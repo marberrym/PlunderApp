@@ -15,6 +15,3 @@ let getUsers = (req, res) => {
 
 
 ex.get('/users', getUsers);
-// ex.get('/flutters', allFlutters);
-// ex.get('/users/:username/flutters', fluttersByUser);
-// ex.get('/users/:username/:postid', specificUserPost)
