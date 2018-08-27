@@ -10,10 +10,6 @@ CREATE TABLE Users (
     rating integer,
 );
 
-CREATE TABLE Products ( 
-    Category character varying (200),
-)
-
 -- CREATE TABLE Locations (
 
 -- );
@@ -24,7 +20,8 @@ CREATE TABLE Post (
     category character varying (200),
     description TEXT, 
     price integer, 
-    userid serial primary key,
-    city character varying (200),
-    state character varying (200),
+    postUserid integer,
+
 );
+
+
