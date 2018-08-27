@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: rgb(227,187,3);
+    background: radial-gradient(circle, rgba(227,187,3,1) 0%, rgba(181,129,6,1) 74%);
+}
+
+.navBar {
+    background-color: whitesmoke;
+    width: 100%;
+    padding: .7em;
+    border-bottom: 1px solid black;
+    position: fixed;
+}
+
+.flexColumn {
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.headText {
+    color: whitesmoke;
+    font-family: 'Pacifico', cursive;
+    font-size: 5em;
+    text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+}
+
+.postSection {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 60%;
+    background-color: rgba(245, 245, 245, 0.74);
+    width: 80%;
+    align-items: center;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.post {
+    flex-basis: 10%;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    background: rgba(169, 169, 169, 0.411);
+    margin: .5em;
+    border-radius: 1em;
+    padding: .5em;
+}
+
+.userIcon {
+    height: 5em;
+    width: 5em;
+    border-radius: 1em;
+    border: 1px solid black;
+}
+
+.postHead {
+    display: flex;
+    align-items: center;
+}
+
+.userPostTitle{
+    flex-basis: 50%;
+    margin-left: 1em;
+}
+
+.locationPrice{
+    text-align: right;
+    flex-basis: 40%;
+}
+
+.username {
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.5em;
+}
+
+.userProduct {
+    font-family: 'Acme', sans-serif;
+    font-size: 1.5em;
+}
+
+.userPrice {
+    font-family: 'Acme', sans-serif;
+    font-size: 2em;
+}
