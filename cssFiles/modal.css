@@ -23,9 +23,9 @@
 
 .modalRegister {
     position: absolute;
-    top: 30%;
+    top: 10%;
     left: 30%;
-    height: 60%;
+    height: 80%;
     width: 40%;
     background-color: whitesmoke;
     border-radius: 1em;
@@ -67,7 +67,7 @@
 
 .inputFields {
     height: 2em;
-    width: 40%;
+    width: 25%;
     border: 1px solid black;
 }
 
@@ -96,4 +96,9 @@
     font-family: 'Acme', sans-serif;
     font-size: 1em;
     text-align: center;
+}
+
+.submitLabel {
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.3em;
 }
