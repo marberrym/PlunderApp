@@ -3,8 +3,7 @@ body {
     padding: 0;
     height: 100%;
     width: 100%;
-    background: rgb(227,187,3);
-    background: radial-gradient(circle, rgba(227,187,3,1) 0%, rgba(181,129,6,1) 74%);
+    background: radial-gradient(circle, rgba(4,138,158,1) 18%, rgba(35,1,97,1) 93%);
 }
 
 .navBar {
@@ -13,6 +12,10 @@ body {
     padding: .7em;
     border-bottom: 1px solid black;
     position: fixed;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .flexColumn {
@@ -20,7 +23,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .headText {
@@ -28,10 +31,18 @@ body {
     font-family: 'Pacifico', cursive;
     font-size: 5em;
     text-shadow:
-		-1px -1px 0 #000,
-		1px -1px 0 #000,
-		-1px 1px 0 #000,
-		1px 1px 0 #000;
+		-2px -2px 0 #000,
+		2px -2px 0 #000,
+		-2px 2px 0 #000,
+        2px 2px 0 #000;
+    display: flex;
+    align-items: center;
+    padding-top: 1em;
+    justify-content: center;
+}
+
+.plunderText {
+    transform: translateX(-.5em) translateY(-.2em)
 }
 
 .postSection {
@@ -91,4 +102,11 @@ body {
 .userPrice {
     font-family: 'Acme', sans-serif;
     font-size: 2em;
+}
+
+.navBTN {
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.3em;
+    padding-left: 1.5em;
+    margin-right: 1.5em;
 }
