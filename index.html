@@ -7,20 +7,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="cssFiles/styles.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="cssFiles/dubloon.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="cssFiles/modal.css" />
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Pacifico|Acme" rel="stylesheet">
 </head>
 <body>
     <img class="dubloonOne" src="images/dublookdark.png">
     <img class="dubloonTwo" src="images/dublookdark.png">
     <img class="dubloonThree" src="images/dublookdark.png">
+
+    <div class="modalPlunders">
+        <div class="sideBar">Automobiles</div>
+        <div class="sideBar">Electronics</div>
+        <div class="sideBar">Decor</div>
+        <div class="sideBar">Weapons</div>
+        <div class="sideBar">Hardware</div>
+        <div class="sideBar">Fashion</div>        
+    </div>
+
+    <div class="modalBG">
+        <div class="modalLogin">
+            <form class="login">
+                <label class="navBTN">Username: </label><input type="text" name="username" class="inputFields"><br>
+                <label class="navBTN">Password: </label><input type="password" name="password" class="inputFields"><br>
+                <button type="submit" class="submitBTN">Submit</button>
+            </form>
+        </div>
+        <div class="modalRegister">
+            <form class="login">
+                <label class="submitLabel">First Name: </label><input type="text" name="username" class="inputFields"><br>
+                <label class="submitLabel">Last Name: </label><input type="text" name="username" class="inputFields"><br>
+                <label class="submitLabel">Email: </label><input type="email" name="email" class="inputFields"><br>
+                <label class="submitLabel">City: </label><input type="text" name="username" class="inputFields"><br>
+                <label class="submitLabel">State: </label><input type="text" name="username" class="inputFields"><br>
+                <label class="submitLabel">Username: </label><input type="text" name="username" class="inputFields"><br>
+                <label class="submitLabel">Password: </label><input type="password" name="password" class="inputFields"><br>
+                <button type="submit" class="submitBTN">Submit</button>
+            </form>
+        </div>
+    </div>
+    
     <div class="navBar">
         <div style="display: flex; align-items: center;">
             <img src="images/plunderLogoFinalCrop.png" style="height: 2em;">
-            <span class="navBTN">Plunders</span>
+            <span id="plunders" class="navBTN">Plunders</span>
         </div>
         <div style="flex-basis: 80%; text-align: right">
-            <span class="navBTN" style="margin: 0; padding: 0;">Login</span>
-            <span class="navBTN">Register</span>
+            <span id="login" class="navBTN" style="margin: 0; padding: 0;">Login</span>
+            <span id="register" class="navBTN">Register</span>
         </div>
     </div>
     <div class="headText">
@@ -47,11 +80,11 @@
                     <img class="userIcon" src="images/Jack.jpeg">
                     <div class="userPostTitle">
                         <div class="username">Jack Sparrow</div>
-                        <div>Buy my booty</div>
+                        <div class="userProduct">Buy my booty</div>
                     </div>
                     <div class="locationPrice">
                         <div class="username">Atlanta, GA</div>
-                        <div>$500</div>
+                        <div class="userPrice">$500</div>
                     </div>
                 </div>
             </div>
@@ -60,11 +93,11 @@
                     <img class="userIcon" src="images/Jack.jpeg">
                     <div class="userPostTitle">
                         <div class="username">Jack Sparrow</div>
-                        <div>Buy my booty</div>
+                        <div class="userProduct">Buy my booty</div>
                     </div>
                     <div class="locationPrice">
                         <div class="username">Atlanta, GA</div>
-                        <div>$500</div>
+                        <div class="userPrice">$500</div>
                     </div>
                 </div>
             </div>
@@ -73,11 +106,11 @@
                     <img class="userIcon" src="images/Jack.jpeg">
                     <div class="userPostTitle">
                         <div class="username">Jack Sparrow</div>
-                        <div>Buy my booty</div>
+                        <div class="userProduct">Buy my booty</div>
                     </div>
                     <div class="locationPrice">
                         <div class="username">Atlanta, GA</div>
-                        <div>$500</div>
+                        <div class="userPrice">$500</div>
                     </div>
                 </div>
             </div>
@@ -85,5 +118,6 @@
     </div>
 
     <script src="jsFiles/main.js"></script>
+    <script src="jsFiles/modal.js"></script>
 </body>
 </html>

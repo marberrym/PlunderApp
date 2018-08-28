@@ -1,5 +1,5 @@
 const pg = require('pg-promise')();
-const db = ('postgres://marshallsimpson@localhost:5432/plunder')
+const db = pg('postgres://marshallsimpson@localhost:5432/plunder')
 
 let listAllUsers = () => {
     return db.query(`select * from users`)
