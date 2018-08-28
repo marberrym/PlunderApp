@@ -30,9 +30,9 @@ let postSection = () => {
 
     userImage.setAttribute('src', post.src);
     titleUsername.textContent = post.username;
-    postTitle.textContent = post.title;
+    userProduct.textContent = post.title;
     location.textContent = post.location;
-    price.textContent = post.price;
+    price.textContent = '$' + post.price;
     
     postTitle.appendChild(titleUsername);
     postTitle.appendChild(userProduct);
