@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const express = require('express');
+const queries = require('./queries.js')
 let ex = express();
 ex.listen(3000);
 
@@ -17,7 +18,6 @@ let readBody = (req, callback) => {
         callback(body);
     });
 };
-
 
 
 let getUsers = (req, res) => {
@@ -46,38 +46,40 @@ let validateToken = (req, res, next) => {
 
 let createToken = (req, res) => {
     readBody(req, body => {
+        //body will eventually contain username and email
         let credentials = JSON.parse(body);
-        if (credentials.firstName === 'marshall' && credentials.lastName === 'simpson') {
-            
-            let token = jwt.sign(
-                {userID: '56878'},
-                'backendssignatureyo',
-            {expiresIn: '7d'}
-            );
-            res.end(token)
-            //frontend needs localstorage to hold this
-            //grant passprot
-        } else {
-            res.end('your shits expired')
-        }
-    })
+        let validUser = queries.usernameLogin();
+        validUser.then(dbReply => {
+            // this function serves an object with keys "username" and "password" from our form
+            let loginID = JSON.stringify(dbReply.username);
+            let loginPass = JSON.stringify(dbReply.password)
+            let username = JSON.stringify(credentials.username);
+            let password = JSON.stringify(credentials.password);
+            if (loginID === username) {
+                if (loginPass === password) {
+                    let token = jwt.sign(
+                        {userID: username},
+                        'backendssignatureyo',
+                        {expiresIn: '7d'}
+                    );
+                    res.end(token)
+                    //this should be granted & held in localstorage for access later
+                } else {
+                    res.end('You entered an incorrect password, try again')
+                }
+
+            } else {
+                res.end('You need to login, please enter username and password')
+            }
+        });
+    });
 }
+
+        
+
 
 ex.get('/users', validateToken, getUsers);
 ex.post('/token', createToken);
-
-//?=username=nybblr&password=1234
-//middleware req,res,next
-
-
-// authenticate = (req, res, next) => {
-//     if (req.query.username === && req.query.password ===){
-//         next();
-//     } else {
-//         res.end('not tooday!')
-//     }
-// }
-
 
 
 // post to tokens, because it's to create a new thing
@@ -87,4 +89,3 @@ ex.post('/token', createToken);
 //password
 //username can be reused so we use userID, don't want the token to 
 //be replicant
-// 
