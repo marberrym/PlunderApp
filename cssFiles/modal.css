@@ -1,0 +1,99 @@
+.modalBG {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.295);
+    position: fixed;
+    z-index: 1;
+    visibility: hidden;
+}
+
+.modalLogin {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    height: 40%;
+    width: 40%;
+    background-color: whitesmoke;
+    border-radius: 1em;
+    border: 1px solid black;
+    visibility: hidden;
+}
+
+.modalRegister {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    height: 60%;
+    width: 40%;
+    background-color: whitesmoke;
+    border-radius: 1em;
+    border: 1px solid black;
+    visibility: hidden;
+}
+
+.modalPlunders {
+    position: fixed;
+    top: 30%;
+    left: -25%;
+    height: 50%;
+    width: 20%;
+    background-color: rgba(245, 245, 245, 0.83);
+    border: 1px solid black;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    transition: 1s ease-in-out;
+    z-index: 2;
+}
+
+.showPlunders {
+    transform: translateX(100%);
+}
+
+.show {
+    visibility: visible;
+}
+
+.login {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputFields {
+    height: 2em;
+    width: 40%;
+    border: 1px solid black;
+}
+
+.inputFields:focus {
+    border: 1px solid darkblue;
+    outline: none;
+}
+
+.submitBTN {
+    padding: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    border: 1px solid black;
+    font-family: 'Amatic SC', cursive;
+    font-size: 1em;
+    border-radius: 1em;
+    background: radial-gradient(circle, rgba(4,138,158,1) 18%, rgba(35,1,97,1) 93%);
+    color: whitesmoke;
+}
+
+.submitBTN:hover {
+    border: 1px solid whitesmoke;
+}
+
+.sideBar {
+    font-family: 'Acme', sans-serif;
+    font-size: 1em;
+    text-align: center;
+}
