@@ -1,0 +1,26 @@
+.dubloonOne {
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: -1;
+    height: 20em;
+    transform: translateX(-50%) translateY(1em) rotate(60deg);
+}
+
+.dubloonTwo {
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: -1;
+    height: 15em;
+    transform: translateX(-30%) translateY(18em) rotate(30deg);
+}
+
+.dubloonThree {
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: -1;
+    height: 18em;
+    transform: translateX(-30%) translateY(30em) rotate(-20deg);
+}
