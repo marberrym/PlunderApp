@@ -1,5 +1,5 @@
-CREATE TABLE Users (
-    userid serial primary key,
+CREATE TABLE users (
+    id serial primary key,
     username character varying (200),
     password character varying (200),
     email character varying (200),
@@ -7,21 +7,21 @@ CREATE TABLE Users (
     last character varying (200),
     city character varying (200),
     state character varying (200),
-    rating integer,
+    rating integer
 );
 
--- CREATE TABLE Locations (
+-- CREATE TABLE locations (
 
 -- );
 
-CREATE TABLE Post (
+CREATE TABLE posts (
+    id serial primary key,
     name character varying (200),
     item character varying (200),
     category character varying (200),
     description TEXT, 
     price integer, 
-    postUserid integer,
-
+    userid integer REFERENCES users(id)
 );
 
 
