@@ -63,7 +63,7 @@ INSERT INTO post (name, item, category, description, price, userid)
     VALUES ('Selling my Honda',
     '2009 Honda Civic', 
     'Automobile', 
-    'White Honda Civi',
+    'White Honda Civic bla radda dabba doo come at me bro',
     9000, 
     4);
 
@@ -71,7 +71,7 @@ INSERT INTO posts (name, item, category, description, price, userid)
     VALUES ('Selling shutgun and shells',
     'Remington 700',
     'Guns',
-    'Remington 700 made in 1980. Some scrates',
+    'Remington 700 made in 1980. Some scratches. I SHOOOOT EVERRRRRYTHING',
     150, 
     4);
 
@@ -87,7 +87,7 @@ INSERT INTO posts (name, item, category, description, price, userid)
     VALUES ('Selling anitique Paintings by Van Gogh',
     'Van Gogh Paintings', 
     'Decor', 
-    'Original paintings by Vicent Van Gogh', 
+    'Original paintings by Vicent Van Gogh.', 
     20000, 
     2);
 

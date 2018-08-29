@@ -63,11 +63,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    align-content: flex-end;
 }
 
 .inputFields {
     height: 2em;
-    width: 25%;
+    width: 10em;
     border: 1px solid black;
 }
 
@@ -96,9 +97,66 @@
     font-family: 'Acme', sans-serif;
     font-size: 1em;
     text-align: center;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+}
+
+.sideBar:hover {
+    transform: scale(2) translateX(1em);
+    color: darkcyan;
+    text-shadow:
+		-.5px -.5px 0 #000,
+		.5px -.5px 0 #000,
+		-.5px .5px 0 #000,
+        .5px .5px 0 #000;
 }
 
 .submitLabel {
     font-family: 'Amatic SC', cursive;
     font-size: 1.3em;
+    width: 10em;
+    text-align: right;
+    transform: translateX(-2.1em);
+    display: flex;
+    justify-content: flex-end;
+    margin-right: .3em;
+}
+
+.descriptions {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 2em;
+    opacity: 0;
+    height: 0;
+    pointer-events: none;
+    transition: .2s ease-in-out;
+    margin: 0;
+    padding: 0;
+    font-family: 'Acme', sans-serif;
+    font-size: 1.1em;
+}
+
+
+.showDesc {
+    pointer-events: all;
+    margin: 1em;
+    padding: 1em;
+    display: flex;
+    height: 10em;
+    opacity: 1;
+    border-radius: 1em;
+    background-color: rgba(0, 0, 0, 0.129);
+}
+
+.descriptionIMG {
+    height: 10em;
+}
+
+.paraText {
+    font-family: 'Acme', sans-serif;
+    font-size: 1.1em;
+}
+
+.padding3R {
+    padding-right: .3em;
 }

@@ -1,5 +1,5 @@
 const pg = require('pg-promise')();
-const db = pg('postgres://marshallsimpson@localhost:5432/plunder')
+const db = pg('postgres://matt@localhost:5432/plunder')
 
 
 let listAllUsers = () => {
@@ -10,27 +10,19 @@ let listAllPosts = () => {
     return db.query(`select * from posts;`)
 }
 
-let usernameLogin = () => {
-    return db.one(`select username, password, id
-    FROM users
-    WHERE username = 'BillyJ456'
-    AND password = 'lolrus199';`
-    );
-}
-
 let allPostsByUser = (username) => {
-    return db.query(`select username, name, item, description
-        FROM posts
-        INNER JOIN users ON users.id = posts.userid
+    return db.query(`select usr.username, pst.name, pst.item, pst.description
+        FROM posts pst
+        INNER JOIN users usr ON usr.id = pst.userid
         WHERE username = '` + username + `';`);
 }
 
 let onePostsByUser = (username, postid) => {
-    return db.one(`select username, name, item, description
-        FROM posts
-        INNER JOIN users ON users.id = posts.userid
-        WHERE username = $1
-        AND postid = $2;`, [username, postId]);
+    return db.one(`select usr.username, pst.name, pst.item, pst.description, pst.price, usr.city, usr.state
+        FROM posts pst
+        INNER JOIN users usr ON usr.id = pst.userid
+        WHERE username = '` + username + `'
+        AND pst.id = '` + postid + `';`);
 }
 
 let listPostsByCategory = (category) => {
@@ -40,10 +32,10 @@ let listPostsByCategory = (category) => {
 }
 
 let listPostsByState = (state) => {
-    return db.query(`select username, state, name, item, price, description
-        FROM posts 
-        INNER JOIN users ON users.id = posts.userid
-        WHERE state = '` + state + `';`);
+    return db.query(`select usr.username, usr.state, usr.city, pst.name, pst.item, pst.price, pst.description
+        FROM posts pst
+        INNER JOIN users usr ON usr.id = pst.userid
+        WHERE usr.state = '` + state + `';`);
 }
 
 let createPost = (name, item, category, description, price, userid) => {
@@ -52,7 +44,6 @@ let createPost = (name, item, category, description, price, userid) => {
 }
 
 
-exports.usernameLogin = usernameLogin;
 exports.listAllUsers = listAllUsers;
 exports.listAllPosts = listAllPosts;
 exports.allPostsByUser = allPostsByUser;
