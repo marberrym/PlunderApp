@@ -1,6 +1,7 @@
 CREATE TABLE users (
     id serial primary key,
     username character varying (200),
+    image character varying(255),
     password character varying (200),
     email character varying (200),
     first character varying (200),

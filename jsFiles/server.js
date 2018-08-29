@@ -1,18 +1,13 @@
 
 const jwt = require('jsonwebtoken');
 const express = require('express');
-
+const ex = express();
 const bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
-let ex = express();
-ex.listen(3000);
 
 const cors = require('cors');
 const dbq = require('./queries.js')
-
-let ex = express();
-ex.use(cors());
-ex.listen(3000);
+ex.use(express.static('../images'))
 
 //Read body function for posts.
 let readBody = (req, callback) => {
@@ -25,7 +20,7 @@ let readBody = (req, callback) => {
     });
 };
 
-res.end(console.log('authenticated'));
+
 //Request All Users
 let getUsers = (req, res) => {
     dbq.listAllUsers()
@@ -128,6 +123,7 @@ let createToken = (req, res) => {
 
 //ex.get('/users', validateToken, getUsers);
 
+
 ex.post('/login', jsonParser, createToken);
 ex.get('/users', getUsers);
 ex.get('/posts', getPosts);
@@ -136,6 +132,7 @@ ex.get('/:username/posts/:postid', postByUser);
 ex.get('/posts/cat/:category', postsByCat);
 ex.get('/posts/state/:location', postsByLocation);
 
-
+ex.use(cors());
+ex.listen(3000);
 
 
