@@ -1,18 +1,14 @@
 
 const jwt = require('jsonwebtoken');
 const express = require('express');
-
-const bodyParser = require('body-parser')
-var jsonParser = bodyParser.json()
-let ex = express();
-ex.listen(3000);
-
 const cors = require('cors');
 const dbq = require('./queries.js')
 
+// const bodyParser = require('body-parser')
+// var jsonParser = bodyParser.json()
 let ex = express();
-ex.use(cors());
 ex.listen(3000);
+ex.use(cors());
 
 //Read body function for posts.
 let readBody = (req, callback) => {
@@ -25,7 +21,7 @@ let readBody = (req, callback) => {
     });
 };
 
-res.end(console.log('authenticated'));
+// res.end(console.log('authenticated'));
 //Request All Users
 let getUsers = (req, res) => {
     dbq.listAllUsers()
@@ -70,71 +66,70 @@ let postsByLocation = (req, res) => {
 
 //Create a new post
 let newPost = (req, res, name, item, category, description, price, userid) => {
-    createPost(name, item, category, description, price, userid)
+    dbq.createPostcreatePost(name, item, category, description, price, userid)
 }
 
 //validation ...
-let validateToken = (req, res, next) => {
-    let token = req.query.token;
-    let isValid = false;
-    let payload;
-    console.log(token);
-    try {
-        payload = jwt.verify(token, 'secretsig');
-        isValid = true;
-    } catch (err) {
-        isValid = false;
-    }
-    req.user = payload;
-    //creates a new property for the request object, called user
-    if (isValid) {
-        next();
-    } else {
-        res.end('youshallnotpass')
-    }
-}
+// let validateToken = (req, res, next) => {
+//     let token = req.query.token;
+//     let isValid = false;
+//     let payload;
+//     console.log(token);
+//     try {
+//         payload = jwt.verify(token, 'secretsig');
+//         isValid = true;
+//     } catch (err) {
+//         isValid = false;
+//     }
+//     req.user = payload;
+//     //creates a new property for the request object, called user
+//     if (isValid) {
+//         next();
+//     } else {
+//         res.end('youshallnotpass')
+//     }
+// }
 
-let createToken = (req, res) => {
-        let credentials = req.body;
-        console.log(credentials)
-        let validUser = queries.usernameLogin();
-        validUser.then(dbReply => {
-            // this function serves an object with keys "username" and "password" from our form
-            let loginID = JSON.stringify(dbReply.username);
-            let loginPass = JSON.stringify(dbReply.password)
-            let username = JSON.stringify(credentials.username);
-            let password = JSON.stringify(credentials.password);
-            if (loginID === username) {
-                if (loginPass === password) {
-                    let token = jwt.sign(
-                        {userID: username},
-                        'secretsig',
-                        {expiresIn: '7d'}
-                    );
-                    res.end(token)
-                    //this should be granted & held in localstorage for access later
-                } else {
-                    res.end('You entered an incorrect password, try again')
-                }
+// let createToken = (req, res) => {
+//         let credentials = req.body;
+//         console.log(credentials)
+//         let validUser = queries.usernameLogin();
+//         validUser.then(dbReply => {
+//             // this function serves an object with keys "username" and "password" from our form
+//             let loginID = JSON.stringify(dbReply.username);
+//             let loginPass = JSON.stringify(dbReply.password)
+//             let username = JSON.stringify(credentials.username);
+//             let password = JSON.stringify(credentials.password);
+//             if (loginID === username) {
+//                 if (loginPass === password) {
+//                     let token = jwt.sign(
+//                         {userID: username},
+//                         'secretsig',
+//                         {expiresIn: '7d'}
+//                     );
+//                     res.end(token)
+//                     //this should be granted & held in localstorage for access later
+//                 } else {
+//                     res.end('You entered an incorrect password, try again')
+//                 }
 
-            } else {
-                res.end('You need to login, please enter username and password')
-            }
-        });
-    ;
-}
+//             } else {
+//                 res.end('You need to login, please enter username and password')
+//             }
+//         });
+// }
 
         
 
 //ex.get('/users', validateToken, getUsers);
-
-ex.post('/login', jsonParser, createToken);
+// ex.post('/login', jsonParser, createToken);
 ex.get('/users', getUsers);
 ex.get('/posts', getPosts);
 ex.get('/:username/posts', postsByUser);
 ex.get('/:username/posts/:postid', postByUser);
 ex.get('/posts/cat/:category', postsByCat);
 ex.get('/posts/state/:location', postsByLocation);
+
 
 
 

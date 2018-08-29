@@ -7,7 +7,9 @@ let listAllUsers = () => {
 }
 
 let listAllPosts = () => {
-    return db.query(`select * from posts;`)
+    return db.query(`select usr.username, pst.name, pst.item, usr.city, pst.price, usr.state, pst.description 
+                    FROM posts pst
+                    INNER JOIN users usr ON usr.id = pst.userid`)
 }
 
 let allPostsByUser = (username) => {
