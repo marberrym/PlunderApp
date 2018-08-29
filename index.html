@@ -5,15 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Plunder</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="img/png" href="images/plunderLogoFinalCrop.png" />
     <link rel="stylesheet" type="text/css" media="screen" href="cssFiles/styles.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="cssFiles/dubloon.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="cssFiles/modal.css" />
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Pacifico|Acme" rel="stylesheet">
 </head>
 <body>
-    <img class="dubloonOne" src="images/dublookdark.png">
-    <img class="dubloonTwo" src="images/dublookdark.png">
-    <img class="dubloonThree" src="images/dublookdark.png">
+    <img class="dubloonOne" src="images/dublookdarkoutline.png">
+    <img class="dubloonTwo" src="images/dublookdarkoutline.png">
+    <img class="dubloonThree" src="images/dublookdarkoutline.png">
 
     <div class="modalPlunders">
         <div class="sideBar">Automobiles</div>
@@ -34,13 +35,32 @@
         </div>
         <div class="modalRegister">
             <form class="login">
-                <label class="submitLabel">First Name: </label><input type="text" name="username" class="inputFields"><br>
-                <label class="submitLabel">Last Name: </label><input type="text" name="username" class="inputFields"><br>
-                <label class="submitLabel">Email: </label><input type="email" name="email" class="inputFields"><br>
-                <label class="submitLabel">City: </label><input type="text" name="username" class="inputFields"><br>
-                <label class="submitLabel">State: </label><input type="text" name="username" class="inputFields"><br>
-                <label class="submitLabel">Username: </label><input type="text" name="username" class="inputFields"><br>
-                <label class="submitLabel">Password: </label><input type="password" name="password" class="inputFields"><br>
+                <label class="submitLabel">
+                    <span class="padding3R">First Name: </span>
+                    <input type="text" name="username" class="inputFields">
+                </label><br>
+                <label class="submitLabel">
+                    <span class="padding3R">Last Name: </span>
+                    <input type="text" name="username" class="inputFields">
+                </label><br>
+                <label class="submitLabel">
+                    <span class="padding3R">Email: </span>
+                    <input type="email" name="email" class="inputFields">
+                </label><br>
+                <label class="submitLabel">
+                    <span class="padding3R">City: </span><input type="text" name="username" class="inputFields"></label><br>
+                <label class="submitLabel">
+                    <span class="padding3R">State: </span>
+                    <input type="text" name="username" class="inputFields">
+                </label><br>
+                <label class="submitLabel">
+                    <span class="padding3R">Username: </span>
+                    <input type="text" name="username" class="inputFields">
+                </label><br>
+                <label class="submitLabel">
+                    <span class="padding3R">Password: </span>
+                    <input type="password" name="password" class="inputFields">
+                </label><br>
                 <button type="submit" class="submitBTN">Submit</button>
             </form>
         </div>
@@ -48,12 +68,12 @@
     
     <div class="navBar">
         <div style="display: flex; align-items: center;">
-            <img src="images/plunderLogoFinalCrop.png" style="height: 2em;">
-            <span id="plunders" class="navBTN">Plunders</span>
+            <img src="images/plunderLogoFinalCrop.png" class="navLogo">
+            <div id="plunders" class="navBTN">Plunders</div>
         </div>
-        <div style="flex-basis: 80%; text-align: right">
-            <span id="login" class="navBTN" style="margin: 0; padding: 0;">Login</span>
-            <span id="register" class="navBTN">Register</span>
+        <div style="text-align: right; display: flex; margin-right: 2em;">
+            <div id="login" class="navBTN" style="margin: 0; padding: 0;">Login</div>
+            <div id="register" class="navBTN">Register</div>
         </div>
     </div>
     <div class="headText">

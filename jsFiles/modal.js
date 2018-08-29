@@ -6,6 +6,7 @@ let modalRegister = document.querySelector('.modalRegister');
 let plunderBTN = document.querySelector('#plunders')
 let modalPlunders = document.querySelector('.modalPlunders');
 let posts = document.querySelectorAll('.post');
+let navBTN = document.querySelector('.navLogo');
 
 let showLogin = (event) => {
     modalWindow.classList.add('show');
@@ -39,6 +40,7 @@ posts.forEach(function(post){
     post.addEventListener('click', showPost)
 });
 
+navBTN.addEventListener('click', showPlunders);
 plunderBTN.addEventListener('click', showPlunders);
 registerBTN.addEventListener('click', showRegister);
 modalWindow.addEventListener('click', hideModal);
