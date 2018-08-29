@@ -38,6 +38,8 @@ let posts = [{
 let postArea = document.querySelector('.postSection');
 
 let postSection = (post) => {
+    
+    
     let mainPost = document.createElement('div');
     let postHead = document.createElement('div');
     let userImage = document.createElement('img');
@@ -48,8 +50,14 @@ let postSection = (post) => {
     let location = document.createElement('div');
     let price = document.createElement('div');
     let description = document.createElement('div');
-    let descripImage = document.createElement('img')
-    let descripText = document.createElement('p')
+    let descripImage = document.createElement('img');
+    let descripText = document.createElement('p');
+
+    let showPost = (event) => {
+        description.classList.toggle('showDesc');
+    }
+
+    console.log(mainPost.childNodes[3]);
     
     mainPost.classList.add('post');
     postHead.classList.add('postHead');
@@ -62,8 +70,7 @@ let postSection = (post) => {
     price.classList.add('userPrice');
     description.classList.add('descriptions');
     descripImage.classList.add('descriptionIMG');
-    descripText.classList.add('paraText')
-    
+    descripText.classList.add('paraText');
 
     userImage.setAttribute('src', post.src);
     titleUsername.textContent = post.username;
@@ -91,11 +98,12 @@ let postSection = (post) => {
 
     postArea.appendChild(mainPost);
 
+    mainPost.addEventListener('click', showPost)
+
 };
 
-posts.forEach( function (post) {
-    postSection(post) 
-    newPostSlide(post)
+posts.forEach(function (post) {
+    postSection(post)
 });
     
 
