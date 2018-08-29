@@ -1,13 +1,23 @@
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const queries = require('./queries.js')
-const bodyParser = require('body-parser')
-
-// create application/x-www-form-urlencoded parser
-var jsonParser = bodyParser.json()
-
 let ex = express();
 ex.listen(3000);
+
+let users = [
+    {id: '1', name: 'Jaydoe', email: 'jayjay@jay.com', pw: 'shimmy'},
+    {id: '2', name: 'XXXTentacion', email:'sonotdead@hiphop.com', pw: 'dondon'}
+]
+
+let readBody = (req, callback) => {
+    let body = '';
+    req.on('data', (chunk) => {
+        body += chunk.toString();
+    });
+    req.on('end', () => {
+        callback(body);
+    });
+};
 
 
 let getUsers = (req, res) => {
@@ -35,8 +45,9 @@ let validateToken = (req, res, next) => {
 }
 
 let createToken = (req, res) => {
-        let credentials = req.body;
-        console.log(credentials)
+    readBody(req, body => {
+        //body will eventually contain username and email
+        let credentials = JSON.parse(body);
         let validUser = queries.usernameLogin();
         validUser.then(dbReply => {
             // this function serves an object with keys "username" and "password" from our form
@@ -61,11 +72,11 @@ let createToken = (req, res) => {
                 res.end('You need to login, please enter username and password')
             }
         });
-    ;
+    });
 }
 
         
 
 
 ex.get('/users', validateToken, getUsers);
-ex.post('/login', jsonParser, createToken);
+ex.post('/token', createToken);
