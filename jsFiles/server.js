@@ -1,5 +1,12 @@
+
 const jwt = require('jsonwebtoken');
 const express = require('express');
+
+const bodyParser = require('body-parser')
+var jsonParser = bodyParser.json()
+let ex = express();
+ex.listen(3000);
+
 const cors = require('cors');
 const dbq = require('./queries.js')
 
@@ -18,6 +25,7 @@ let readBody = (req, callback) => {
     });
 };
 
+res.end(console.log('authenticated'));
 //Request All Users
 let getUsers = (req, res) => {
     dbq.listAllUsers()
@@ -70,13 +78,13 @@ let validateToken = (req, res, next) => {
     let token = req.query.token;
     let isValid = false;
     let payload;
+    console.log(token);
     try {
-        payload = jwt.verify(token, 'signature');
+        payload = jwt.verify(token, 'secretsig');
         isValid = true;
     } catch (err) {
         isValid = false;
     }
-    console.log(payload.userID);
     req.user = payload;
     //creates a new property for the request object, called user
     if (isValid) {
@@ -87,9 +95,8 @@ let validateToken = (req, res, next) => {
 }
 
 let createToken = (req, res) => {
-    readBody(req, body => {
-        //body will eventually contain username and email
-        let credentials = JSON.parse(body);
+        let credentials = req.body;
+        console.log(credentials)
         let validUser = queries.usernameLogin();
         validUser.then(dbReply => {
             // this function serves an object with keys "username" and "password" from our form
@@ -101,7 +108,7 @@ let createToken = (req, res) => {
                 if (loginPass === password) {
                     let token = jwt.sign(
                         {userID: username},
-                        'backendssignatureyo',
+                        'secretsig',
                         {expiresIn: '7d'}
                     );
                     res.end(token)
@@ -114,12 +121,14 @@ let createToken = (req, res) => {
                 res.end('You need to login, please enter username and password')
             }
         });
-    });
+    ;
 }
 
         
 
+//ex.get('/users', validateToken, getUsers);
 
+ex.post('/login', jsonParser, createToken);
 ex.get('/users', getUsers);
 ex.get('/posts', getPosts);
 ex.get('/:username/posts', postsByUser);
@@ -129,10 +138,4 @@ ex.get('/posts/state/:location', postsByLocation);
 
 
 
-// post to tokens, because it's to create a new thing
-//npm install --save jjsonwebtoken
 
-//username/id stored in webtoken
-//password
-//username can be reused so we use userID, don't want the token to 
-//be replicant
