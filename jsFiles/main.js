@@ -2,6 +2,8 @@ let posts = [{
     src: "images/Jack.jpeg",
     username: "mmsimpson",
     title: "Remington 700",
+    description:"Oukast is best bamnd eva",
+    dsrc: "images/plunderLogoFinalCrop.png",
     location: "Savannah, Ga",
     price: 200
 },
@@ -9,6 +11,8 @@ let posts = [{
     src: "images/Jack.jpeg",
     username: "MattisaGoober",
     title: "Unicorn collection",
+    description:" Nickleback is highly underrated",
+    dsrc: "images/plunderLogoFinalCrop.png",
     location: "Atlanta, Ga",
     price: 20000
 },
@@ -16,6 +20,8 @@ let posts = [{
     src: "images/Jack.jpeg",
     username: "Drose345",
     title: "Fine China",
+    description: "I thought you knew the word. That bird is the word",
+    dsrc: "images/plunderLogoFinalCrop.png",
     location: "San Diego, Ca",
     price: 300
 },
@@ -23,6 +29,8 @@ let posts = [{
     src: "images/Jack.jpeg",
     username: "anon876",
     title: "Plush Toys",
+    description: "Do you believe in life after love?!!!",
+    dsrc: "images/plunderLogoFinalCrop.png",
     location: "Athens, Ga",
     price: 765
 }];
@@ -39,6 +47,9 @@ let postSection = (post) => {
     let locationPrice = document.createElement('div');
     let location = document.createElement('div');
     let price = document.createElement('div');
+    let description = document.createElement('div');
+    let descripImage = document.createElement('img')
+    let descripText = document.createElement('p')
     
     mainPost.classList.add('post');
     postHead.classList.add('postHead');
@@ -49,13 +60,23 @@ let postSection = (post) => {
     locationPrice.classList.add('locationPrice');
     location.classList.add('username');
     price.classList.add('userPrice');
+    description.classList.add('descriptions');
+    descripImage.classList.add('descriptionIMG');
+    descripText.classList.add('paraText')
+    
 
     userImage.setAttribute('src', post.src);
     titleUsername.textContent = post.username;
     userProduct.textContent = post.title;
     location.textContent = post.location;
     price.textContent = '$' + post.price;
-    
+    description.textContent = post.description;
+    descripText.textContent = post.description
+    descripImage.setAttribute('src', post.dsrc)
+
+    description.appendChild(descripText);
+    description.appendChild(descripImage);
+
     postTitle.appendChild(titleUsername);
     postTitle.appendChild(userProduct);
     locationPrice.appendChild(location);
@@ -66,6 +87,7 @@ let postSection = (post) => {
     postHead.appendChild(locationPrice);
 
     mainPost.appendChild(postHead);
+    mainPost.appendChild(description);
 
     postArea.appendChild(mainPost);
 
@@ -73,7 +95,8 @@ let postSection = (post) => {
 
 posts.forEach( function (post) {
     postSection(post) 
-})
+    newPostSlide(post)
+});
     
 
 

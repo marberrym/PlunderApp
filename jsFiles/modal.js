@@ -5,7 +5,7 @@ let modalLogin = document.querySelector('.modalLogin');
 let modalRegister = document.querySelector('.modalRegister');
 let plunderBTN = document.querySelector('#plunders')
 let modalPlunders = document.querySelector('.modalPlunders');
-let posts = document.querySelectorAll('.post');
+let divposts = document.querySelectorAll('.post');
 let navBTN = document.querySelector('.navLogo');
 
 let showLogin = (event) => {
@@ -32,7 +32,7 @@ let hideModal = (event) => {
     }
 }
 
-posts.forEach(function(post){
+divposts.forEach(function(post){
     let showPost = (event) => {
         post.childNodes[3].classList.toggle('showDesc');
     }
@@ -40,8 +40,17 @@ posts.forEach(function(post){
     post.addEventListener('click', showPost)
 });
 
+let newPostSlide = (post) => {
+    let showPost = (event) => {
+        post.childNodes[3].classList.toggle('showDesc');
+    }
+    console.log(post.childNodes);
+    post.addEventListener('click', showPost)
+}
+
 navBTN.addEventListener('click', showPlunders);
 plunderBTN.addEventListener('click', showPlunders);
 registerBTN.addEventListener('click', showRegister);
 modalWindow.addEventListener('click', hideModal);
 loginBTN.addEventListener('click', showLogin);
+
