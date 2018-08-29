@@ -1,13 +1,35 @@
-let post = {
+let posts = [{
     src: "images/Jack.jpeg",
     username: "mmsimpson",
     title: "Remington 700",
     location: "Savannah, Ga",
     price: 200
-};
+},
+{
+    src: "images/Jack.jpeg",
+    username: "MattisaGoober",
+    title: "Unicorn collection",
+    location: "Atlanta, Ga",
+    price: 20000
+},
+{
+    src: "images/Jack.jpeg",
+    username: "Drose345",
+    title: "Fine China",
+    location: "San Diego, Ca",
+    price: 300
+},
+{
+    src: "images/Jack.jpeg",
+    username: "anon876",
+    title: "Plush Toys",
+    location: "Athens, Ga",
+    price: 765
+}];
+
 let postArea = document.querySelector('.postSection');
 
-let postSection = () => {
+let postSection = (post) => {
     let mainPost = document.createElement('div');
     let postHead = document.createElement('div');
     let userImage = document.createElement('img');
@@ -49,5 +71,11 @@ let postSection = () => {
 
 };
 
-postSection();
+posts.forEach( function (post) {
+    postSection(post) 
+})
+    
+
+
+
 
