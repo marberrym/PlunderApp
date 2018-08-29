@@ -10,18 +10,10 @@ let listAllPosts = () => {
     return db.query(`select * from posts;`)
 }
 
-let usernameLogin = () => {
-    return db.one(`select username, password, id
-    FROM users
-    WHERE username = 'BillyJ456'
-    AND password = 'lolrus199';`
-    );
-}
-
 let allPostsByUser = (username) => {
-    return db.query(`select username, name, item, description
-        FROM posts
-        INNER JOIN users ON users.id = posts.userid
+    return db.query(`select usr.username, pst.name, pst.item, pst.description
+        FROM posts pst
+        INNER JOIN users usr ON usr.id = pst.userid
         WHERE username = '` + username + `';`);
 }
 
@@ -52,7 +44,6 @@ let createPost = (name, item, category, description, price, userid) => {
 }
 
 
-exports.usernameLogin = usernameLogin;
 exports.listAllUsers = listAllUsers;
 exports.listAllPosts = listAllPosts;
 exports.allPostsByUser = allPostsByUser;
