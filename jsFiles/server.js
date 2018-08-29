@@ -1,14 +1,13 @@
 const jwt = require('jsonwebtoken');
 const express = require('express');
-const queries = require('./queries.js')
+const cors = require('cors');
+const dbq = require('./queries.js')
+
 let ex = express();
+ex.use(cors());
 ex.listen(3000);
 
-let users = [
-    {id: '1', name: 'Jaydoe', email: 'jayjay@jay.com', pw: 'shimmy'},
-    {id: '2', name: 'XXXTentacion', email:'sonotdead@hiphop.com', pw: 'dondon'}
-]
-
+//Read body function for posts.
 let readBody = (req, callback) => {
     let body = '';
     req.on('data', (chunk) => {
@@ -19,11 +18,54 @@ let readBody = (req, callback) => {
     });
 };
 
-
+//Request All Users
 let getUsers = (req, res) => {
-    res.end(users[0].name);
+    dbq.listAllUsers()
+        .then(results => res.send(results));
 }
 
+//Get posts - page initialization
+let getPosts = (req, res) => {
+    dbq.listAllPosts()
+        .then(results => res.send(results));
+}
+
+//Get posts by specific user
+let postsByUser = (req, res) => {
+    let user = req.params.username;
+    dbq.allPostsByUser(user)
+        .then(results => res.send(results));
+}
+
+//Get specific post by specific user
+let postByUser = (req, res) => {
+    let user = req.params.username;
+    let post = req.params.postid;
+    dbq.onePostsByUser(user, post)
+        .then(results => res.send(results));
+}
+
+//Get posts by category
+let postsByCat = (req, res) => {
+    let category = req.params.category;
+    console.log(category);
+    dbq.listPostsByCategory(category)
+        .then(results => res.send(results));
+}
+
+//Get Posts by Location
+let postsByLocation = (req, res) => {
+    let state = req.params.location;
+    dbq.listPostsByState(state)
+        .then(results => res.send(results));
+}
+
+//Create a new post
+let newPost = (req, res, name, item, category, description, price, userid) => {
+    createPost(name, item, category, description, price, userid)
+}
+
+//validation ...
 let validateToken = (req, res, next) => {
     let token = req.query.token;
     let isValid = false;
@@ -78,8 +120,13 @@ let createToken = (req, res) => {
         
 
 
-ex.get('/users', validateToken, getUsers);
-ex.post('/token', createToken);
+ex.get('/users', getUsers);
+ex.get('/posts', getPosts);
+ex.get('/:username/posts', postsByUser);
+ex.get('/:username/posts/:postid', postByUser);
+ex.get('/posts/cat/:category', postsByCat);
+ex.get('/posts/state/:location', postsByLocation);
+
 
 
 // post to tokens, because it's to create a new thing

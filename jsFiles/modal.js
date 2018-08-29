@@ -5,7 +5,7 @@ let modalLogin = document.querySelector('.modalLogin');
 let modalRegister = document.querySelector('.modalRegister');
 let plunderBTN = document.querySelector('#plunders')
 let modalPlunders = document.querySelector('.modalPlunders');
-let divposts = document.querySelectorAll('.post');
+let plunders = document.querySelectorAll('.post');
 let navBTN = document.querySelector('.navLogo');
 
 let showLogin = (event) => {
@@ -32,7 +32,7 @@ let hideModal = (event) => {
     }
 }
 
-divposts.forEach(function(post){
+plunders.forEach(function(post){
     let showPost = (event) => {
         post.childNodes[3].classList.toggle('showDesc');
     }
