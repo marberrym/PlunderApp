@@ -12,20 +12,20 @@ ex.listen(3000);
 
 
 let getUsers = (req, res) => {
-    res.end(users[0].name);
+    res.end(console.log('authenticated'));
 }
 
 let validateToken = (req, res, next) => {
     let token = req.query.token;
     let isValid = false;
     let payload;
+    console.log(token);
     try {
-        payload = jwt.verify(token, 'signature');
+        payload = jwt.verify(token, 'secretsig');
         isValid = true;
     } catch (err) {
         isValid = false;
     }
-    console.log(payload.userID);
     req.user = payload;
     //creates a new property for the request object, called user
     if (isValid) {
@@ -49,7 +49,7 @@ let createToken = (req, res) => {
                 if (loginPass === password) {
                     let token = jwt.sign(
                         {userID: username},
-                        'backendssignatureyo',
+                        'secretsig',
                         {expiresIn: '7d'}
                     );
                     res.end(token)
