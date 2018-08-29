@@ -1,44 +1,47 @@
 let posts = [{
     src: "images/Jack.jpeg",
     username: "mmsimpson",
-    title: "Remington 700",
+    item: "Remington 700",
     description:"Oukast is best bamnd eva",
     dsrc: "images/plunderLogoFinalCrop.png",
-    location: "Savannah, Ga",
+    city: "Savannah", 
+    state: "GA",
     price: 200
 },
 {
     src: "images/Jack.jpeg",
     username: "MattisaGoober",
-    title: "Unicorn collection",
+    item: "Unicorn collection",
     description:" Nickleback is highly underrated",
     dsrc: "images/plunderLogoFinalCrop.png",
-    location: "Atlanta, Ga",
+    city: "Savannah", 
+    state: "GA",
     price: 20000
 },
 {
     src: "images/Jack.jpeg",
     username: "Drose345",
-    title: "Fine China",
+    item: "Fine China",
     description: "I thought you knew the word. That bird is the word",
     dsrc: "images/plunderLogoFinalCrop.png",
-    location: "San Diego, Ca",
+    city: "Savannah", 
+    state: "GA",
     price: 300
 },
 {
     src: "images/Jack.jpeg",
     username: "anon876",
-    title: "Plush Toys",
+    item: "Plush Toys",
     description: "Do you believe in life after love?!!!",
     dsrc: "images/plunderLogoFinalCrop.png",
-    location: "Athens, Ga",
+    city: "Savannah", 
+    state: "GA",
     price: 765
 }];
 
 let postArea = document.querySelector('.postSection');
 
 let postSection = (post) => {
-    
     
     let mainPost = document.createElement('div');
     let postHead = document.createElement('div');
@@ -74,10 +77,9 @@ let postSection = (post) => {
 
     userImage.setAttribute('src', post.src);
     titleUsername.textContent = post.username;
-    userProduct.textContent = post.title;
-    location.textContent = post.location;
+    userProduct.textContent = post.item;
+    location.textContent = post.city + ', ' + post.state;
     price.textContent = '$' + post.price;
-    description.textContent = post.description;
     descripText.textContent = post.description
     descripImage.setAttribute('src', post.dsrc)
 
