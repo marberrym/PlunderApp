@@ -150,6 +150,11 @@
     height: 10em;
 }
 
+.paraText {
+    font-family: 'Acme', sans-serif;
+    font-size: 1.1em;
+}
+
 .padding3R {
     padding-right: .3em;
 }

@@ -40,8 +40,17 @@ plunders.forEach(function(post){
     post.addEventListener('click', showPost)
 });
 
+let newPostSlide = (post) => {
+    let showPost = (event) => {
+        post.childNodes[3].classList.toggle('showDesc');
+    }
+    console.log(post.childNodes);
+    post.addEventListener('click', showPost)
+}
+
 navBTN.addEventListener('click', showPlunders);
 plunderBTN.addEventListener('click', showPlunders);
 registerBTN.addEventListener('click', showRegister);
 modalWindow.addEventListener('click', hideModal);
 loginBTN.addEventListener('click', showLogin);
+
