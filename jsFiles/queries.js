@@ -25,7 +25,7 @@ let allPostsByUser = (username) => {
         WHERE username = '` + username + `';`);
 }
 
-let onePostsByUser = (username, postid) => {
+let onePostsByUser = (username, postId) => {
     return db.one(`select username, name, item, description
         FROM posts
         INNER JOIN users ON users.id = posts.userid
