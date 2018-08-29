@@ -45,6 +45,7 @@ let createPost = (name, item, category, description, price, userid) => {
         ('` + name + `', '` + item + `', '` + category + `', '` + description + `', ` + price + `, '` + userid + `');`);
 }
 
+//let createUser = (username, password, email, first, last, city, state, )
 
 exports.listAllUsers = listAllUsers;
 exports.listAllPosts = listAllPosts;
