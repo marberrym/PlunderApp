@@ -1,5 +1,5 @@
 const pg = require('pg-promise')();
-const db = pg('postgres://matt@localhost:5432/plunder')
+const db = pg('postgres://wills@localhost:5432/plunder')
 
 
 let listAllUsers = () => {
@@ -8,6 +8,14 @@ let listAllUsers = () => {
 
 let listAllPosts = () => {
     return db.query(`select * from posts;`)
+}
+
+let usernameLogin = () => {
+    return db.one(`select username, password, id
+    FROM users
+    WHERE username = 'BillyJ456'
+    AND password = 'lolrus199';`
+    );
 }
 
 let allPostsByUser = (username) => {
@@ -43,7 +51,7 @@ let createPost = (name, item, category, description, price, userid) => {
         ('` + name + `', '` + item + `', '` + category + `', '` + description + `', ` + price + `, '` + userid + `');`);
 }
 
-
+exports.usernameLogin = usernameLogin;
 exports.listAllUsers = listAllUsers;
 exports.listAllPosts = listAllPosts;
 exports.allPostsByUser = allPostsByUser;

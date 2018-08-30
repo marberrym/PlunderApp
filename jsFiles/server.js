@@ -1,31 +1,17 @@
 
 const jwt = require('jsonwebtoken');
 const express = require('express');
-
-const bodyParser = require('body-parser')
-var jsonParser = bodyParser.json()
-let ex = express();
-ex.listen(3000);
-
 const cors = require('cors');
 const dbq = require('./queries.js')
+const bodyParser = require('body-parser')
 
+var jsonParser = bodyParser.json()
 let ex = express();
+
 ex.use(cors());
 ex.listen(3000);
 
-//Read body function for posts.
-let readBody = (req, callback) => {
-    let body = '';
-    req.on('data', (chunk) => {
-        body += chunk.toString();
-    });
-    req.on('end', () => {
-        callback(body);
-    });
-};
 
-res.end(console.log('authenticated'));
 //Request All Users
 let getUsers = (req, res) => {
     dbq.listAllUsers()
@@ -73,7 +59,7 @@ let newPost = (req, res, name, item, category, description, price, userid) => {
     createPost(name, item, category, description, price, userid)
 }
 
-//validation ...
+//validation middlewhere takes in url query for ?token='webtoken'
 let validateToken = (req, res, next) => {
     let token = req.query.token;
     let isValid = false;
@@ -97,7 +83,7 @@ let validateToken = (req, res, next) => {
 let createToken = (req, res) => {
         let credentials = req.body;
         console.log(credentials)
-        let validUser = queries.usernameLogin();
+        let validUser = dbq.usernameLogin();
         validUser.then(dbReply => {
             // this function serves an object with keys "username" and "password" from our form
             let loginID = JSON.stringify(dbReply.username);
@@ -124,17 +110,17 @@ let createToken = (req, res) => {
     ;
 }
 
-        
 
-//ex.get('/users', validateToken, getUsers);
-
-ex.post('/login', jsonParser, createToken);
-ex.get('/users', getUsers);
+ex.use(jsonParser);
+ex.post('/login', createToken);
+ex.get('/users', validateToken, getUsers);
 ex.get('/posts', getPosts);
 ex.get('/:username/posts', postsByUser);
 ex.get('/:username/posts/:postid', postByUser);
 ex.get('/posts/cat/:category', postsByCat);
 ex.get('/posts/state/:location', postsByLocation);
+
+
 
 
 
