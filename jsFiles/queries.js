@@ -1,5 +1,5 @@
 const pg = require('pg-promise')();
-const db = pg('postgres://wills@localhost:5432/plunder')
+const db = pg('postgres://matt@localhost:5432/plunder')
 
 
 let listAllUsers = () => {
