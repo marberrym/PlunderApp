@@ -3,7 +3,7 @@ let posts = [{
     username: "mmsimpson",
     item: "Remington 700",
     description:"Oukast is best bamnd eva",
-    descripimg: "images/imagination.png",
+    descripimg: "images/imagination.jpg",
     city: "Savannah", 
     state: "GA",
     price: 200
@@ -67,7 +67,7 @@ let postSection = (post) => {
         modalMap.classList.toggle('show');
     }
 
-    console.log(mainPost.childNodes[3]);
+    //console.log(mainPost.childNodes[3]);
     
     mainPost.classList.add('post');
     postHead.classList.add('postHead');

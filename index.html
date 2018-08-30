@@ -50,7 +50,9 @@
                     <input type="email" name="email" class="inputFields">
                 </label><br>
                 <label class="submitLabel">
-                    <span class="padding3R">City: </span><input type="text" name="username" class="inputFields"></label><br>
+                    <span class="padding3R">City: </span>
+                    <input type="text" name="username" class="inputFields">
+                </label><br>
                 <label class="submitLabel">
                     <span class="padding3R">State: </span>
                     <input type="text" name="username" class="inputFields">
@@ -67,7 +69,7 @@
             </form>
         </div>
         <div class="modalPost">
-            <form class="post">
+            <form class="post" method="post" enctype="multipart/form-data" action="/upload">
                 <label class="submitLabel">
                     <span class="padding3R">Item Name: </span>
                     <input type="text" name="item" class= "inputFields">
@@ -82,18 +84,19 @@
                 </label>
                 <label class="submitLabel">
                     <span class="padding3R">Item Picture: </span>
-                    <input type="text" name="descripimg" class= "inputFields">
+                    <input type="file" name="descripimg" class= "inputFields">
+                    <input type="submit" class="submitBTN">
                 </label>
                 <label class="submitLabel">
                     <span class="padding3R">Price: </span>
                     <input type="number" name="price" class= "inputFields" min="10" step="10">
                 </label>
-                <label class="submitLabel">
+                <!-- <label class="submitLabel">
                     <span class="padding3R">Item Name: </span>
                     <input type="" name="item" class= "inputFields">
-                </label>
+                </label> -->
             </form>
-
+        </div>
         <!-- Modal for Map Display -->
         <div class="modalMap">
             <img class="mapFrame" src="images/imagination.jpg">

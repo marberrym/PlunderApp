@@ -8,17 +8,8 @@ const cors = require('cors');
 const dbq = require('./queries.js')
 ex.use(cors());
 ex.use(express.static('../images'))
-
-//Read body function for posts.
-let readBody = (req, callback) => {
-    let body = '';
-    req.on('data', (chunk) => {
-        body += chunk.toString();
-    });
-    req.on('end', () => {
-        callback(body);
-    });
-};
+let multer = require('multer')
+let upload = multer({dest: '../images'})
 
 //Request All Users
 let getUsers = (req, res) => {
@@ -123,7 +114,7 @@ let createToken = (req, res) => {
 ex.use(jsonParser);
 ex.post('/login', createToken);
 // ex.get('/users', validateToken, getUsers);
-
+ex.post('/newpost', newPost)
 ex.get('/users', getUsers);
 ex.get('/posts', getPosts);
 ex.get('/:username/posts', postsByUser);
