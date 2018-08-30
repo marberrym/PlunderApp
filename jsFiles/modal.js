@@ -7,6 +7,28 @@ let plunderBTN = document.querySelector('#plunders')
 let modalPlunders = document.querySelector('.modalPlunders');
 let plunders = document.querySelectorAll('.post');
 let navBTN = document.querySelector('.navLogo');
+let loginForm = document.querySelector('.loginForm')
+
+let loginSubmission = (event) => {
+    event.preventDefault();
+    let loginSubmissionObject = {username:'', password: ''};
+    let usernameSubmit = document.querySelector('.inputFieldUsername');
+    let passwordSubmit = document.querySelector('.inputFieldPassword');
+    loginSubmissionObject['username'] = usernameSubmit.value;
+    loginSubmissionObject['password'] = passwordSubmit.value;
+    console.log(loginSubmissionObject);
+    fetch('http://localhost:3000/login', {
+        method: 'POST',
+        body: JSON.stringify(loginSubmissionObject),
+        headers: {'Content-Type': 'application/json'}
+    })
+    .then((result) => {
+        return result.text()
+    })
+    .then((result)=>{
+        console.log(result);
+    })
+}
 
 let showLogin = (event) => {
     modalWindow.classList.add('show');
@@ -45,4 +67,5 @@ plunderBTN.addEventListener('click', showPlunders);
 registerBTN.addEventListener('click', showRegister);
 modalWindow.addEventListener('click', hideModal);
 loginBTN.addEventListener('click', showLogin);
+loginForm.addEventListener('submit', loginSubmission);
 

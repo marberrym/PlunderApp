@@ -12,6 +12,14 @@ let listAllPosts = () => {
                     INNER JOIN users usr ON usr.id = pst.userid`)
 }
 
+let usernameLogin = (username, password) => {
+    return db.one(`select username, password, id
+    FROM users
+    WHERE username = '` + username + `'
+    AND password = '` + password + `';`
+    );
+}
+
 let allPostsByUser = (username) => {
     return db.query(`select usr.username, pst.name, pst.item, pst.description
         FROM posts pst
@@ -45,7 +53,10 @@ let createPost = (name, item, category, description, price, userid) => {
         ('` + name + `', '` + item + `', '` + category + `', '` + description + `', ` + price + `, '` + userid + `');`);
 }
 
+
+exports.usernameLogin = usernameLogin;
 //let createUser = (username, password, email, first, last, city, state, )
+
 
 exports.listAllUsers = listAllUsers;
 exports.listAllPosts = listAllPosts;
