@@ -22,11 +22,10 @@ body {
 }
 
 .flexColumn {
-    padding: 2em;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .headText {
@@ -86,11 +85,13 @@ body {
 .postHead {
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 
 .userPostTitle{
     flex-basis: 50%;
     margin-left: 1em;
+    text-align: center;
 }
 
 .locationPrice{
@@ -166,10 +167,20 @@ body {
 }
 
 @media only screen and (min-width: 600px) {
+    .userPostTitle {
+        text-align: start;
+    }
     .plunderText {
         transform: translateX(-.5em) translateY(-.2em)
     }
     .plunderLogo {
         transform: translateX(0);
     } 
+    .flexColumn {
+        padding: 2em;
+        align-items: flex-end;
+    }
+    .postHead {
+        flex-direction: row;
+    }
 }

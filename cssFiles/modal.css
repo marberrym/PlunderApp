@@ -35,15 +35,18 @@
 
 .modalMap {
     position: absolute;
-    top: 10%;
-    left: 30%;
-    height: 80%;
-    width: 40%;
+    top: 20%;
+    left: 10%;
+    height: 60%;
+    width: 80%;
     background-color: whitesmoke;
     border-radius: 1em;
     border: 1px solid black;
     visibility: hidden;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .modalPlunders {
@@ -138,26 +141,24 @@
 .descriptions {
     display: flex;
     justify-content: space-evenly;
-    padding: 2em;
+    border-radius: 1em;
     opacity: 0;
     height: 0;
     pointer-events: none;
     transition: .2s ease-in-out;
-    margin: 0;
-    padding: 0;
+    flex-direction: column;
+    margin: 1em;
+    padding: 1em;
     font-family: 'Acme', sans-serif;
     font-size: 1.1em;
+    
 }
 
 
 .showDesc {
     pointer-events: all;
-    margin: 1em;
-    padding: 1em;
-    display: flex;
-    height: 10em;
+    height: 50%;
     opacity: 1;
-    border-radius: 1em;
     background-color: rgba(0, 0, 0, 0.129);
 }
 
@@ -175,12 +176,14 @@
 }
 
 .mapFrame {
-    margin-top: 30%;
     height: 50%;
     width: 80%;
 }
 
 @media only screen and (min-width: 600px) {
+    .descriptions {
+        flex-direction: row;
+    }
     .modalPlunders{
         left: -45%;
         width: 40%;
@@ -190,6 +193,10 @@
         width: 60%;
     }
     .modalRegister {
+        left: 15%;
+        width: 60%;
+    }
+    .modalMap {
         left: 15%;
         width: 60%;
     }
@@ -207,6 +214,9 @@
     .modalRegister {
         width: 50%;
     }
+    .modalMap {
+        width: 50%;
+    }
     
 }
 
@@ -220,6 +230,10 @@
         width: 40%;
     }
     .modalRegister {
+        left: 30%;
+        width: 40%;
+    }
+    .modalMap {
         left: 30%;
         width: 40%;
     }
