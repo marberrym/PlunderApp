@@ -50,7 +50,9 @@
                     <input type="email" name="email" class="inputFields">
                 </label><br>
                 <label class="submitLabel">
-                    <span class="padding3R">City: </span><input type="text" name="username" class="inputFields"></label><br>
+                    <span class="padding3R">City: </span>
+                    <input type="text" name="username" class="inputFields">
+                </label><br>
                 <label class="submitLabel">
                     <span class="padding3R">State: </span>
                     <input type="text" name="username" class="inputFields">
@@ -64,6 +66,35 @@
                     <input type="password" name="password" class="inputFields">
                 </label><br>
                 <button type="submit" class="submitBTN">Submit</button>
+            </form>
+        </div>
+        <div class="modalPost">
+            <form class="post" method="post" enctype="multipart/form-data" action="/upload">
+                <label class="submitLabel">
+                    <span class="padding3R">Item Name: </span>
+                    <input type="text" name="item" class= "inputFields">
+                </label>
+                <label class="submitLabel">
+                    <span class="padding3R">Category: </span>
+                    <input type="text" name="category" class= "inputFields">
+                </label>
+                <label class="submitLabel">
+                    <span class="padding3R">Description: </span>
+                    <input type="text" name="description" class= "inputFields">
+                </label>
+                <label class="submitLabel">
+                    <span class="padding3R">Item Picture: </span>
+                    <input type="file" name="descripimg" class= "inputFields">
+                    <input type="submit" class="submitBTN">
+                </label>
+                <label class="submitLabel">
+                    <span class="padding3R">Price: </span>
+                    <input type="number" name="price" class= "inputFields" min="10" step="10">
+                </label>
+                <!-- <label class="submitLabel">
+                    <span class="padding3R">Item Name: </span>
+                    <input type="" name="item" class= "inputFields">
+                </label> -->
             </form>
         </div>
         <!-- Modal for Map Display -->
@@ -81,6 +112,7 @@
         <div style="text-align: right; display: flex; margin-right: 2em;">
             <div id="login" class="navBTN" style="margin: 0; padding: 0;">Login</div>
             <div id="register" class="navBTN">Register</div>
+            <div id="post" class="navBTN">Post</div>
         </div>
     </div>
     <div class="headText">

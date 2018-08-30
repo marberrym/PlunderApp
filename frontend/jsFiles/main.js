@@ -26,7 +26,7 @@ let postSection = (post) => {
         modalMap.classList.toggle('show');
     }
 
-    console.log(mainPost.childNodes[3]);
+    //console.log(mainPost.childNodes[3]);
     
     mainPost.classList.add('post');
     postHead.classList.add('postHead');

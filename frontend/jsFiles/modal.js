@@ -1,8 +1,10 @@
 let loginBTN = document.querySelector('#login');
 let registerBTN = document.querySelector('#register');
+let postBTN = document.querySelector('#post');
 let modalWindow = document.querySelector('.modalBG');
 let modalLogin = document.querySelector('.modalLogin');
 let modalRegister = document.querySelector('.modalRegister');
+let modalPost = document.querySelector('.modalPost')
 let plunderBTN = document.querySelector('#plunders')
 let modalPlunders = document.querySelector('.modalPlunders');
 let plunders = document.querySelectorAll('.post');
@@ -31,7 +33,16 @@ let loginSubmission = (event) => {
         console.log(result);
     })
 }
+let postSubmission = (event) => {
+    event.preventDefault();
+    let postSubmissionObject = {item:'', category:'', description:'', descripimg:'', price:''};
+    let itemNameSubmit = document.querySelector('.inputFieldItem')
+    let categorySubmit = document.querySelector('.inputFieldCategory');
+    let descriptionSubmit = document.querySelector('.inputFieldDescription');
+    let descriptionImg = document.querySelector('.inputFieldDescriptionImg');
+    let passwordSubmit = document.querySelector('.inputFieldPassword');
 
+}
 let showLogin = (event) => {
     modalWindow.classList.add('show');
     modalLogin.classList.add('show');
@@ -40,6 +51,11 @@ let showLogin = (event) => {
 let showRegister = (event) => {
     modalWindow.classList.add('show');
     modalRegister.classList.add('show');
+}
+
+let showPost = (event) => {
+    modalWindow.classList.add('show');
+    modalPost.classList.add('show');
 }
 
 let showPlunders = (event) => {
@@ -65,7 +81,9 @@ let hideModal = (event) => {
 navBTN.addEventListener('click', showPlunders);
 plunderBTN.addEventListener('click', showPlunders);
 registerBTN.addEventListener('click', showRegister);
+postBTN.addEventListener('click',showPost)
 modalWindow.addEventListener('click', hideModal);
 loginBTN.addEventListener('click', showLogin);
 loginForm.addEventListener('submit', loginSubmission);
+
 

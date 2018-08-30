@@ -7,18 +7,10 @@ var jsonParser = bodyParser.json()
 const cors = require('cors');
 const dbq = require('./queries.js')
 ex.use(cors());
-ex.use(express.static('../images'))
-
-//Read body function for posts.
-let readBody = (req, callback) => {
-    let body = '';
-    req.on('data', (chunk) => {
-        body += chunk.toString();
-    });
-    req.on('end', () => {
-        callback(body);
-    });
-};
+ex.use('/images/', express.static('./images'))
+ex.use(express.static('./frontend'))
+let multer = require('multer')
+let upload = multer({dest: './images'})
 
 //Request All Users
 let getUsers = (req, res) => {
@@ -123,7 +115,7 @@ let createToken = (req, res) => {
 ex.use(jsonParser);
 ex.post('/login', createToken);
 // ex.get('/users', validateToken, getUsers);
-
+ex.post('/newpost', newPost)
 ex.get('/users', getUsers);
 ex.get('/posts', getPosts);
 ex.get('/:username/posts', postsByUser);
@@ -131,7 +123,6 @@ ex.get('/:username/posts/:postid', postByUser);
 ex.get('/posts/cat/:category', postsByCat);
 ex.get('/posts/state/:location', postsByLocation);
 
-ex.use(cors());
 ex.listen(3000);
 
 
