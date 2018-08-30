@@ -33,6 +33,19 @@
     visibility: hidden;
 }
 
+.modalMap {
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    height: 80%;
+    width: 40%;
+    background-color: whitesmoke;
+    border-radius: 1em;
+    border: 1px solid black;
+    visibility: hidden;
+    text-align: center;
+}
+
 .modalPlunders {
     position: fixed;
     top: 30%;
@@ -159,4 +172,10 @@
 
 .padding3R {
     padding-right: .3em;
+}
+
+.mapFrame {
+    margin-top: 30%;
+    height: 50%;
+    width: 80%;
 }
