@@ -29,9 +29,9 @@
         <!-- Modal for User Login -->
         <div class="modalLogin">
             <form class="login loginForm">
-                <label class="navBTN">Username: </label><input type="text" name="username" class="inputFields inputFieldUsername"><br>
-                <label class="navBTN">Password: </label><input type="password" name="password" class="inputFields inputFieldPassword"><br>
-                <button type="submit" class="submitBTN">Submit</button>
+                <label class="submitLabel">Username: <input type="text" name="username" class="inputFields inputFieldUsername"></label><br>
+                <label class="submitLabel">Password: <input type="password" name="password" class="inputFields inputFieldPassword"></label><br>
+                <button type="submit" class="submitBTN noTrans">Submit</button>
             </form>
         </div>
         <!-- Modal for User Registration -->
@@ -65,11 +65,12 @@
                     <span class="padding3R">Password: </span>
                     <input type="password" name="password" class="inputFields">
                 </label><br>
-                <button type="submit" class="submitBTN">Submit</button>
+                <button type="submit" class="submitBTN noTrans">Submit</button>
             </form>
         </div>
+        <!-- Modal for Post -->
         <div class="modalPost">
-            <form class="post" method="post" enctype="multipart/form-data" action="/upload">
+            <form class="login">
                 <label class="submitLabel">
                     <span class="padding3R">Item Name: </span>
                     <input type="text" name="item" class= "inputFields">
@@ -85,25 +86,19 @@
                 <label class="submitLabel">
                     <span class="padding3R">Item Picture: </span>
                     <input type="file" name="descripimg" class= "inputFields">
-                    <input type="submit" class="submitBTN">
                 </label>
                 <label class="submitLabel">
                     <span class="padding3R">Price: </span>
                     <input type="number" name="price" class= "inputFields" min="10" step="10">
                 </label>
-                <!-- <label class="submitLabel">
-                    <span class="padding3R">Item Name: </span>
-                    <input type="" name="item" class= "inputFields">
-                </label> -->
+                <button type="submit" class="submitBTN noTrans">Submit</button>
             </form>
         </div>
         <!-- Modal for Map Display -->
         <div class="modalMap">
-            <img class="mapFrame" src="images/imagination.jpg">
-            <div>This is where the map goes...</div>
         </div>
     </div>
-    
+    <!-- NavBar -->
     <div class="navBar">
         <div style="display: flex; align-items: center;">
             <img src="images/plunderLogoFinalCrop.png" class="navLogo">
@@ -115,16 +110,16 @@
             <div id="post" class="navBTN">Post</div>
         </div>
     </div>
+    <!-- Logo -->
     <div class="headText">
         <img src="images/plunderLogoFinal.png" class="plunderLogo">
         <span class="plunderText">Plunder</span>
     </div>
+    <!-- Main Page -->
     <div class="flexColumn">
         <div class="postSection">
         </div>
-    </div>
-
-    
+    </div>    
     <script src="jsFiles/fetchReq.js"></script>
     <script src="jsFiles/main.js"></script>
     <script src="jsFiles/modal.js"></script>

@@ -2,9 +2,9 @@
 url = 'http://localhost:3000/posts'
 let catBTNS = document.querySelectorAll('.sideBar');
 
-let empty = () => {
-    while (postArea.firstChild) {
-        postArea.removeChild(postArea.firstChild)
+let empty = (node) => {
+    while (node.firstChild) {
+        node.removeChild(node.firstChild)
     }
 }
 
@@ -35,8 +35,15 @@ getReq(url);
 catBTNS.forEach(function(cat) {
     let reqURL = 'http://localhost:3000/posts/cat/'+ cat.textContent;
     let catReq = () => {
-        empty();
+        empty(postArea);
         getReq(reqURL);
     }
     cat.addEventListener('click', catReq)
 });
+
+let getMap = (city, state) => {
+    fetch('https://maps.googleapis.com/maps/api/staticmap?center=' + city + ',' + state + '&zoom=14&size=400x400&key=' + apiKey)
+        .then(response => {
+            return response
+        })       
+}
