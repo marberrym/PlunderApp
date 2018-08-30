@@ -90,7 +90,7 @@ body {
 
 .locationPrice{
     text-align: right;
-    flex-basis: 40%;
+    flex-basis: 15%;
 }
 
 .username {
@@ -140,4 +140,22 @@ body {
         transform: scale(1.5) rotate(30deg)
 
     }
+}
+
+.mapBTN {
+    padding: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    flex-basis: 15%;
+    text-align: center;
+    border: 1px solid black;
+    font-family: 'Amatic SC', cursive;
+    font-size: 1em;
+    border-radius: 1em;
+    background: radial-gradient(circle, rgba(4,138,158,1) 18%, rgba(35,1,97,1) 93%);
+    color: whitesmoke;
+}
+
+.mapBTN:hover {
+    border: 1px solid whitesmoke;
 }

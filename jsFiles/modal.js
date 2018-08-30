@@ -8,6 +8,8 @@ let modalPlunders = document.querySelector('.modalPlunders');
 let plunders = document.querySelectorAll('.post');
 let navBTN = document.querySelector('.navLogo');
 let loginForm = document.querySelector('.loginForm')
+let mapBTNS = document.querySelectorAll('.mapBTN');
+let modalMap = document.querySelector('.modalMap');
 
 let loginSubmission = (event) => {
     event.preventDefault();
@@ -45,22 +47,20 @@ let showPlunders = (event) => {
     modalPlunders.classList.add('showPlunders');
 }
 
+let showMap = (event) => {
+    modalWindow.classList.add('show');
+    modalMap.classList.add('show');
+}
+
 let hideModal = (event) => {
     if (event.target === modalWindow) {
         modalWindow.classList.remove('show');
         modalLogin.classList.remove('show');
+        modalMap.classList.remove('show');
         modalRegister.classList.remove('show');
         modalPlunders.classList.remove('showPlunders');
     }
 }
-
-plunders.forEach(function(post){
-    let showPost = (event) => {
-        post.childNodes[3].classList.toggle('showDesc');
-    }
-    post.addEventListener('click', showPost)
-});
-
 
 navBTN.addEventListener('click', showPlunders);
 plunderBTN.addEventListener('click', showPlunders);

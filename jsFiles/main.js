@@ -52,12 +52,19 @@ let postSection = (post) => {
     let locationPrice = document.createElement('div');
     let location = document.createElement('div');
     let price = document.createElement('div');
+    let mapBTN = document.createElement('div');
     let description = document.createElement('div');
     let descripImage = document.createElement('img');
     let descripText = document.createElement('p');
 
     let showPost = (event) => {
-        description.classList.toggle('showDesc');
+        if (event.target != mapBTN) {
+            description.classList.toggle('showDesc');
+        }
+    }
+    let showMap = (event) => {
+        modalWindow.classList.add('show');
+        modalMap.classList.toggle('show');
     }
 
     console.log(mainPost.childNodes[3]);
@@ -74,10 +81,12 @@ let postSection = (post) => {
     description.classList.add('descriptions');
     descripImage.classList.add('descriptionIMG');
     descripText.classList.add('paraText');
+    mapBTN.classList.add('mapBTN');
 
     userImage.setAttribute('src', post.userimg);
     titleUsername.textContent = post.username;
     userProduct.textContent = post.item;
+    mapBTN.textContent = 'Suggested Plunder Spots';
     location.textContent = post.city + ', ' + post.state;
     price.textContent = '$' + post.price;
     descripText.textContent = post.description
@@ -93,6 +102,7 @@ let postSection = (post) => {
 
     postHead.appendChild(userImage);
     postHead.appendChild(postTitle);
+    postHead.appendChild(mapBTN);
     postHead.appendChild(locationPrice);
 
     mainPost.appendChild(postHead);
@@ -100,7 +110,8 @@ let postSection = (post) => {
 
     postArea.appendChild(mainPost);
 
-    mainPost.addEventListener('click', showPost)
+    mainPost.addEventListener('click', showPost);
+    mapBTN.addEventListener('click', showMap);
 
 };
 
