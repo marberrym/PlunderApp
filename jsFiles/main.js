@@ -1,39 +1,39 @@
 let posts = [{
-    src: "images/Jack.jpeg",
+    userimg: "images/Alfalfa.jpg",
     username: "mmsimpson",
     item: "Remington 700",
     description:"Oukast is best bamnd eva",
-    dsrc: "images/plunderLogoFinalCrop.png",
+    descripimg: "images/imagination.png",
     city: "Savannah", 
     state: "GA",
     price: 200
 },
 {
-    src: "images/Jack.jpeg",
+    userimg: "images/james_earl_jones.jpg",
     username: "MattisaGoober",
     item: "Unicorn collection",
     description:" Nickleback is highly underrated",
-    dsrc: "images/plunderLogoFinalCrop.png",
+    descripimg: "images/plunderLogoFinalCrop.png",
     city: "Savannah", 
     state: "GA",
     price: 20000
 },
 {
-    src: "images/Jack.jpeg",
+    userimg: "images/jon_snow.png",
     username: "Drose345",
     item: "Fine China",
     description: "I thought you knew the word. That bird is the word",
-    dsrc: "images/plunderLogoFinalCrop.png",
+    descripimg: "images/plunderLogoFinalCrop.png",
     city: "Savannah", 
     state: "GA",
     price: 300
 },
 {
-    src: "images/Jack.jpeg",
+    userimg: "images/Jack.jpeg",
     username: "anon876",
     item: "Plush Toys",
     description: "Do you believe in life after love?!!!",
-    dsrc: "images/plunderLogoFinalCrop.png",
+    descripimg: "images/plunderLogoFinalCrop.png",
     city: "Savannah", 
     state: "GA",
     price: 765
@@ -75,13 +75,13 @@ let postSection = (post) => {
     descripImage.classList.add('descriptionIMG');
     descripText.classList.add('paraText');
 
-    userImage.setAttribute('src', post.src);
+    userImage.setAttribute('src', post.userimg);
     titleUsername.textContent = post.username;
     userProduct.textContent = post.item;
     location.textContent = post.city + ', ' + post.state;
     price.textContent = '$' + post.price;
     descripText.textContent = post.description
-    descripImage.setAttribute('src', post.dsrc)
+    descripImage.setAttribute('src', post.descripimg)
 
     description.appendChild(descripText);
     description.appendChild(descripImage);

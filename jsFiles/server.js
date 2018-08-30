@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 const cors = require('cors');
 const dbq = require('./queries.js')
+ex.use(cors());
 ex.use(express.static('../images'))
 
 //Read body function for posts.
@@ -62,8 +63,8 @@ let postsByLocation = (req, res) => {
 }
 
 //Create a new post
-let newPost = (req, res, name, item, category, description, price, userid) => {
-    dbq.createPostcreatePost(name, item, category, description, price, userid)
+let newPost = (req, res, item, category, description, price, userid) => {
+    dbq.createPostcreatePost(item, category, description, price, userid)
 }
 
 

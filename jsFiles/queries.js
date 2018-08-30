@@ -7,7 +7,7 @@ let listAllUsers = () => {
 }
 
 let listAllPosts = () => {
-    return db.query(`select usr.username, pst.name, pst.item, usr.city, pst.price, usr.state, pst.description 
+    return db.query(`select usr.username, usr.userimg, pst.item, usr.city, pst.price, usr.state, pst.description, pst.descripimg 
                     FROM posts pst
                     INNER JOIN users usr ON usr.id = pst.userid`)
 }
@@ -21,14 +21,14 @@ let usernameLogin = (username, password) => {
 }
 
 let allPostsByUser = (username) => {
-    return db.query(`select usr.username, pst.name, pst.item, pst.description
+    return db.query(`select usr.username, usr.userimg, pst.item, pst.description, pst.descripimg
         FROM posts pst
         INNER JOIN users usr ON usr.id = pst.userid
         WHERE username = '` + username + `';`);
 }
 
 let onePostsByUser = (username, postid) => {
-    return db.one(`select usr.username, pst.name, pst.item, pst.description, pst.price, usr.city, usr.state
+    return db.one(`select usr.username, usr.userimg, pst.item, pst.description, pst.descripimg, pst.price, usr.city, usr.state
         FROM posts pst
         INNER JOIN users usr ON usr.id = pst.userid
         WHERE username = '` + username + `'
@@ -42,15 +42,15 @@ let listPostsByCategory = (category) => {
 }
 
 let listPostsByState = (state) => {
-    return db.query(`select usr.username, usr.state, usr.city, pst.name, pst.item, pst.price, pst.description
+    return db.query(`select usr.username, usr.userimg, usr.state, usr.city, pst.item, pst.price, pst.description, pst.descripimg
         FROM posts pst
         INNER JOIN users usr ON usr.id = pst.userid
         WHERE usr.state = '` + state + `';`);
 }
 
-let createPost = (name, item, category, description, price, userid) => {
-    return db.one(`INSERT INTO posts (name, item, category, description, price, userid) values 
-        ('` + name + `', '` + item + `', '` + category + `', '` + description + `', ` + price + `, '` + userid + `');`);
+let createPost = (item, category, description, descripimg, price, userid) => {
+    return db.one(`INSERT INTO posts (item, category, description, price, userid) values 
+        ('` + item + `', '` + category + `', '` + description + `', '` + descripimg + `', '` + price + `', '` + userid + `');`);
 }
 
 
