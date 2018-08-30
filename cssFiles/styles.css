@@ -45,7 +45,12 @@ body {
 }
 
 .plunderText {
-    transform: translateX(-.5em) translateY(-.2em)
+    transform: translateX(-1.5em) translateY(1em);
+}
+
+.plunderLogo {
+    height: 3em;
+    transform: translateX(1.5em);
 }
 
 .postSection {
@@ -158,4 +163,13 @@ body {
 
 .mapBTN:hover {
     border: 1px solid whitesmoke;
+}
+
+@media only screen and (min-width: 600px) {
+    .plunderText {
+        transform: translateX(-.5em) translateY(-.2em)
+    }
+    .plunderLogo {
+        transform: translateX(0);
+    } 
 }
