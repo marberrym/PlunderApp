@@ -1,16 +1,23 @@
 
 const jwt = require('jsonwebtoken');
 const express = require('express');
+const ex = express();
+const bodyParser = require('body-parser')
+var jsonParser = bodyParser.json()
 const cors = require('cors');
 const dbq = require('./queries.js')
-const bodyParser = require('body-parser')
+ex.use(express.static('../images'))
 
-var jsonParser = bodyParser.json()
-let ex = express();
-
-ex.use(cors());
-ex.listen(3000);
-
+//Read body function for posts.
+let readBody = (req, callback) => {
+    let body = '';
+    req.on('data', (chunk) => {
+        body += chunk.toString();
+    });
+    req.on('end', () => {
+        callback(body);
+    });
+};
 
 //Request All Users
 let getUsers = (req, res) => {
@@ -56,8 +63,9 @@ let postsByLocation = (req, res) => {
 
 //Create a new post
 let newPost = (req, res, name, item, category, description, price, userid) => {
-    createPost(name, item, category, description, price, userid)
+    dbq.createPostcreatePost(name, item, category, description, price, userid)
 }
+
 
 //validation middlewhere takes in url query for ?token='webtoken'
 let validateToken = (req, res, next) => {
@@ -113,13 +121,17 @@ let createToken = (req, res) => {
 
 ex.use(jsonParser);
 ex.post('/login', createToken);
-ex.get('/users', validateToken, getUsers);
+// ex.get('/users', validateToken, getUsers);
+
+ex.get('/users', getUsers);
 ex.get('/posts', getPosts);
 ex.get('/:username/posts', postsByUser);
 ex.get('/:username/posts/:postid', postByUser);
 ex.get('/posts/cat/:category', postsByCat);
 ex.get('/posts/state/:location', postsByLocation);
 
+ex.use(cors());
+ex.listen(3000);
 
 
 
