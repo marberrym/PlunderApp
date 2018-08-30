@@ -42,7 +42,7 @@ catBTNS.forEach(function(cat) {
 });
 
 let getMap = (city, state) => {
-    fetch('https://maps.googleapis.com/maps/api/staticmap?center=' + city + ',' + state + '&zoom=14&size=400x400&key=' + apiKey);
+    fetch('https://maps.googleapis.com/maps/api/staticmap?center=' + city + ',' + state + '&zoom=14&size=400x400&key=' + apiKey)
         .then(response => {
             return response
         })       
