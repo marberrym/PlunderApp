@@ -7,9 +7,10 @@ var jsonParser = bodyParser.json()
 const cors = require('cors');
 const dbq = require('./queries.js')
 ex.use(cors());
-ex.use(express.static('../images'))
+ex.use('/images/', express.static('./images'))
+ex.use(express.static('./frontend'))
 let multer = require('multer')
-let upload = multer({dest: '../images'})
+let upload = multer({dest: './images'})
 
 //Request All Users
 let getUsers = (req, res) => {
@@ -122,7 +123,6 @@ ex.get('/:username/posts/:postid', postByUser);
 ex.get('/posts/cat/:category', postsByCat);
 ex.get('/posts/state/:location', postsByLocation);
 
-ex.use(cors());
 ex.listen(3000);
 
 
