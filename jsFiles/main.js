@@ -1,44 +1,3 @@
-let posts = [{
-    userimg: "images/Alfalfa.jpg",
-    username: "mmsimpson",
-    item: "Remington 700",
-    description:"Oukast is best bamnd eva",
-    descripimg: "images/imagination.jpg",
-    city: "Savannah", 
-    state: "GA",
-    price: 200
-},
-{
-    userimg: "images/james_earl_jones.jpg",
-    username: "MattisaGoober",
-    item: "Unicorn collection",
-    description:" Nickleback is highly underrated",
-    descripimg: "images/plunderLogoFinalCrop.png",
-    city: "Savannah", 
-    state: "GA",
-    price: 20000
-},
-{
-    userimg: "images/jon_snow.png",
-    username: "Drose345",
-    item: "Fine China",
-    description: "I thought you knew the word. That bird is the word",
-    descripimg: "images/plunderLogoFinalCrop.png",
-    city: "Savannah", 
-    state: "GA",
-    price: 300
-},
-{
-    userimg: "images/Jack.jpeg",
-    username: "anon876",
-    item: "Plush Toys",
-    description: "Do you believe in life after love?!!!",
-    descripimg: "images/plunderLogoFinalCrop.png",
-    city: "Savannah", 
-    state: "GA",
-    price: 765
-}];
-
 let postArea = document.querySelector('.postSection');
 
 let postSection = (post) => {
@@ -115,9 +74,6 @@ let postSection = (post) => {
 
 };
 
-posts.forEach(function (post) {
-    postSection(post)
-});
     
 
 
