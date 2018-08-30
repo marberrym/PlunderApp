@@ -36,8 +36,9 @@ let onePostsByUser = (username, postid) => {
 }
 
 let listPostsByCategory = (category) => {
-    return db.query(`select * 
-        FROM posts
+    return db.query(`select usr.username, usr.userimg, pst.item, usr.city, pst.price, usr.state, pst.description, pst.descripimg
+        FROM posts pst
+        INNER JOIN users usr ON usr.id = pst.userid
         WHERE category = '` + category + `';`);
 }
 

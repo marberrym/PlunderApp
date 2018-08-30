@@ -120,7 +120,7 @@ body {
     padding-left: 1.5em;
     margin-right: 1.5em;
     cursor: pointer;
-    transition: 1s ease-in-out;
+    transition: .3s ease-in-out;
 }
 
 .navBTN:hover {
@@ -160,9 +160,11 @@ body {
     border-radius: 1em;
     background: radial-gradient(circle, rgba(4,138,158,1) 18%, rgba(35,1,97,1) 93%);
     color: whitesmoke;
+    transition: .3s ease-in-out;
 }
 
 .mapBTN:hover {
+    transform: scale(1.2);
     border: 1px solid whitesmoke;
 }
 

@@ -103,10 +103,12 @@
     border-radius: 1em;
     background: radial-gradient(circle, rgba(4,138,158,1) 18%, rgba(35,1,97,1) 93%);
     color: whitesmoke;
+    transition: .3s ease-in-out;
 }
 
 .submitBTN:hover {
     border: 1px solid whitesmoke;
+    transform: scale(1.2);
 }
 
 .sideBar {
@@ -147,8 +149,8 @@
     pointer-events: none;
     transition: .2s ease-in-out;
     flex-direction: column;
-    margin: 1em;
-    padding: 1em;
+    margin: 0;
+    padding: 0;
     font-family: 'Acme', sans-serif;
     font-size: 1.1em;
     
@@ -156,6 +158,8 @@
 
 
 .showDesc {
+    margin: 1em;
+    padding: 1em;
     pointer-events: all;
     height: 50%;
     opacity: 1;

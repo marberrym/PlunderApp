@@ -2,6 +2,12 @@
 url = 'http://localhost:3000/posts'
 let catBTNS = document.querySelectorAll('.sideBar');
 
+let empty = () => {
+    while (postArea.firstChild) {
+        postArea.removeChild(postArea.firstChild)
+    }
+}
+
 let getReq = (url) => fetch(url)
     .then(response => {
         if(response.status < 400) {
@@ -29,7 +35,8 @@ getReq(url);
 catBTNS.forEach(function(cat) {
     let reqURL = 'http://localhost:3000/posts/cat/'+ cat.textContent;
     let catReq = () => {
-        getReq(reqURL)
+        empty();
+        getReq(reqURL);
     }
     cat.addEventListener('click', catReq)
 });
