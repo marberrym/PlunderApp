@@ -1,7 +1,7 @@
 CREATE TABLE users (
     id serial primary key,
     username character varying (200),
-    image character varying(255),
+    userimg character varying(255),
     password character varying (200),
     email character varying (200),
     first character varying (200),
@@ -17,10 +17,10 @@ CREATE TABLE users (
 
 CREATE TABLE posts (
     id serial primary key,
-    name character varying (200),
     item character varying (200),
     category character varying (200),
     description TEXT, 
+    descripimg character varying(255),
     price integer, 
     userid integer REFERENCES users(id)
 );
