@@ -35,8 +35,13 @@ getReq(url);
 catBTNS.forEach(function(cat) {
     let reqURL = 'http://localhost:3000/posts/cat/'+ cat.textContent;
     let catReq = () => {
-        empty(postArea);
-        getReq(reqURL);
+        if (cat.textContent !== 'All'){
+            empty(postArea);
+            getReq(reqURL);
+        } else {
+            empty(postArea);
+            getReq(url);
+        }
     }
     cat.addEventListener('click', catReq)
 });
