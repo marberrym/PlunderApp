@@ -83,7 +83,7 @@ let validateToken = (req, res, next) => {
 let createToken = (req, res) => {
         let credentials = req.body;
         console.log(credentials)
-        let validUser = dbq.usernameLogin();
+        let validUser = dbq.usernameLogin(credentials.username, credentials.password);
         validUser.then(dbReply => {
             // this function serves an object with keys "username" and "password" from our form
             let loginID = JSON.stringify(dbReply.username);

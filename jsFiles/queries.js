@@ -10,11 +10,11 @@ let listAllPosts = () => {
     return db.query(`select * from posts;`)
 }
 
-let usernameLogin = () => {
+let usernameLogin = (username, password) => {
     return db.one(`select username, password, id
     FROM users
-    WHERE username = 'BillyJ456'
-    AND password = 'lolrus199';`
+    WHERE username = '` + username + `'
+    AND password = '` + password + `';`
     );
 }
 
