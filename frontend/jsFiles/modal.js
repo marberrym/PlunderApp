@@ -63,17 +63,14 @@ let showPlunders = (event) => {
     modalPlunders.classList.add('showPlunders');
 }
 
-let showMap = (event) => {
-    modalWindow.classList.add('show');
-    modalMap.classList.add('show');
-}
-
 let hideModal = (event) => {
     if (event.target === modalWindow) {
+        empty(modalMap);
         modalWindow.classList.remove('show');
         modalLogin.classList.remove('show');
         modalMap.classList.remove('show');
         modalRegister.classList.remove('show');
+        modalPost.classList.remove('show');
         modalPlunders.classList.remove('showPlunders');
     }
 }

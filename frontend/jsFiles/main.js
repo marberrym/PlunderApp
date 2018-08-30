@@ -22,8 +22,16 @@ let postSection = (post) => {
         }
     }
     let showMap = (event) => {
+        buildMap()
         modalWindow.classList.add('show');
         modalMap.classList.toggle('show');
+    }
+    let buildMap = (event) => {
+        let newMap = document.createElement('img');
+        let map = getMap(post.city, post.state);
+        newMap.classList.add('mapFrame');
+        newMap.setAttribute('src', '../../images/imagination.jpg')
+        modalMap.appendChild(newMap);
     }
 
     //console.log(mainPost.childNodes[3]);
