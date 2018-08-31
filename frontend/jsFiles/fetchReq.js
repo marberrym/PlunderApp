@@ -1,6 +1,8 @@
 
-url = 'http://localhost:3000/posts'
+let url = 'http://localhost:3000/posts'
+let mapURL = 'http://localhost:3000/map'
 let catBTNS = document.querySelectorAll('.sideBar');
+
 
 let empty = (node) => {
     while (node.firstChild) {
@@ -31,6 +33,24 @@ let getReq = (url) => fetch(url)
 
 getReq(url);
 
+let getGeocode = (object) => {
+    console.log(JSON.stringify(object));
+    return fetch(mapURL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(object)
+    })
+    .then(response => {
+        return response.json()
+    })
+    .then(response => {
+        console.log(response);
+    })
+}
+    
+
 
 catBTNS.forEach(function(cat) {
     let reqURL = 'http://localhost:3000/posts/cat/'+ cat.textContent;
@@ -46,9 +66,4 @@ catBTNS.forEach(function(cat) {
     cat.addEventListener('click', catReq)
 });
 
-let getMap = (city, state) => {
-    fetch('https://maps.googleapis.com/maps/api/staticmap?center=' + city + ',' + state + '&zoom=14&size=400x400&key=' + apiKey)
-        .then(response => {
-            return response
-        })       
-}
+

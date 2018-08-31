@@ -269,3 +269,13 @@
     }
     
 }
+
+.mapdiv {
+    height: 50%;
+    width: 50%;
+    background-color: blueviolet;
+}
+
+#map {
+    height: 100%;
+}

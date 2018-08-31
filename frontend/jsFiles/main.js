@@ -1,5 +1,13 @@
 let postArea = document.querySelector('.postSection');
 
+// let initMap = () => {
+//     let mapDiv = document.querySelector('.mapDiv')
+//     let map = new google.maps.Map(document.getElementById('map'), {
+//         center: {City: 'Atlanta', State: 'GA'},
+//         zoom: 10
+//     })
+// }
+
 let postSection = (post) => {
     
     let mainPost = document.createElement('div');
@@ -22,19 +30,12 @@ let postSection = (post) => {
         }
     }
     let showMap = (event) => {
-        buildMap()
+        let location = {city: post.city,
+                        state: post.state}
+        getGeocode(location);
         modalWindow.classList.add('show');
         modalMap.classList.toggle('show');
     }
-    let buildMap = (event) => {
-        let newMap = document.createElement('img');
-        let map = getMap(post.city, post.state);
-        newMap.classList.add('mapFrame');
-        newMap.setAttribute('src', '../../images/imagination.jpg')
-        modalMap.appendChild(newMap);
-    }
-
-    //console.log(mainPost.childNodes[3]);
     
     mainPost.classList.add('post');
     postHead.classList.add('postHead');

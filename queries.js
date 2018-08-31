@@ -58,8 +58,6 @@ let createPost = (item, category, description, descripimg, price, userid) => {
 
 exports.usernameLogin = usernameLogin;
 //let createUser = (username, password, email, first, last, city, state, )
-
-
 exports.listAllUsers = listAllUsers;
 exports.listAllPosts = listAllPosts;
 exports.allPostsByUser = allPostsByUser;
