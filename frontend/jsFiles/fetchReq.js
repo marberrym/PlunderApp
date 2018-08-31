@@ -1,6 +1,8 @@
 
-url = 'http://localhost:3000/posts'
+let url = 'http://localhost:3000/posts'
+let mapURL = 'http://localhost:3000/map'
 let catBTNS = document.querySelectorAll('.sideBar');
+
 
 let empty = (node) => {
     while (node.firstChild) {
@@ -31,19 +33,50 @@ let getReq = (url) => fetch(url)
 
 getReq(url);
 
+let getGeocode = (object) => {
+    console.log(JSON.stringify(object));
+    return fetch(mapURL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(object)
+    })
+    .then(response => {
+        return response.json()
+    })
+    .then(response => {
+        console.log(response);
+        initMap(response)
+    })
+}
+
+let initMap = (markers) => {
+    let mapOptions = {zoom: 10,
+                        center: markers[0].geometry.location}
+    let map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    markers.forEach(function(pin) {
+        let marker = new google.maps.Marker({
+            position: pin.geometry.location,
+            map: map
+        })
+        marker.setMap(map);
+    })
+    console.log(map);
+}
 
 catBTNS.forEach(function(cat) {
     let reqURL = 'http://localhost:3000/posts/cat/'+ cat.textContent;
     let catReq = () => {
-        empty(postArea);
-        getReq(reqURL);
+        if (cat.textContent !== 'All'){
+            empty(postArea);
+            getReq(reqURL);
+        } else {
+            empty(postArea);
+            getReq(url);
+        }
     }
     cat.addEventListener('click', catReq)
 });
 
-let getMap = (city, state) => {
-    fetch('https://maps.googleapis.com/maps/api/staticmap?center=' + city + ',' + state + '&zoom=14&size=400x400&key=' + apiKey)
-        .then(response => {
-            return response
-        })       
-}
+

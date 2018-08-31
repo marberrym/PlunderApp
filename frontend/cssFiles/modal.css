@@ -269,3 +269,15 @@
     }
     
 }
+
+.mapdiv {
+    height: 50%;
+    width: 50%;
+    background-color: blueviolet;
+}
+
+#map {
+    height: 400px;
+    width: 400px;
+    background-color: purple;
+}
