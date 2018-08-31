@@ -12,9 +12,12 @@ let geocode = (city, state) => {
 }
 
 let mapQuery = (object) => {
-    let location = object.json.results[0].geometry.location
-    console.log(location)
+    let longlat = object.json.results[0].geometry.location
+    console.log(longlat)
+    return googleMapsClient.placesNearby({location: longlat,
+                                radius: 48280.3,
+                                keyword: 'Fire Department'
+                                }).asPromise();
 }
-
 exports.mapQuery = mapQuery;
 exports.geocode = geocode;
