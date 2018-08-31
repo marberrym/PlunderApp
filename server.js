@@ -118,8 +118,7 @@ let getGeocode = (req, res) => {
     console.log(req.body);
     maps.geocode(req.body.city, req.body.state)
         .then(results => {
-            console.log(results.json.results);
-            res.send(JSON.stringify(results.json.results));
+            maps.mapQuery(results);
         })
 }
 
