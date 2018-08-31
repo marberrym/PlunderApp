@@ -47,10 +47,23 @@ let getGeocode = (object) => {
     })
     .then(response => {
         console.log(response);
+        initMap(response)
     })
 }
-    
 
+let initMap = (markers) => {
+    let mapOptions = {zoom: 10,
+                        center: markers[0].geometry.location}
+    let map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    markers.forEach(function(pin) {
+        let marker = new google.maps.Marker({
+            position: pin.geometry.location,
+            map: map
+        })
+        marker.setMap(map);
+    })
+    console.log(map);
+}
 
 catBTNS.forEach(function(cat) {
     let reqURL = 'http://localhost:3000/posts/cat/'+ cat.textContent;

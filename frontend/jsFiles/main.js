@@ -9,6 +9,14 @@ let postArea = document.querySelector('.postSection');
 // }
 
 let postSection = (post) => {
+
+    let showMap = (event) => {
+        let location = {city: post.city,
+                        state: post.state}
+        getGeocode(location);
+        modalWindow.classList.add('show');
+        modalMap.classList.toggle('show');
+    }
     
     let mainPost = document.createElement('div');
     let postHead = document.createElement('div');
@@ -29,13 +37,7 @@ let postSection = (post) => {
             description.classList.toggle('showDesc');
         }
     }
-    let showMap = (event) => {
-        let location = {city: post.city,
-                        state: post.state}
-        getGeocode(location);
-        modalWindow.classList.add('show');
-        modalMap.classList.toggle('show');
-    }
+    
     
     mainPost.classList.add('post');
     postHead.classList.add('postHead');

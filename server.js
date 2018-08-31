@@ -120,7 +120,7 @@ let getGeocode = (req, res) => {
         .then(results => {
             maps.mapQuery(results)
             .then(results => {
-                console.log(results.json.results)
+                res.send(results.json.results);
             })
         })
 }
