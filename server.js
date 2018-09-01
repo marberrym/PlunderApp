@@ -13,8 +13,6 @@ ex.use(express.static('./frontend'));
 ex.use(jsonParser);
 let multer = require('multer');
 let upload = multer({dest: './images'});
-
-let upload = multer({dest: './images'})
  
 ex.post("/postimageupload", upload.single('post-image'), (req, res)  =>  {
     let postid = req.body.id;
