@@ -1,3 +1,4 @@
+let logoutBTN = document.querySelector('#logout');
 let loginBTN = document.querySelector('#login');
 let registerBTN = document.querySelector('#register');
 let postBTN = document.querySelector('#post');
@@ -156,6 +157,11 @@ let hideModal = (event) => {
     }
 }
 
+let logout = () => {
+    myStorage.clear();
+    checkLogin();
+}
+
 navBTN.addEventListener('click', showPlunders);
 plunderBTN.addEventListener('click', showPlunders);
 registerBTN.addEventListener('click', showRegister);
@@ -165,6 +171,7 @@ loginBTN.addEventListener('click', showLogin);
 loginForm.addEventListener('submit', loginSubmission);
 postForm.addEventListener('submit', postSubmission);
 registerForm.addEventListener('submit', registerSubmission);
+logoutBTN.addEventListener('click', logout);
 
 //Store WebToken in local storage
 let myStorage = window.localStorage;
@@ -175,10 +182,12 @@ let checkLogin = () => {
         registerBTN.classList.add('hide');
         loginBTN.classList.add('hide');
         postBTN.classList.remove('hide');
+        logoutBTN.classList.remove('hide');
     } else {
         registerBTN.classList.remove('hide');
         loginBTN.classList.remove('hide');
         postBTN.classList.add('hide');
+        logoutBTN.classList.add('hide');
     }
 }
 checkLogin();
