@@ -15,6 +15,7 @@ let postForm = document.querySelector('.postForm')
 let registerForm = document.querySelector('.registerForm')
 let mapBTNS = document.querySelectorAll('.mapBTN');
 let modalMap = document.querySelector('.modalMap');
+let logoutFlash = document.querySelector('#logoutFlash');
 
 
 let loginSubmission = (event) => {
@@ -157,8 +158,13 @@ let hideModal = (event) => {
     }
 }
 
+let logoutFlashMSG = () => {
+    logoutFlash.classList.add('flashAnimation');
+}
+
 let logout = () => {
     myStorage.clear();
+    logoutFlashMSG();
     checkLogin();
 }
 
@@ -175,7 +181,7 @@ logoutBTN.addEventListener('click', logout);
 
 //Store WebToken in local storage
 let myStorage = window.localStorage;
-
+//WE WILL BE STORING A WEBTOKEN.
 myStorage.setItem('userid', '54');
 let checkLogin = () => {
     if (myStorage.userid != null) {
