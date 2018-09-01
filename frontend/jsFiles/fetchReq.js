@@ -56,10 +56,19 @@ let initMap = (markers) => {
                         center: markers[0].geometry.location}
     let map = new google.maps.Map(document.getElementById('map'), mapOptions);
     markers.forEach(function(pin) {
+        let contentString = '<div><b>' + pin.name +'</b></div><div>' + pin.vicinity + '</div>'
         let marker = new google.maps.Marker({
             position: pin.geometry.location,
+            id: pin.id,
+            name: pin.name,
             map: map
-        })
+        });
+        let infoWindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+        marker.addListener('click', function() {
+            infoWindow.open(map, marker);
+        });
         marker.setMap(map);
     })
     console.log(map);
