@@ -269,3 +269,26 @@
     }
     
 }
+
+.mapDiv {
+    height: 60%;
+    width: 80%;
+    background-color: darkgray;
+    border-radius: 1em;
+    border: 1px solid black;
+    overflow: hidden;
+    text-align: center;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    background-color: darkgray;
+}
+
+.modalMapDescription {
+    margin: 2em;
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.3em;
+    text-align: center;
+}

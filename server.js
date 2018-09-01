@@ -2,14 +2,17 @@
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const ex = express();
-const bodyParser = require('body-parser')
-var jsonParser = bodyParser.json()
+const bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
 const cors = require('cors');
-const dbq = require('./queries.js')
+const dbq = require('./queries.js');
+const maps = require('./maps');
 ex.use(cors());
-ex.use('/images/', express.static('./images'))
-ex.use(express.static('./frontend'))
-let multer = require('multer')
+ex.use('/images/', express.static('./images'));
+ex.use(express.static('./frontend'));
+ex.use(jsonParser);
+let multer = require('multer');
+let upload = multer({dest: './images'});
 
 let upload = multer({dest: './images'})
  
@@ -141,12 +144,25 @@ let createToken = (req, res) => {
     ;
 }
 
+//geocoding
+let getGeocode = (req, res) => {
+    console.log(req.body);
+    maps.geocode(req.body.city, req.body.state)
+        .then(results => {
+            maps.mapQuery(results)
+            .then(results => {
+                res.send(results.json.results);
+            })
+        })
+}
 
-ex.use(jsonParser);
+
 ex.post('/login', createToken);
 // ex.get('/users', validateToken, getUsers);
 ex.post('/register', newUser)
 ex.post('/post', newPost)
+ex.post('/newpost', newPost);
+ex.post('/map', jsonParser, getGeocode);
 ex.get('/users', getUsers);
 ex.get('/posts', getPosts);
 ex.get('/:username/posts', postsByUser);

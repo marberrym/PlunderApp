@@ -147,7 +147,6 @@ let showPlunders = (event) => {
 
 let hideModal = (event) => {
     if (event.target === modalWindow) {
-        empty(modalMap);
         modalWindow.classList.remove('show');
         modalLogin.classList.remove('show');
         modalMap.classList.remove('show');

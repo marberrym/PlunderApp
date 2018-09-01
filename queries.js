@@ -73,6 +73,8 @@ let postAddImage = (id, path) => {
 exports.registerAddImage = registerAddImage
 exports.postAddImage = postAddImage;
 exports.usernameLogin = usernameLogin;
+exports.usernameLogin = usernameLogin;
+//let createUser = (username, password, email, first, last, city, state, )
 exports.listAllUsers = listAllUsers;
 exports.listAllPosts = listAllPosts;
 exports.allPostsByUser = allPostsByUser;
