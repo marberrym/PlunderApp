@@ -14,6 +14,25 @@ ex.use(jsonParser);
 let multer = require('multer');
 let upload = multer({dest: './images'});
 
+let upload = multer({dest: './images'})
+ 
+ex.post("/postimageupload", upload.single('post-image'), (req, res)  =>  {
+    let postid = req.body.id;
+    console.log(postid)
+    dbq.postAddImage(postid, './images/' + req.file.filename)
+    .then(row => {
+        res.send(row)
+    })
+})
+
+ex.post("/registerimageupload", upload.single('profile-image'), (req, res)  =>  {
+    let userid = req.body.id;
+    console.log(userid)
+    dbq.registerAddImage(userid, './images/' + req.file.filename)
+    .then(row => {
+        res.send(row)
+    })
+})
 //Request All Users
 let getUsers = (req, res) => {
     dbq.listAllUsers()
@@ -56,11 +75,23 @@ let postsByLocation = (req, res) => {
         .then(results => res.send(results));
 }
 
-//Create a new post
-let newPost = (req, res, item, category, description, price, userid) => {
-    dbq.createPostcreatePost(item, category, description, price, userid)
+let newUser = (req,res) => {
+    let userForm = req.body;
+    dbq.createUser(userForm)
+        .then(results => {
+            res.send(results)
+        });
 }
 
+//Create a new post
+let newPost = (req, res) => {
+    let postForm = req.body;  
+    console.log(postForm);              
+    dbq.createPost(postForm)
+        .then(results => {
+            res.send(results)
+        });
+}
 
 //validation middlewhere takes in url query for ?token='webtoken'
 let validateToken = (req, res, next) => {
@@ -128,6 +159,8 @@ let getGeocode = (req, res) => {
 
 ex.post('/login', createToken);
 // ex.get('/users', validateToken, getUsers);
+ex.post('/register', newUser)
+ex.post('/post', newPost)
 ex.post('/newpost', newPost);
 ex.post('/map', jsonParser, getGeocode);
 ex.get('/users', getUsers);
