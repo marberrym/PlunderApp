@@ -1,3 +1,4 @@
+let logoutBTN = document.querySelector('#logout');
 let loginBTN = document.querySelector('#login');
 let registerBTN = document.querySelector('#register');
 let postBTN = document.querySelector('#post');
@@ -14,6 +15,7 @@ let postForm = document.querySelector('.postForm')
 let registerForm = document.querySelector('.registerForm')
 let mapBTNS = document.querySelectorAll('.mapBTN');
 let modalMap = document.querySelector('.modalMap');
+let logoutFlash = document.querySelector('#logoutFlash');
 
 
 let loginSubmission = (event) => {
@@ -156,6 +158,16 @@ let hideModal = (event) => {
     }
 }
 
+let logoutFlashMSG = () => {
+    logoutFlash.classList.add('flashAnimation');
+}
+
+let logout = () => {
+    myStorage.clear();
+    logoutFlashMSG();
+    checkLogin();
+}
+
 navBTN.addEventListener('click', showPlunders);
 plunderBTN.addEventListener('click', showPlunders);
 registerBTN.addEventListener('click', showRegister);
@@ -165,9 +177,24 @@ loginBTN.addEventListener('click', showLogin);
 loginForm.addEventListener('submit', loginSubmission);
 postForm.addEventListener('submit', postSubmission);
 registerForm.addEventListener('submit', registerSubmission);
+logoutBTN.addEventListener('click', logout);
 
-// let getRefresh = () => {   //add listener, when, clicked- empy(postarea), then run getReq(url)
-//     postForm.
-//     getReq(URL)
-// }
+//Store WebToken in local storage
+let myStorage = window.localStorage;
+//WE WILL BE STORING A WEBTOKEN.
+myStorage.setItem('userid', '54');
+let checkLogin = () => {
+    if (myStorage.userid != null) {
+        registerBTN.classList.add('hide');
+        loginBTN.classList.add('hide');
+        postBTN.classList.remove('hide');
+        logoutBTN.classList.remove('hide');
+    } else {
+        registerBTN.classList.remove('hide');
+        loginBTN.classList.remove('hide');
+        postBTN.classList.add('hide');
+        logoutBTN.classList.add('hide');
+    }
+}
+checkLogin();
 

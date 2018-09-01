@@ -1,13 +1,5 @@
 let postArea = document.querySelector('.postSection');
 
-// let initMap = () => {
-//     let mapDiv = document.querySelector('.mapDiv')
-//     let map = new google.maps.Map(document.getElementById('map'), {
-//         center: {City: 'Atlanta', State: 'GA'},
-//         zoom: 10
-//     })
-// }
-
 let postSection = (post) => {
 
     let showMap = (event) => {
