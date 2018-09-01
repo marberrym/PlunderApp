@@ -166,8 +166,20 @@ loginForm.addEventListener('submit', loginSubmission);
 postForm.addEventListener('submit', postSubmission);
 registerForm.addEventListener('submit', registerSubmission);
 
-// let getRefresh = () => {   //add listener, when, clicked- empy(postarea), then run getReq(url)
-//     postForm.
-//     getReq(URL)
-// }
+//Store WebToken in local storage
+let myStorage = window.localStorage;
+
+myStorage.setItem('userid', '54');
+let checkLogin = () => {
+    if (myStorage.userid != null) {
+        registerBTN.classList.add('hide');
+        loginBTN.classList.add('hide');
+        postBTN.classList.remove('hide');
+    } else {
+        registerBTN.classList.remove('hide');
+        loginBTN.classList.remove('hide');
+        postBTN.classList.add('hide');
+    }
+}
+checkLogin();
 
