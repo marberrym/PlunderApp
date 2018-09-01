@@ -97,6 +97,7 @@ body {
     margin: .5em;
     border-radius: 1em;
     padding: .5em;
+    border: 1px solid rgba(0, 0, 139, 0.39);
 }
 
 .userIcon {

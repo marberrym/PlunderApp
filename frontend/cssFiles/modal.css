@@ -3,7 +3,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.295);
+    background-color: rgba(0, 0, 0, 0.45);
     position: fixed;
     z-index: 1;
     visibility: hidden;
@@ -15,22 +15,28 @@
     left: 5%;
     height: 30%;
     width: 80%;
-    background-color: whitesmoke;
+    background: radial-gradient(circle, rgba(202,233,241,1) 18%, rgba(167,170,194,1) 93%);
     border-radius: 1em;
     border: 1px solid black;
-    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: .3s ease-in;
 }
 
 .modalRegister {
     position: absolute;
-    top: 20%;
+    top: 10%;
     left: 5%;
-    height: 60%;
+    height: 75%;
     width: 80%;
-    background-color: whitesmoke;
+    background: radial-gradient(circle, rgba(202,233,241,1) 18%, rgba(167,170,194,1) 93%);
     border-radius: 1em;
     border: 1px solid black;
-    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: .3s ease-in-out;
 }
 .modalPost {
     position: absolute;
@@ -38,10 +44,13 @@
     left: 5%;
     height: 60%;
     width: 80%;
-    background-color: whitesmoke;
+    background: radial-gradient(circle, rgba(202,233,241,1) 18%, rgba(167,170,194,1) 93%);
     border-radius: 1em;
     border: 1px solid black;
-    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: .3s ease-in-out;
 }
 
 .modalMap {
@@ -50,14 +59,17 @@
     left: 10%;
     height: 60%;
     width: 80%;
-    background-color: whitesmoke;
+    background: radial-gradient(circle, rgba(202,233,241,1) 18%, rgba(167,170,194,1) 93%);
     border-radius: 1em;
     border: 1px solid black;
-    visibility: hidden;
+    pointer-events: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: .3s ease-in-out;
 }
 
 .modalPlunders {
@@ -82,13 +94,16 @@
 
 .show {
     visibility: visible;
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
 }
 
 .login {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     align-content: flex-end;
 }
@@ -114,7 +129,7 @@
     border-radius: 1em;
     background: radial-gradient(circle, rgba(4,138,158,1) 18%, rgba(35,1,97,1) 93%);
     color: whitesmoke;
-    transition: .3s ease-in-out;
+    transition: .2s ease-in-out;
 }
 
 .noTrans {
@@ -153,6 +168,7 @@
     display: flex;
     justify-content: flex-end;
     margin-right: .3em;
+    margin: .3em;
 }
 
 .descriptions {
@@ -168,6 +184,7 @@
     padding: 0;
     font-family: 'Acme', sans-serif;
     font-size: 1.1em;
+    border: 1px solid rgba(0, 0, 139, 0.39);
     
 }
 
@@ -273,7 +290,7 @@
 .mapDiv {
     height: 60%;
     width: 80%;
-    background-color: darkgray;
+    background-color: rgba(169, 169, 169, 0.507);
     border-radius: 1em;
     border: 1px solid black;
     overflow: hidden;
