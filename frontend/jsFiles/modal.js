@@ -13,10 +13,8 @@ let navBTN = document.querySelector('.navLogo');
 let loginForm = document.querySelector('.loginForm')
 let postForm = document.querySelector('.postForm')
 let registerForm = document.querySelector('.registerForm')
-let mapBTNS = document.querySelectorAll('.mapBTN');
 let modalMap = document.querySelector('.modalMap');
 let logoutFlash = document.querySelector('#logoutFlash');
-
 
 let loginSubmission = (event) => {
     event.preventDefault();
@@ -165,6 +163,8 @@ let logoutFlashMSG = () => {
 let logout = () => {
     myStorage.clear();
     logoutFlashMSG();
+    empty(postArea);
+    getReq(url);
     checkLogin();
 }
 
@@ -180,6 +180,7 @@ registerForm.addEventListener('submit', registerSubmission);
 logoutBTN.addEventListener('click', logout);
 
 //Store WebToken in local storage
+
 let myStorage = window.localStorage;
 //WE WILL BE STORING A WEBTOKEN.
 myStorage.setItem('userid', '54');
