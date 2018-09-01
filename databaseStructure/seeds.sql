@@ -122,40 +122,40 @@ INSERT INTO users (username, userimg, password, email, first, last, city, state,
 INSERT INTO posts (item, category, description, descripimg, price, userid)
     VALUES ('2009 Honda Civic', 
     'Automobile', 
-    'White Honda Civic bla radda dabba doo come at me bro',
-    './images/imagination.jpg',
+    'Check out my suped up honda civic.  Straight out of the fast and the furious.  Maybe the Tokyo Drift one.  I hope.  NOOOO HAN - COME BACK TO ME.',
+    './images/hondacivic.jpg',
     9000, 
     4);
 
 INSERT INTO posts (item, category, description, descripimg, price, userid)
     VALUES ('Remington 700',
     'Weapons',
-    'Remington 700 made in 1980. Some scratches. I SHOOOOT EVERRRRRYTHING',
-    './images/imagination.jpg',
+    'So you have a daughter.  Shes starting to get the attention from all the boys.  You need you here one of these there Remington 700s.  Rock salt solde separately.  Please intimidate teenage boys responsibly.',
+    './images/remington.jpeg',
     150, 
     1);
 
 INSERT INTO posts (item, category, description, descripimg, price, userid)
     VALUES ('Xbox One w/controller',
     'Electronics',
-    'Mint condition Xbox One with two controllers for sale',
-    './images/imagination.jpg',
+    'I stopped playing video games because I decided to attend a coding bootcamp at Digital Crafts.  Learning that code started to take up all my time.  Why play video games when you can increase your JS and nodeJS levels.  Code before sleep.',
+    './images/xboxone.jpeg',
     250, 
     2);
 
 INSERT INTO posts (item, category, description, descripimg, price, userid)
-    VALUES ('Van Gogh Paintings', 
+    VALUES ('Some Painting', 
     'Decor', 
-    'Original paintings by Vicent Van Gogh.',
-    './images/imagination.jpg',
+    'This one is called the Scream.  It might be worth something.  I dont really know.  Well lets say 20000, Im sure you could get more for it on the black market underground art scene.',
+    './images/thescream.jpeg',
     20000, 
     3);
 
 INSERT INTO posts (item, category, description, descripimg, price, userid)
     VALUES ('Coffee Filters', 
     'Wholesale',
-    'Industrial sized coffee filters for large coffee makers at a discount price',
-    './images/imagination.jpg',
+    'Industrial sized coffee filters for large coffee makers at a discount price we heard that ATV is in short supply.',
+    './images/cofffilters.jpeg',
     75, 
     4);
 
@@ -170,23 +170,23 @@ INSERT INTO posts (item, category, description, descripimg, price, userid)
 INSERT INTO posts (item, category, description, descripimg, price, userid)
     VALUES ('Welding kit', 
     'Hardware',
-    'Welding kit for sale. Includes fuelbasedwelder, welding mask, and flame-resistant gloves.',
-    './images/imagination.jpg',
+    'Welding kit for sale. Includes fuelbasedwelder, welding mask, and flame-resistant gloves.  Great tool for teaching your neighbors the meaning of RESPECT.',
+    './images/welding.jpg',
     475, 
     6);
 
 INSERT INTO posts (item, category, description, descripimg, price, userid)
     VALUES ('One Grenade', 
     'Weapons',
-    'Selling one "Pineapple" hand grenade. Pretty sure it works. For all of those who say "If you are not sure then why don''t you test it?" Well that would defeat the purpose of me trying to sell it.',
-    './images/imagination.jpg',
+    'Selling one "Pineapple" hand grenade. Pretty sure it works. For all of those who say "If you are not sure then why dont you test it?" Well that would defeat the purpose of me trying to sell it.',
+    './images/pineapple.jpg',
     200, 
     7);
 
 INSERT INTO posts (item, category, description, descripimg, price, userid)
     VALUES ('Maternity Clothes', 
     'Fashion',
-    'I am selling old maternity clothes that my sister used to wear! Most of them came from the mall but there are some nice designer options as well!',
-    './images/imagination.jpg',
+    'I am selling old maternity clothes that my sister used to wear! Most of them came from the mall but there are some nice designer options as well!  PS my sister is hot.',
+    './images/maternity.jpg',
     120, 
     8);
