@@ -47,3 +47,4 @@ let getMap = (city, state) => {
             return response
         })       
 }
+

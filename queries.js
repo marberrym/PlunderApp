@@ -10,7 +10,7 @@ let listAllUsers = () => {
 let listAllPosts = () => {
     return db.query(`select usr.username, usr.userimg, pst.item, usr.city, pst.price, usr.state, pst.description, pst.descripimg 
                     FROM posts pst
-                    INNER JOIN users usr ON usr.id = pst.userid`)
+                    LEFT JOIN users usr ON usr.id = pst.userid`)
 }
 
 let usernameLogin = (username, password) => {
@@ -50,16 +50,29 @@ let listPostsByState = (state) => {
         WHERE usr.state = '` + state + `';`);
 }
 
-let createPost = (item, category, description, descripimg, price, userid) => {
-    return db.one(`INSERT INTO posts (item, category, description, price, userid) values 
-        ('` + item + `', '` + category + `', '` + description + `', '` + descripimg + `', '` + price + `', '` + userid + `');`);
+let createPost = (postForm) => {
+    return db.one(`INSERT INTO posts (item, category, description, price) values 
+        ('` + postForm.item + `', '` + postForm.category + `', '` + postForm.description + `', '` + postForm.price + `')
+        RETURNING *;`) // re-add '` + descripimg + `',
 }
 
+let createUser = (userForm) => {            
+    return db.one(`INSERT INTO users (username, password, email, first, last, city, state) values    
+    ('` + userForm.username + `', '` + userForm.password + `', '` + userForm.email + `', '` + userForm.first + `', '` + userForm.last + `','` + userForm.city + `', '` + userForm.state + `')
+    RETURNING *;`);  //re-add userimg
+} 
 
+let registerAddImage = (id, path) => {
+    return db.one(`UPDATE users SET userimg = $1 WHERE id = $2 RETURNING *;`, [path, id])
+}
+
+let postAddImage = (id, path) => {
+    return db.one(`UPDATE posts SET descripimg = $1 WHERE id = $2 RETURNING *;`, [path, id])
+}
+
+exports.registerAddImage = registerAddImage
+exports.postAddImage = postAddImage;
 exports.usernameLogin = usernameLogin;
-//let createUser = (username, password, email, first, last, city, state, )
-
-
 exports.listAllUsers = listAllUsers;
 exports.listAllPosts = listAllPosts;
 exports.allPostsByUser = allPostsByUser;
@@ -67,5 +80,6 @@ exports.onePostsByUser = onePostsByUser;
 exports.listPostsByCategory = listPostsByCategory;
 exports.listPostsByState = listPostsByState;
 exports.createPost = createPost;
+exports.createUser = createUser;
 
 

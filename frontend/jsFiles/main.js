@@ -34,7 +34,7 @@ let postSection = (post) => {
         modalMap.appendChild(newMap);
     }
 
-    //console.log(mainPost.childNodes[3]);
+    console.log(mainPost.childNodes[3]);
     
     mainPost.classList.add('post');
     postHead.classList.add('postHead');
