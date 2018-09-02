@@ -198,11 +198,12 @@ let myStorage = window.localStorage;
 //WE WILL BE STORING A WEBTOKEN.
 myStorage.setItem('userid', '54');
 let checkLogin = () => {
-    console.log(myStorage.webtoken);
+    let token = myStorage;
+    console.log(token);
     fetch('http://localhost:3000/checktoken', {
         method: 'POST',
-        body: myStorage.webtoken,
-        mode: 'cors',
+        body: JSON.stringify(myStorage),
+        headers: {'Content-Type': 'application/json'}
     })
     .then(result => {
         console.log(result);

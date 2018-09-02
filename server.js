@@ -96,8 +96,7 @@ let newPost = (req, res) => {
 //validation middlewhere takes in url query for ?token='webtoken'
 let validateToken = (req, res) => {
     let responseObject = {response: null}
-    let token = req.body
-    console.log(token);
+    let token = req.body.webtoken
     let isValid = false;
     let payload;
     console.log(token);
