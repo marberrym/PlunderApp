@@ -13,10 +13,10 @@ let listAllPosts = () => {
                     LEFT JOIN users usr ON usr.id = pst.userid`)
 }
 
-let usernameLogin = (username, id) => {
+let usernameLogin = (id, password) => {
     return db.one(`select username, password, id
     FROM users
-    WHERE username = '` + username + `'
+    WHERE password = '` + password + `'
     AND id = ` + id + `;`
     );
 }

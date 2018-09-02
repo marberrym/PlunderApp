@@ -95,45 +95,50 @@ let newPost = (req, res) => {
 
 //validation middlewhere takes in url query for ?token='webtoken'
 let validateToken = (req, res) => {
-    let token = req.body.webtoken;
+    let responseObject = {response: null}
+    let token = req.body
     console.log(token);
     let isValid = false;
     let payload;
     console.log(token);
     try {
-        payload = jwt.verify(token, 'secretsig');
+        payload = jwt.verify(token, priv.signature);
+        console.log(payload);
         isValid = true;
+        req.user = payload;
     } catch (err) {
         isValid = false;
     }
-    req.user = payload;
     //creates a new property for the request object, called user
     if (isValid) {
-        next();
+        responseObject.response = "Logged in";
+        res.send(responseObject);
     } else {
-        res.end('youshallnotpass')
+        responseObject.response = "invalid login";
+        res.send(responseObject);
     }
 }
 
 let createToken = (req, res) => {
     let credentials = req.body;
-    let username = credentials.username;
+    let password = credentials.password;
     let id = credentials.id;
-    let db = dbq.usernameLogin(username, id);
-    console.log(id);
-    console.log(username);
+    let username = credentials.username;
 
-    dbq.usernameLogin(username, id)
+    dbq.usernameLogin(id, password)
         .then(results => {
-            console.log(results);
+            if (results.password === password && results.id === id) {
+                let token = jwt.sign(
+                    {name: username,
+                    userid: id},
+                    priv.signature,
+                    {notBefore: '7d'})
+                    console.log(token);
+                    res.end(JSON.stringify(token));
+            } else {
+                res.end("Sorry, invalid login");
+            }
         }).catch(error=> console.debug(error));
-    
-    let token = jwt.sign(
-        {name: username,
-        userid: id},
-        priv.signature,
-        {notBefore: '7d'})
-        res.end(JSON.stringify(token));
     };
 
 //geocoding
@@ -147,7 +152,7 @@ let getGeocode = (req, res) => {
         })
 }
 
-ex.post('/validate', validateToken);
+ex.post('/checktoken', validateToken);
 ex.post('/login', createToken);
 ex.post('/register', newUser);
 ex.post('/post', newPost);

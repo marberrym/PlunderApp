@@ -198,17 +198,32 @@ let myStorage = window.localStorage;
 //WE WILL BE STORING A WEBTOKEN.
 myStorage.setItem('userid', '54');
 let checkLogin = () => {
-    if (myStorage.userid != null) {
-        registerBTN.classList.add('hide');
-        loginBTN.classList.add('hide');
-        postBTN.classList.remove('hide');
-        logoutBTN.classList.remove('hide');
-    } else {
-        registerBTN.classList.remove('hide');
-        loginBTN.classList.remove('hide');
-        postBTN.classList.add('hide');
-        logoutBTN.classList.add('hide');
-    }
+    console.log(myStorage.webtoken);
+    fetch('http://localhost:3000/checktoken', {
+        method: 'POST',
+        body: myStorage.webtoken,
+        mode: 'cors',
+    })
+    .then(result => {
+        console.log(result);
+        return result.json()})
+        
+        .then(status => {
+        console.log(status)
+        console.log('wtf')
+    })
+        // if (status === 'Logged in'){
+        //     registerBTN.classList.add('hide');
+        //     loginBTN.classList.add('hide');
+        //     postBTN.classList.remove('hide');
+        //     logoutBTN.classList.remove('hide');
+        // } else {
+        //     registerBTN.classList.remove('hide');
+        //     loginBTN.classList.remove('hide');
+        //     postBTN.classList.add('hide');
+        //     logoutBTN.classList.add('hide');
+        // }
 }
+
 checkLogin();
 
