@@ -71,9 +71,6 @@ let registerSubmission = (event) => {
     .then((result) => {
         return result.json()
     })
-    // .then((result) =>{
-    //     console.log(result);
-    //})
     .then((user) => {
         console.log(user)
         registerFormData.append('id', user.id)
@@ -166,8 +163,4 @@ loginForm.addEventListener('submit', loginSubmission);
 postForm.addEventListener('submit', postSubmission);
 registerForm.addEventListener('submit', registerSubmission);
 
-// let getRefresh = () => {   //add listener, when, clicked- empy(postarea), then run getReq(url)
-//     postForm.
-//     getReq(URL)
-// }
 

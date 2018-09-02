@@ -53,13 +53,13 @@ let listPostsByState = (state) => {
 let createPost = (postForm) => {
     return db.one(`INSERT INTO posts (item, category, description, price) values 
         ('` + postForm.item + `', '` + postForm.category + `', '` + postForm.description + `', '` + postForm.price + `')
-        RETURNING *;`) // re-add '` + descripimg + `',
+        RETURNING *;`) 
 }
 
 let createUser = (userForm) => {            
     return db.one(`INSERT INTO users (username, password, email, first, last, city, state) values    
     ('` + userForm.username + `', '` + userForm.password + `', '` + userForm.email + `', '` + userForm.first + `', '` + userForm.last + `','` + userForm.city + `', '` + userForm.state + `')
-    RETURNING *;`);  //re-add userimg
+    RETURNING *;`);  
 } 
 
 let registerAddImage = (id, path) => {
@@ -73,8 +73,6 @@ let postAddImage = (id, path) => {
 exports.registerAddImage = registerAddImage
 exports.postAddImage = postAddImage;
 exports.usernameLogin = usernameLogin;
-exports.usernameLogin = usernameLogin;
-//let createUser = (username, password, email, first, last, city, state, )
 exports.listAllUsers = listAllUsers;
 exports.listAllPosts = listAllPosts;
 exports.allPostsByUser = allPostsByUser;
