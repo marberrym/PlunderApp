@@ -190,6 +190,7 @@ body {
 
 .mapBTN:hover {
     transform: scale(1.2);
+    background: radial-gradient(circle, rgb(3, 189, 218) 18%, rgb(60, 2, 168) 93%); 
     border: 1px solid whitesmoke;
 }
 
@@ -214,4 +215,23 @@ body {
 
 .hide {
     display: none;
+}
+
+.emailLink {
+    text-decoration: none;
+    background: radial-gradient(circle, rgba(4,138,158,1) 18%, rgba(35,1,97,1) 93%);
+    color: white;
+    padding: .2em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-left: 1em;
+    font-size: .7em;
+    border-radius: .5em;
+    border: 1px solid black;
+    transition: .2s ease-in-out;
+}
+
+.emailLink:hover {
+    background: radial-gradient(circle, rgb(3, 189, 218) 18%, rgb(60, 2, 168) 93%); 
+    border: 1px solid whitesmoke;  
 }

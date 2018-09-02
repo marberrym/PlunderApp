@@ -132,12 +132,9 @@
     transition: .2s ease-in-out;
 }
 
-.noTrans {
-    transition: none;
-}
-
 .submitBTN:hover {
     border: 1px solid whitesmoke;
+    background: radial-gradient(circle, rgb(3, 189, 218) 18%, rgb(60, 2, 168) 93%); 
     transform: scale(1.2);
 }
 
@@ -312,7 +309,7 @@
 
 .flash {
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 40%;
     width: 30%;
     height: 10%;
@@ -326,6 +323,7 @@
     align-items: center;
     border: 2px solid black;
     border-radius: 1em;
+    pointer-events: none;
 }
 
 .flashAnimation {
