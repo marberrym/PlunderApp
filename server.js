@@ -119,7 +119,8 @@ let createToken = (req, res) => {
     let username = JSON.stringify(credentials.username);
     let password = JSON.stringify(credentials.password);
     let token = jwt.sign(
-        {userID: username,},
+        {name: username,
+        id: credentials.id},
         priv.signature,
         {notBefore: '7d'})
         res.end(JSON.stringify(token));
