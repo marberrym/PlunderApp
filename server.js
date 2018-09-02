@@ -7,6 +7,7 @@ var jsonParser = bodyParser.json();
 const cors = require('cors');
 const dbq = require('./queries.js');
 const maps = require('./maps');
+const priv = require('./private');
 ex.use(cors());
 ex.use('/images/', express.static('./images'));
 ex.use(express.static('./frontend'));
@@ -114,18 +115,15 @@ let validateToken = (req, res, next) => {
 }
 
 let createToken = (req, res) => {
-        console.log("hey")
-        console.log(req.body.username);
-        let credentials = req.body;
-        let username = JSON.stringify(credentials.username);
-        let password = JSON.stringify(credentials.password);
-        let token = jwt.sign(
-            {userID: username,},
-            'secretsig',
-            {notBefore: '7d'})
-            console.log(token);
-            res.end(JSON.stringify(token));
-        };
+    let credentials = req.body;
+    let username = JSON.stringify(credentials.username);
+    let password = JSON.stringify(credentials.password);
+    let token = jwt.sign(
+        {userID: username,},
+        priv.signature,
+        {notBefore: '7d'})
+        res.end(JSON.stringify(token));
+    };
 
 //geocoding
 let getGeocode = (req, res) => {
