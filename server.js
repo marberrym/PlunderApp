@@ -94,8 +94,9 @@ let newPost = (req, res) => {
 }
 
 //validation middlewhere takes in url query for ?token='webtoken'
-let validateToken = (req, res, next) => {
-    let token = req.query.token;
+let validateToken = (req, res) => {
+    let token = req.body.webtoken;
+    console.log(token);
     let isValid = false;
     let payload;
     console.log(token);
@@ -116,11 +117,20 @@ let validateToken = (req, res, next) => {
 
 let createToken = (req, res) => {
     let credentials = req.body;
-    let username = JSON.stringify(credentials.username);
-    let password = JSON.stringify(credentials.password);
+    let username = credentials.username;
+    let id = credentials.id;
+    let db = dbq.usernameLogin(username, id);
+    console.log(id);
+    console.log(username);
+
+    dbq.usernameLogin(username, id)
+        .then(results => {
+            console.log(results);
+        }).catch(error=> console.debug(error));
+    
     let token = jwt.sign(
         {name: username,
-        id: credentials.id},
+        userid: id},
         priv.signature,
         {notBefore: '7d'})
         res.end(JSON.stringify(token));
@@ -137,7 +147,7 @@ let getGeocode = (req, res) => {
         })
 }
 
-
+ex.post('/validate', validateToken);
 ex.post('/login', createToken);
 ex.post('/register', newUser);
 ex.post('/post', newPost);
