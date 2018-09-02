@@ -15,7 +15,6 @@ let getReq = (url) => fetch(url)
         if(response.status < 400) {
             response.json()
                 .then(results=> {
-                    console.log(results)
                     results.forEach(function (post) {
                         postSection(post)
                     })
@@ -34,7 +33,6 @@ let getReq = (url) => fetch(url)
 getReq(url);
 
 let getGeocode = (object) => {
-    console.log(JSON.stringify(object));
     return fetch(mapURL, {
         method: "POST",
         headers: {
@@ -46,7 +44,6 @@ let getGeocode = (object) => {
         return response.json()
     })
     .then(response => {
-        console.log(response);
         initMap(response)
     })
 }
@@ -71,7 +68,6 @@ let initMap = (markers) => {
         });
         marker.setMap(map);
     })
-    console.log(map);
 }
 
 catBTNS.forEach(function(cat) {

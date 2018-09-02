@@ -1,8 +1,6 @@
 let postArea = document.querySelector('.postSection');
 
 let postSection = (post) => {
-    console.log(post);
-
     let showMap = (event) => {
         let location = {city: post.city,
                         state: post.state}

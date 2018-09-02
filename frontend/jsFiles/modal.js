@@ -71,9 +71,22 @@ let registerSubmission = (event) => {
     .then((result) => {
         return result.json()
     })
-    // .then((result) =>{
-    //     console.log(result);
-    //})
+    .then((data) => {
+        console.log(data);
+        fetch('http://localhost:3000/login', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {'Content-Type': 'application/JSON'}
+        })
+            .then((result) => {
+                console.log(result);
+                result.json().then((result) => {
+                    console.log(result);
+                    myStorage.setItem('webtoken', result);
+            })
+        })
+        return data;
+    })
     .then((user) => {
         console.log(user)
         registerFormData.append('id', user.id)
@@ -83,6 +96,7 @@ let registerSubmission = (event) => {
             mode: 'cors',
         })
     })
+   
     empty(postArea);
     getReq(url);
 }
@@ -98,7 +112,6 @@ let postSubmission = (event) => {
     postSubmissionObject['category'] = categorySubmit.value;
     postSubmissionObject['description'] = descriptionSubmit.value;
     postSubmissionObject['price'] = priceSubmit.value;
-    console.log(postSubmissionObject);
     let descriptionImg = document.querySelector('#descripimg');
     let productImg = descriptionImg.files[0];
     let postFormData = new FormData()

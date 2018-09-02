@@ -73,8 +73,9 @@ let postsByLocation = (req, res) => {
         .then(results => res.send(results));
 }
 
-let newUser = (req,res) => {
+let newUser = (req, res) => {
     let userForm = req.body;
+    console.log(userForm);
     dbq.createUser(userForm)
         .then(results => {
             res.send(results)
@@ -113,38 +114,21 @@ let validateToken = (req, res, next) => {
 }
 
 let createToken = (req, res) => {
+        console.log("hey")
+        console.log(req.body.username);
         let credentials = req.body;
-        console.log(credentials)
-        let validUser = dbq.usernameLogin(credentials.username, credentials.password);
-        validUser.then(dbReply => {
-            // this function serves an object with keys "username" and "password" from our form
-            let loginID = JSON.stringify(dbReply.username);
-            let loginPass = JSON.stringify(dbReply.password)
-            let username = JSON.stringify(credentials.username);
-            let password = JSON.stringify(credentials.password);
-            if (loginID === username) {
-                if (loginPass === password) {
-                    let token = jwt.sign(
-                        {userID: username},
-                        'secretsig',
-                        {expiresIn: '7d'}
-                    );
-                    res.end(token)
-                    //this should be granted & held in localstorage for access later
-                } else {
-                    res.end('You entered an incorrect password, try again')
-                }
-
-            } else {
-                res.end('You need to login, please enter username and password')
-            }
-        });
-    ;
-}
+        let username = JSON.stringify(credentials.username);
+        let password = JSON.stringify(credentials.password);
+        let token = jwt.sign(
+            {userID: username,},
+            'secretsig',
+            {notBefore: '7d'})
+            console.log(token);
+            res.end(JSON.stringify(token));
+        };
 
 //geocoding
 let getGeocode = (req, res) => {
-    console.log(req.body);
     maps.geocode(req.body.city, req.body.state)
         .then(results => {
             maps.mapQuery(results)
@@ -156,11 +140,10 @@ let getGeocode = (req, res) => {
 
 
 ex.post('/login', createToken);
-// ex.get('/users', validateToken, getUsers);
-ex.post('/register', newUser)
-ex.post('/post', newPost)
+ex.post('/register', newUser);
+ex.post('/post', newPost);
 ex.post('/newpost', newPost);
-ex.post('/map', jsonParser, getGeocode);
+ex.post('/map', getGeocode);
 ex.get('/users', getUsers);
 ex.get('/posts', getPosts);
 ex.get('/:username/posts', postsByUser);
