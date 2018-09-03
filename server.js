@@ -91,7 +91,13 @@ let newUser = (req, res) => {
 
 //Create a new post
 let newPost = (req, res) => {
-    let postForm = req.body;               
+    let postForm = req.body;
+    console.log(postForm);
+    let decoded = jwt.decode(postForm.webtoken)
+    let userid = decoded.userid;
+    console.log(userid);
+    postForm.userid = userid;
+    console.log(postForm);         
     dbq.createPost(postForm)
         .then(results => {
             res.send(results)
@@ -121,7 +127,7 @@ let validateToken = (req, res) => {
         responseObject.response = "Logged in";
         res.send(responseObject);
     } else {
-        responseObject.response = "invalid login";
+        responseObject.response = "Invalid login";
         res.send(responseObject);
     }
 }
@@ -131,6 +137,7 @@ let createToken = (req, res) => {
     let password = credentials.password;
     let id = credentials.id;
     let username = credentials.username;
+    console.log(req.body);
 
     dbq.usernameLogin(username, password)
         .then(results => {
@@ -144,7 +151,7 @@ let createToken = (req, res) => {
             } else {
                 res.end("Sorry, invalid login");
             }
-        }).catch(error=> res.send("invalid login"));
+        }).catch(error=> res.send({response: "bad login"}));
     };
 
 //geocoding
@@ -161,7 +168,6 @@ let getGeocode = (req, res) => {
 ex.post('/checktoken', validateToken);
 ex.post('/login', createToken);
 ex.post('/register', newUser);
-ex.post('/post', newPost);
 ex.post('/newpost', newPost);
 ex.post('/map', getGeocode);
 ex.get('/users', getUsers);
