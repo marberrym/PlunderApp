@@ -1,8 +1,6 @@
 let postArea = document.querySelector('.postSection');
 
 let postSection = (post) => {
-    console.log(post);
-
     let showMap = (event) => {
         let location = {city: post.city,
                         state: post.state}
@@ -33,10 +31,16 @@ let postSection = (post) => {
             description.classList.toggle('showDesc');
         }
     }
-
-    if (!myStorage.userid) {
+    console.log(" LOGGED IN IS" + loggedin);
+    if (loggedin === true) {
+        emailLink.classList.remove('hide');
+    }
+   
+    if (loggedin === false) {
         emailLink.classList.add('hide');
     }
+    
+   
     
     emailLink.classList.add('emailLink');
     mainPost.classList.add('post');

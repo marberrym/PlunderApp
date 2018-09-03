@@ -7,6 +7,7 @@ var jsonParser = bodyParser.json();
 const cors = require('cors');
 const dbq = require('./queries.js');
 const maps = require('./maps');
+const priv = require('./private');
 ex.use(cors());
 ex.use('/images/', express.static('./images'));
 ex.use(express.static('./frontend'));
@@ -16,7 +17,6 @@ let upload = multer({dest: './images'});
  
 ex.post("/postimageupload", upload.single('post-image'), (req, res)  =>  {
     let postid = req.body.id;
-    console.log(postid)
     dbq.postAddImage(postid, './images/' + req.file.filename)
     .then(row => {
         res.send(row)
@@ -25,7 +25,6 @@ ex.post("/postimageupload", upload.single('post-image'), (req, res)  =>  {
 
 ex.post("/registerimageupload", upload.single('profile-image'), (req, res)  =>  {
     let userid = req.body.id;
-    console.log(userid)
     dbq.registerAddImage(userid, './images/' + req.file.filename)
     .then(row => {
         res.send(row)
@@ -61,7 +60,6 @@ let postByUser = (req, res) => {
 //Get posts by category
 let postsByCat = (req, res) => {
     let category = req.params.category;
-    console.log(category);
     dbq.listPostsByCategory(category)
         .then(results => res.send(results));
 }
@@ -73,7 +71,7 @@ let postsByLocation = (req, res) => {
         .then(results => res.send(results));
 }
 
-let newUser = (req,res) => {
+let newUser = (req, res, next) => {
     let userForm = req.body;
     dbq.createUser(userForm)
         .then(results => {
@@ -83,8 +81,7 @@ let newUser = (req,res) => {
 
 //Create a new post
 let newPost = (req, res) => {
-    let postForm = req.body;  
-    console.log(postForm);              
+    let postForm = req.body;               
     dbq.createPost(postForm)
         .then(results => {
             res.send(results)
@@ -92,59 +89,57 @@ let newPost = (req, res) => {
 }
 
 //validation middlewhere takes in url query for ?token='webtoken'
-let validateToken = (req, res, next) => {
-    let token = req.query.token;
-    let isValid = false;
+let validateToken = (req, res) => {
+    let responseObject = {response: null,
+                            payload: null}
+    let token = req.body.webtoken
+    let testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ.XSnJHmO0Z55qeh-bZM7nsvTGAIETHmkdhdkvKyNS5po'
+    let isValid;
     let payload;
-    console.log(token);
     try {
-        payload = jwt.verify(token, 'secretsig');
+        let decoded = jwt.verify(token, priv.signature, {"alg": "HS256", "typ": "JWT"});
+        console.log(decoded);
         isValid = true;
+        req.user = decoded.payload;
+        responseObject.payload = payload;
     } catch (err) {
+        console.log(err)
+        console.log("Token not valid.");
         isValid = false;
     }
-    req.user = payload;
     //creates a new property for the request object, called user
     if (isValid) {
-        next();
+        responseObject.response = "Logged in";
+        res.send(responseObject);
     } else {
-        res.end('youshallnotpass')
+        responseObject.response = "invalid login";
+        res.send(responseObject);
     }
 }
 
 let createToken = (req, res) => {
-        let credentials = req.body;
-        console.log(credentials)
-        let validUser = dbq.usernameLogin(credentials.username, credentials.password);
-        validUser.then(dbReply => {
-            // this function serves an object with keys "username" and "password" from our form
-            let loginID = JSON.stringify(dbReply.username);
-            let loginPass = JSON.stringify(dbReply.password)
-            let username = JSON.stringify(credentials.username);
-            let password = JSON.stringify(credentials.password);
-            if (loginID === username) {
-                if (loginPass === password) {
-                    let token = jwt.sign(
-                        {userID: username},
-                        'secretsig',
-                        {expiresIn: '7d'}
-                    );
-                    res.end(token)
-                    //this should be granted & held in localstorage for access later
-                } else {
-                    res.end('You entered an incorrect password, try again')
-                }
+    let credentials = req.body;
+    let password = credentials.password;
+    let id = credentials.id;
+    let username = credentials.username;
 
+    dbq.usernameLogin(username, password)
+        .then(results => {
+            if (results.password === password && results.username === username) {
+                let token = jwt.sign(
+                    {name: results.username,
+                    userid: results.id},
+                    priv.signature,
+                    {expiresIn: '7d'})
+                    res.end(JSON.stringify(token));
             } else {
-                res.end('You need to login, please enter username and password')
+                res.end("Sorry, invalid login");
             }
-        });
-    ;
-}
+        }).catch(error=> res.send("invalid login"));
+    };
 
 //geocoding
 let getGeocode = (req, res) => {
-    console.log(req.body);
     maps.geocode(req.body.city, req.body.state)
         .then(results => {
             maps.mapQuery(results)
@@ -154,13 +149,12 @@ let getGeocode = (req, res) => {
         })
 }
 
-
+ex.post('/checktoken', validateToken);
 ex.post('/login', createToken);
-// ex.get('/users', validateToken, getUsers);
-ex.post('/register', newUser)
-ex.post('/post', newPost)
+ex.post('/register', newUser, createToken);
+ex.post('/post', newPost);
 ex.post('/newpost', newPost);
-ex.post('/map', jsonParser, getGeocode);
+ex.post('/map', getGeocode);
 ex.get('/users', getUsers);
 ex.get('/posts', getPosts);
 ex.get('/:username/posts', postsByUser);

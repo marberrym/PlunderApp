@@ -15,6 +15,7 @@ let postForm = document.querySelector('.postForm')
 let registerForm = document.querySelector('.registerForm')
 let modalMap = document.querySelector('.modalMap');
 let logoutFlash = document.querySelector('#logoutFlash');
+let loggedin;
 
 let loginSubmission = (event) => {
     event.preventDefault();
@@ -23,17 +24,25 @@ let loginSubmission = (event) => {
     let passwordSubmit = document.querySelector('.inputFieldPassword');
     loginSubmissionObject['username'] = usernameSubmit.value;
     loginSubmissionObject['password'] = passwordSubmit.value;
-    console.log(loginSubmissionObject);
     fetch('http://localhost:3000/login', {
         method: 'POST',
         body: JSON.stringify(loginSubmissionObject),
         headers: {'Content-Type': 'application/json'}
     })
     .then((result) => {
-        return result.text()
+        return result.json()
     })
     .then((result)=>{
-        console.log(result);
+        if (result === "invalid login") {
+
+        }
+        myStorage.setItem('webtoken', result);
+        resetModal();
+        loginFlashMSG();
+        empty(postArea);
+        loggedin = true;
+        checkLogin();
+        getReq(url);
     })
 }
 
@@ -62,7 +71,6 @@ let registerSubmission = (event) => {
     registerFormData.append('profile-image', profileImg)
 
     //registerSubmissionObject['userimg'] = 
-    console.log(registerSubmissionObject);
     fetch('http://localhost:3000/register', {
         method: 'POST', 
         body: JSON.stringify(registerSubmissionObject),
@@ -71,11 +79,19 @@ let registerSubmission = (event) => {
     .then((result) => {
         return result.json()
     })
-    // .then((result) =>{
-    //     console.log(result);
-    //})
+    .then((data) => {
+        fetch('http://localhost:3000/login', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {'Content-Type': 'application/JSON'}
+        })
+            .then((result) => {
+                result.json().then((result) => {
+            })
+        })
+        return data;
+    })
     .then((user) => {
-        console.log(user)
         registerFormData.append('id', user.id)
         return fetch('http://localhost:3000/registerimageupload', {
             method: 'POST',
@@ -83,6 +99,8 @@ let registerSubmission = (event) => {
             mode: 'cors',
         })
     })
+    resetModal();
+    registerFlashMSG();
     empty(postArea);
     getReq(url);
 }
@@ -98,7 +116,6 @@ let postSubmission = (event) => {
     postSubmissionObject['category'] = categorySubmit.value;
     postSubmissionObject['description'] = descriptionSubmit.value;
     postSubmissionObject['price'] = priceSubmit.value;
-    console.log(postSubmissionObject);
     let descriptionImg = document.querySelector('#descripimg');
     let productImg = descriptionImg.files[0];
     let postFormData = new FormData()
@@ -113,7 +130,6 @@ let postSubmission = (event) => {
         return result.json()
     })
     .then((post) => {
-        console.log(post)
         postFormData.append('id', post.id)
         return fetch('http://localhost:3000/postimageupload', {
             method: 'POST',
@@ -121,9 +137,10 @@ let postSubmission = (event) => {
             mode: 'cors',
         })
     })
-    
-    empty(postArea)
-    getReq(url)
+    resetModal();
+    postFlashMSG();
+    empty(postArea);
+    getReq(url);
 }
 let showLogin = (event) => {
     modalWindow.classList.add('show');
@@ -156,11 +173,35 @@ let hideModal = (event) => {
     }
 }
 
+let resetModal = () => {
+    modalWindow.classList.remove('show');
+    modalLogin.classList.remove('show');
+    modalMap.classList.remove('show');
+    modalRegister.classList.remove('show');
+    modalPost.classList.remove('show');
+    modalPlunders.classList.remove('showPlunders');
+
+}
+
 let logoutFlashMSG = () => {
     logoutFlash.classList.add('flashAnimation');
 }
 
+let loginFlashMSG = () => {
+    loginFlash.classList.add('flashAnimation');
+}
+
+let registerFlashMSG = () => {
+    regFlash.classList.add('flashAnimation');
+}
+
+let postFlashMSG = () => {
+    postFlash.classList.add('flashAnimation');
+}
+
+
 let logout = () => {
+    loggedin = false;
     myStorage.clear();
     logoutFlashMSG();
     empty(postArea);
@@ -181,21 +222,32 @@ logoutBTN.addEventListener('click', logout);
 
 //Store WebToken in local storage
 
+
 let myStorage = window.localStorage;
 //WE WILL BE STORING A WEBTOKEN.
-myStorage.setItem('userid', '54');
 let checkLogin = () => {
-    if (myStorage.userid != null) {
-        registerBTN.classList.add('hide');
-        loginBTN.classList.add('hide');
-        postBTN.classList.remove('hide');
-        logoutBTN.classList.remove('hide');
-    } else {
-        registerBTN.classList.remove('hide');
-        loginBTN.classList.remove('hide');
-        postBTN.classList.add('hide');
-        logoutBTN.classList.add('hide');
-    }
+    fetch('http://localhost:3000/checktoken', {
+        method: 'POST',
+        body: JSON.stringify(myStorage),
+        headers: {'Content-Type': 'application/json'}
+    })
+    .then(result => {
+        return result.json()})   
+        .then(status => {
+        if (status.response === 'Logged in'){
+            registerBTN.classList.add('hide');
+            loginBTN.classList.add('hide');
+            postBTN.classList.remove('hide');
+            logoutBTN.classList.remove('hide');
+            loggedin = true;
+        } else {
+            registerBTN.classList.remove('hide');
+            loginBTN.classList.remove('hide');
+            postBTN.classList.add('hide');
+            logoutBTN.classList.add('hide');
+            loggedin = false;
+        }
+    })
 }
 checkLogin();
 

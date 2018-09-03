@@ -17,8 +17,7 @@ let usernameLogin = (username, password) => {
     return db.one(`select username, password, id
     FROM users
     WHERE username = '` + username + `'
-    AND password = '` + password + `';`
-    );
+    AND password = '` + password + `';`)
 }
 
 let allPostsByUser = (username) => {
