@@ -2,7 +2,7 @@
 let url = 'http://localhost:3000/posts'
 let mapURL = 'http://localhost:3000/map'
 let catBTNS = document.querySelectorAll('.sideBar');
-let locationBTN = document.querySelector('.locationFilter')
+let locationBTN = document.querySelector('.locationBTN')
 
 let empty = (node) => {
     while (node.firstChild) {
@@ -83,6 +83,18 @@ catBTNS.forEach(function(cat) {
     cat.addEventListener('click', catReq)
 });
 
-locationBTN
+let getLocation = (local) => {
+    let reqURL = 'http://localhost:3000/posts/local/' + local.textContent 
+    let localReq = () => {
+       if (local.textContent !== 'All' ){
+            empty(postArea);
+            getReq(reqURL);
+        } else {
+            empty(postArea);
+            getReq(url);
+        }   
+    }
+    local.addEventListener('submit', localReq)
+};
 
 

@@ -66,8 +66,8 @@ let postsByCat = (req, res) => {
 
 //Get Posts by Location
 let postsByLocation = (req, res) => {
-    let state = req.params.location;
-    let city = req.params.location;
+    let state = req.params.state;
+    let city = req.params.city;
     dbq.listPostsByLocation(city, state)
         .then(results => res.send(results));
 }
@@ -161,7 +161,7 @@ ex.get('/posts', getPosts);
 ex.get('/:username/posts', postsByUser);
 ex.get('/:username/posts/:postid', postByUser);
 ex.get('/posts/cat/:category', postsByCat);
-ex.get('/posts/state/:location', postsByLocation);
+ex.get('/posts/local/:location', postsByLocation);
 
 ex.listen(3000);
 

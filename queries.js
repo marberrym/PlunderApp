@@ -43,7 +43,7 @@ let listPostsByCategory = (category) => {
 }
 
 let listPostsByLocation = (city, state) => {
-    return db.query(`select usr.username, usr.userimg, usr.state, usr.city, pst.item, pst.price, pst.description, pst.descripimg
+    return db.query(`select usr.username, usr.userimg, pst.item, usr.city, pst.price, pst.state, pst.description, pst.descripimg, urs.email
         FROM posts pst
         INNER JOIN users usr ON usr.id = pst.userid
         WHERE usr.state = '` + city + `', '` + state + `';`);
