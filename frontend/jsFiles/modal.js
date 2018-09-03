@@ -185,20 +185,31 @@ let resetModal = () => {
 
 let logoutFlashMSG = () => {
     logoutFlash.classList.add('flashAnimation');
+    setTimeout(function(){
+        logoutFlash.classList.remove('flashAnimation')
+    }, 2500)
 }
 
 let loginFlashMSG = () => {
     loginFlash.classList.add('flashAnimation');
+    setTimeout(function(){
+        loginFlash.classList.remove('flashAnimation')
+    }, 2500)
 }
 
 let registerFlashMSG = () => {
     regFlash.classList.add('flashAnimation');
+    setTimeout(function(){
+        regFlash.classList.remove('flashAnimation')
+    }, 2500)
 }
 
 let postFlashMSG = () => {
     postFlash.classList.add('flashAnimation');
+    setTimeout(function(){
+        postFlash.classList.remove('flashAnimation')
+    }, 2500)
 }
-
 
 let logout = () => {
     loggedin = false;

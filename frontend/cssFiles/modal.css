@@ -327,7 +327,7 @@
 }
 
 .flashAnimation {
-    animation: flash 3s alternate-reverse ease-in-out;
+    animation: flash 2.5s alternate-reverse ease-in-out;
     z-index: 2;
 }
 
