@@ -16,6 +16,8 @@ let multer = require('multer');
 let upload = multer({dest: './images'});
  
 ex.post("/postimageupload", upload.single('post-image'), (req, res)  =>  {
+    console.log("UP HERE");
+    console.log(req.body);
     let postid = req.body.id;
     dbq.postAddImage(postid, './images/' + req.file.filename)
     .then(row => {
@@ -24,6 +26,8 @@ ex.post("/postimageupload", upload.single('post-image'), (req, res)  =>  {
 })
 
 ex.post("/registerimageupload", upload.single('profile-image'), (req, res)  =>  {
+    console.log("DOWNHERE")
+    console.log(req.body);
     let userid = req.body.id;
     dbq.registerAddImage(userid, './images/' + req.file.filename)
     .then(row => {
@@ -76,11 +80,9 @@ let newUser = (req, res) => {
     let userNameTaken = {response: "Username Taken"};
     dbq.checkUser(userForm.username)
         .then(results => {
-            console.log(results);
             if(results === undefined || results.length == 0) {
                 dbq.createUser(userForm)
                     .then(results => {
-                        console.log(results)
                         res.send(results);
                     })
             } else {
@@ -92,12 +94,9 @@ let newUser = (req, res) => {
 //Create a new post
 let newPost = (req, res) => {
     let postForm = req.body;
-    console.log(postForm);
     let decoded = jwt.decode(postForm.webtoken)
     let userid = decoded.userid;
-    console.log(userid);
-    postForm.userid = userid;
-    console.log(postForm);         
+    postForm.userid = userid;        
     dbq.createPost(postForm)
         .then(results => {
             res.send(results)
@@ -113,13 +112,10 @@ let validateToken = (req, res) => {
     let payload;
     try {
         let decoded = jwt.verify(token, priv.signature, {"alg": "HS256", "typ": "JWT"});
-        console.log(decoded);
         isValid = true;
         req.user = decoded.payload;
         responseObject.payload = payload;
     } catch (err) {
-        console.log(err)
-        console.log("Token not valid.");
         isValid = false;
     }
     //creates a new property for the request object, called user
@@ -137,7 +133,6 @@ let createToken = (req, res) => {
     let password = credentials.password;
     let id = credentials.id;
     let username = credentials.username;
-    console.log(req.body);
 
     dbq.usernameLogin(username, password)
         .then(results => {
