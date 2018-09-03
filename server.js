@@ -71,12 +71,22 @@ let postsByLocation = (req, res) => {
         .then(results => res.send(results));
 }
 
-let newUser = (req, res, next) => {
+let newUser = (req, res) => {
     let userForm = req.body;
-    dbq.createUser(userForm)
+    let userNameTaken = {response: "Username Taken"};
+    dbq.checkUser(userForm.username)
         .then(results => {
-            res.send(results)
-        });
+            console.log(results);
+            if(results === undefined || results.length == 0) {
+                dbq.createUser(userForm)
+                    .then(results => {
+                        console.log(results)
+                        res.send(results);
+                    })
+            } else {
+                res.send(userNameTaken);
+            }
+        })
 }
 
 //Create a new post
@@ -93,7 +103,6 @@ let validateToken = (req, res) => {
     let responseObject = {response: null,
                             payload: null}
     let token = req.body.webtoken
-    let testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ.XSnJHmO0Z55qeh-bZM7nsvTGAIETHmkdhdkvKyNS5po'
     let isValid;
     let payload;
     try {
@@ -151,7 +160,7 @@ let getGeocode = (req, res) => {
 
 ex.post('/checktoken', validateToken);
 ex.post('/login', createToken);
-ex.post('/register', newUser, createToken);
+ex.post('/register', newUser);
 ex.post('/post', newPost);
 ex.post('/newpost', newPost);
 ex.post('/map', getGeocode);

@@ -42,6 +42,12 @@ let listPostsByCategory = (category) => {
         WHERE category = '` + category + `';`);
 }
 
+let checkUser = (username) => {
+    return db.query(`select username
+        FROM users
+        WHERE username = '` + username + `';`);
+}
+
 let listPostsByState = (state) => {
     return db.query(`select usr.username, usr.userimg, usr.state, usr.city, pst.item, pst.price, pst.description, pst.descripimg, usr.email
         FROM posts pst
@@ -82,5 +88,6 @@ exports.listPostsByCategory = listPostsByCategory;
 exports.listPostsByState = listPostsByState;
 exports.createPost = createPost;
 exports.createUser = createUser;
+exports.checkUser = checkUser;
 
 
