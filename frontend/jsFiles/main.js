@@ -31,8 +31,8 @@ let postSection = (post) => {
             description.classList.toggle('showDesc');
         }
     }
-
-    if (!myStorage.userid) {
+    console.log(" LOGGED IN IS" + loggedin);
+    if (!loggedin) {
         emailLink.classList.add('hide');
     }
     

@@ -74,7 +74,7 @@ let postsByLocation = (req, res) => {
         .then(results => res.send(results));
 }
 
-let newUser = (req, res) => {
+let newUser = (req, res, next) => {
     let userForm = req.body;
     console.log(userForm);
     dbq.createUser(userForm)
@@ -95,17 +95,23 @@ let newPost = (req, res) => {
 
 //validation middlewhere takes in url query for ?token='webtoken'
 let validateToken = (req, res) => {
-    let responseObject = {response: null}
+    let responseObject = {response: null,
+                            payload: null}
     let token = req.body.webtoken
-    let isValid = false;
+    let testToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIifQ.XSnJHmO0Z55qeh-bZM7nsvTGAIETHmkdhdkvKyNS5po'
+    let isValid;
     let payload;
-    console.log(token);
     try {
-        payload = jwt.verify(token, priv.signature);
-        console.log(payload);
+        console.log("I'm testing.")
+        console.log(token);
+        let decoded = jwt.verify(token, priv.signature, {"alg": "HS256", "typ": "JWT"});
+        console.log(decoded);
         isValid = true;
-        req.user = payload;
+        req.user = decoded.payload;
+        responseObject.payload = payload;
     } catch (err) {
+        console.log(err)
+        console.log("Token not valid.");
         isValid = false;
     }
     //creates a new property for the request object, called user
@@ -123,16 +129,16 @@ let createToken = (req, res) => {
     let password = credentials.password;
     let id = credentials.id;
     let username = credentials.username;
+    console.log(credentials);
 
-    dbq.usernameLogin(id, password)
+    dbq.usernameLogin(username, password)
         .then(results => {
-            if (results.password === password && results.id === id) {
+            if (results.password === password && results.username === username) {
                 let token = jwt.sign(
-                    {name: username,
-                    userid: id},
+                    {name: results.username,
+                    userid: results.id},
                     priv.signature,
-                    {notBefore: '7d'})
-                    console.log(token);
+                    {expiresIn: '7d'})
                     res.end(JSON.stringify(token));
             } else {
                 res.end("Sorry, invalid login");
@@ -153,7 +159,7 @@ let getGeocode = (req, res) => {
 
 ex.post('/checktoken', validateToken);
 ex.post('/login', createToken);
-ex.post('/register', newUser);
+ex.post('/register', newUser, createToken);
 ex.post('/post', newPost);
 ex.post('/newpost', newPost);
 ex.post('/map', getGeocode);

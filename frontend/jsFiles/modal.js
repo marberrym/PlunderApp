@@ -15,6 +15,7 @@ let postForm = document.querySelector('.postForm')
 let registerForm = document.querySelector('.registerForm')
 let modalMap = document.querySelector('.modalMap');
 let logoutFlash = document.querySelector('#logoutFlash');
+let loggedin;
 
 let loginSubmission = (event) => {
     event.preventDefault();
@@ -30,10 +31,13 @@ let loginSubmission = (event) => {
         headers: {'Content-Type': 'application/json'}
     })
     .then((result) => {
-        return result.text()
+        return result.json()
     })
     .then((result)=>{
         console.log(result);
+        myStorage.setItem('webtoken', result);
+        resetModal();
+        getReq(url);
     })
 }
 
@@ -96,7 +100,7 @@ let registerSubmission = (event) => {
             mode: 'cors',
         })
     })
-   
+    resetModal();
     empty(postArea);
     getReq(url);
 }
@@ -134,9 +138,9 @@ let postSubmission = (event) => {
             mode: 'cors',
         })
     })
-    
-    empty(postArea)
-    getReq(url)
+    resetModal();
+    empty(postArea);
+    getReq(url);
 }
 let showLogin = (event) => {
     modalWindow.classList.add('show');
@@ -169,11 +173,22 @@ let hideModal = (event) => {
     }
 }
 
+let resetModal = () => {
+    modalWindow.classList.remove('show');
+    modalLogin.classList.remove('show');
+    modalMap.classList.remove('show');
+    modalRegister.classList.remove('show');
+    modalPost.classList.remove('show');
+    modalPlunders.classList.remove('showPlunders');
+
+}
+
 let logoutFlashMSG = () => {
     logoutFlash.classList.add('flashAnimation');
 }
 
 let logout = () => {
+    loggedin = false;
     myStorage.clear();
     logoutFlashMSG();
     empty(postArea);
@@ -194,6 +209,7 @@ logoutBTN.addEventListener('click', logout);
 
 //Store WebToken in local storage
 
+
 let myStorage = window.localStorage;
 //WE WILL BE STORING A WEBTOKEN.
 myStorage.setItem('userid', '54');
@@ -211,19 +227,20 @@ let checkLogin = () => {
         
         .then(status => {
         console.log(status)
-        console.log('wtf')
+        if (status.response === 'Logged in'){
+            registerBTN.classList.add('hide');
+            loginBTN.classList.add('hide');
+            postBTN.classList.remove('hide');
+            logoutBTN.classList.remove('hide');
+            loggedin = true;
+        } else {
+            registerBTN.classList.remove('hide');
+            loginBTN.classList.remove('hide');
+            postBTN.classList.add('hide');
+            logoutBTN.classList.add('hide');
+            loggedin = false;
+        }
     })
-        // if (status === 'Logged in'){
-        //     registerBTN.classList.add('hide');
-        //     loginBTN.classList.add('hide');
-        //     postBTN.classList.remove('hide');
-        //     logoutBTN.classList.remove('hide');
-        // } else {
-        //     registerBTN.classList.remove('hide');
-        //     loginBTN.classList.remove('hide');
-        //     postBTN.classList.add('hide');
-        //     logoutBTN.classList.add('hide');
-        // }
 }
 
 checkLogin();
