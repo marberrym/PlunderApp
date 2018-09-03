@@ -20,7 +20,6 @@ let getReq = (url) => fetch(url)
                     })
                 })
         } else{
-            console.log("failed to load");
             throw new Error('did not retrieve info...')
         }
     })

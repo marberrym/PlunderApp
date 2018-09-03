@@ -313,21 +313,21 @@
     left: 40%;
     width: 30%;
     height: 10%;
-    background: radial-gradient(circle, rgba(4,138,158,1) 18%, rgba(35,1,97,1) 93%);
-    font-family: 'Amatic SC', cursive;
+    background: radial-gradient(circle, rgb(3, 189, 218) 18%, rgb(60, 2, 168) 93%); 
+    font-family: 'Acme', sans-serif;
     color: whitesmoke;
     opacity: 0;
-    font-size: 1.3em;
+    font-size: 1.1em;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid black;
+    border: 2px solid whitesmoke;
     border-radius: 1em;
     pointer-events: none;
 }
 
 .flashAnimation {
-    animation: flash 2s alternate-reverse ease-in-out;
+    animation: flash 3s alternate-reverse ease-in-out;
     z-index: 2;
 }
 

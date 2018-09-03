@@ -17,7 +17,6 @@ let upload = multer({dest: './images'});
  
 ex.post("/postimageupload", upload.single('post-image'), (req, res)  =>  {
     let postid = req.body.id;
-    console.log(postid)
     dbq.postAddImage(postid, './images/' + req.file.filename)
     .then(row => {
         res.send(row)
@@ -26,7 +25,6 @@ ex.post("/postimageupload", upload.single('post-image'), (req, res)  =>  {
 
 ex.post("/registerimageupload", upload.single('profile-image'), (req, res)  =>  {
     let userid = req.body.id;
-    console.log(userid)
     dbq.registerAddImage(userid, './images/' + req.file.filename)
     .then(row => {
         res.send(row)
@@ -62,7 +60,6 @@ let postByUser = (req, res) => {
 //Get posts by category
 let postsByCat = (req, res) => {
     let category = req.params.category;
-    console.log(category);
     dbq.listPostsByCategory(category)
         .then(results => res.send(results));
 }
@@ -76,7 +73,6 @@ let postsByLocation = (req, res) => {
 
 let newUser = (req, res, next) => {
     let userForm = req.body;
-    console.log(userForm);
     dbq.createUser(userForm)
         .then(results => {
             res.send(results)
@@ -85,8 +81,7 @@ let newUser = (req, res, next) => {
 
 //Create a new post
 let newPost = (req, res) => {
-    let postForm = req.body;  
-    console.log(postForm);              
+    let postForm = req.body;               
     dbq.createPost(postForm)
         .then(results => {
             res.send(results)
@@ -102,8 +97,6 @@ let validateToken = (req, res) => {
     let isValid;
     let payload;
     try {
-        console.log("I'm testing.")
-        console.log(token);
         let decoded = jwt.verify(token, priv.signature, {"alg": "HS256", "typ": "JWT"});
         console.log(decoded);
         isValid = true;
@@ -129,7 +122,6 @@ let createToken = (req, res) => {
     let password = credentials.password;
     let id = credentials.id;
     let username = credentials.username;
-    console.log(credentials);
 
     dbq.usernameLogin(username, password)
         .then(results => {
@@ -143,7 +135,7 @@ let createToken = (req, res) => {
             } else {
                 res.end("Sorry, invalid login");
             }
-        }).catch(error=> console.debug(error));
+        }).catch(error=> res.send("invalid login"));
     };
 
 //geocoding

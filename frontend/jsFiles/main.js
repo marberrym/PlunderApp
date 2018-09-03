@@ -32,9 +32,15 @@ let postSection = (post) => {
         }
     }
     console.log(" LOGGED IN IS" + loggedin);
-    if (!loggedin) {
+    if (loggedin === true) {
+        emailLink.classList.remove('hide');
+    }
+   
+    if (loggedin === false) {
         emailLink.classList.add('hide');
     }
+    
+   
     
     emailLink.classList.add('emailLink');
     mainPost.classList.add('post');

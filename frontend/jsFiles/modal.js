@@ -24,7 +24,6 @@ let loginSubmission = (event) => {
     let passwordSubmit = document.querySelector('.inputFieldPassword');
     loginSubmissionObject['username'] = usernameSubmit.value;
     loginSubmissionObject['password'] = passwordSubmit.value;
-    console.log(loginSubmissionObject);
     fetch('http://localhost:3000/login', {
         method: 'POST',
         body: JSON.stringify(loginSubmissionObject),
@@ -34,9 +33,15 @@ let loginSubmission = (event) => {
         return result.json()
     })
     .then((result)=>{
-        console.log(result);
+        if (result === "invalid login") {
+
+        }
         myStorage.setItem('webtoken', result);
         resetModal();
+        loginFlashMSG();
+        empty(postArea);
+        loggedin = true;
+        checkLogin();
         getReq(url);
     })
 }
@@ -66,7 +71,6 @@ let registerSubmission = (event) => {
     registerFormData.append('profile-image', profileImg)
 
     //registerSubmissionObject['userimg'] = 
-    console.log(registerSubmissionObject);
     fetch('http://localhost:3000/register', {
         method: 'POST', 
         body: JSON.stringify(registerSubmissionObject),
@@ -76,23 +80,18 @@ let registerSubmission = (event) => {
         return result.json()
     })
     .then((data) => {
-        console.log(data);
         fetch('http://localhost:3000/login', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {'Content-Type': 'application/JSON'}
         })
             .then((result) => {
-                console.log(result);
                 result.json().then((result) => {
-                    console.log(result);
-                    myStorage.setItem('webtoken', result);
             })
         })
         return data;
     })
     .then((user) => {
-        console.log(user)
         registerFormData.append('id', user.id)
         return fetch('http://localhost:3000/registerimageupload', {
             method: 'POST',
@@ -101,6 +100,7 @@ let registerSubmission = (event) => {
         })
     })
     resetModal();
+    registerFlashMSG();
     empty(postArea);
     getReq(url);
 }
@@ -130,7 +130,6 @@ let postSubmission = (event) => {
         return result.json()
     })
     .then((post) => {
-        console.log(post)
         postFormData.append('id', post.id)
         return fetch('http://localhost:3000/postimageupload', {
             method: 'POST',
@@ -139,6 +138,7 @@ let postSubmission = (event) => {
         })
     })
     resetModal();
+    postFlashMSG();
     empty(postArea);
     getReq(url);
 }
@@ -187,6 +187,19 @@ let logoutFlashMSG = () => {
     logoutFlash.classList.add('flashAnimation');
 }
 
+let loginFlashMSG = () => {
+    loginFlash.classList.add('flashAnimation');
+}
+
+let registerFlashMSG = () => {
+    regFlash.classList.add('flashAnimation');
+}
+
+let postFlashMSG = () => {
+    postFlash.classList.add('flashAnimation');
+}
+
+
 let logout = () => {
     loggedin = false;
     myStorage.clear();
@@ -212,21 +225,15 @@ logoutBTN.addEventListener('click', logout);
 
 let myStorage = window.localStorage;
 //WE WILL BE STORING A WEBTOKEN.
-myStorage.setItem('userid', '54');
 let checkLogin = () => {
-    let token = myStorage;
-    console.log(token);
     fetch('http://localhost:3000/checktoken', {
         method: 'POST',
         body: JSON.stringify(myStorage),
         headers: {'Content-Type': 'application/json'}
     })
     .then(result => {
-        console.log(result);
-        return result.json()})
-        
+        return result.json()})   
         .then(status => {
-        console.log(status)
         if (status.response === 'Logged in'){
             registerBTN.classList.add('hide');
             loginBTN.classList.add('hide');
@@ -242,6 +249,5 @@ let checkLogin = () => {
         }
     })
 }
-
 checkLogin();
 
