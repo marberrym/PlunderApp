@@ -69,8 +69,9 @@ let registerSubmission = (event) => {
 
     let userImage = document.querySelector('#userimg');
     let profileImg = userImage.files[0];
+    console.log(userImage);
     let registerFormData = new FormData()
-    registerFormData.append('profile-image', profileImg)
+    registerFormData.append('userimg', profileImg);
 
     //registerSubmissionObject['userimg'] = 
     fetch('http://localhost:3000/register', {
@@ -85,18 +86,26 @@ let registerSubmission = (event) => {
         console.log(data);
         if (data.response) {
             flashMSG("Username Already Taken");
+            registerFormData.append('id', data.id)
+            return fetch('http://localhost:3000/registerimageupload', {
+                method: 'POST',
+                body: registerFormData,
+                mode: 'cors',
+            })
         } else {
             flashMSG("You can log in now.");
         }
     })
-    .then((user) => {
-        registerFormData.append('id', user.id)
-        return fetch('http://localhost:3000/registerimageupload', {
-            method: 'POST',
-            body: registerFormData,
-            mode: 'cors',
-        })
-    })
+    // .then((user) => {
+    //     console.log(user);
+    //     console.log(registerFormData);
+    //     registerFormData.append('id', user.id)
+    //     return fetch('http://localhost:3000/registerimageupload', {
+    //         method: 'POST',
+    //         body: registerFormData,
+    //         mode: 'cors',
+    //     })
+    // })
     resetModal();
     empty(postArea);
     getReq(url);
