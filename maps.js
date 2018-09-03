@@ -13,7 +13,6 @@ let geocode = (city, state) => {
 
 let mapQuery = (object) => {
     let longlat = object.json.results[0].geometry.location
-    console.log(longlat)
     return googleMapsClient.placesNearby({location: longlat,
                                 radius: 12000.3,
                                 keyword: 'Fire Department'

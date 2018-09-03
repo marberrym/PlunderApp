@@ -26,13 +26,18 @@
         <div class="sideBar">Fashion</div>        
     </div>
 
+    <div id="logoutFlash" class="flash"><div>You have been successfully logged out!</div></div>
+    <div id="loginFlash" class="flash"><div>You have been successfully logged in!</div></div>
+    <div id="regFlash" class="flash"><div>Register successful, you may now log in!</div></div>
+    <div id="postFlash" class="flash"><div>You have posted successfully!</div></div>
+
     <div class="modalBG">
         <!-- Modal for User Login -->
         <div class="modalLogin">
             <form class="login loginForm">
                 <label class="submitLabel">Username: <input type="text" name="username" class="inputFields inputFieldUsername"></label><br>
                 <label class="submitLabel">Password: <input type="password" name="password" class="inputFields inputFieldPassword"></label><br>
-                <button type="submit" class="submitBTN noTrans">Submit</button>
+                <button type="submit" class="submitBTN">Submit</button>
             </form>
         </div>
         <!-- Modal for User Registration -->
@@ -70,7 +75,7 @@
                     <span class="padding3R">Profile Picture: </span>
                     <input type="file" name="userimg" class= "inputFields" id="userimg">
                 </label>
-                <button type="submit" class="submitBTN noTrans">Submit</button>
+                <button type="submit" class="submitBTN">Submit</button>
             </form>
         </div>
         <!-- Modal for Post -->
@@ -121,10 +126,11 @@
             <img src="images/plunderLogoFinalCrop.png" class="navLogo">
             <div id="plunders" class="navBTN">Plunders</div>
         </div>
-        <div style="text-align: right; display: flex; margin-right: 2em;">
+        <div style="text-align: right; display: flex; justify-content: center; margin-right: 2em;">
             <div id="login" class="navBTN" style="margin: 0; padding: 0;">Login</div>
             <div id="register" class="navBTN">Register</div>
-            <div id="post" class="navBTN">Post</div>
+            <div id="post" class="navBTN hide">Post</div>
+            <div id="logout" class="navBTN hide">Logout</div>
         </div>
     </div>
     <!-- Logo -->
@@ -206,7 +212,6 @@
     <script src="jsFiles/fetchReq.js"></script>
     <script src="jsFiles/main.js"></script>
     <script src="jsFiles/modal.js"></script>
-    <script src="jsFiles/keys.js"></script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBk6JT_8aYOM81UZjIS3JzOGvxJPKqEToU&callback=initMap">
     </script>

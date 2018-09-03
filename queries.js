@@ -8,7 +8,7 @@ let listAllUsers = () => {
 }
 
 let listAllPosts = () => {
-    return db.query(`select usr.username, usr.userimg, pst.item, usr.city, pst.price, usr.state, pst.description, pst.descripimg 
+    return db.query(`select usr.username, usr.userimg, pst.item, usr.city, pst.price, usr.state, pst.description, pst.descripimg, usr.email 
                     FROM posts pst
                     LEFT JOIN users usr ON usr.id = pst.userid`)
 }
@@ -17,19 +17,18 @@ let usernameLogin = (username, password) => {
     return db.one(`select username, password, id
     FROM users
     WHERE username = '` + username + `'
-    AND password = '` + password + `';`
-    );
+    AND password = '` + password + `';`)
 }
 
 let allPostsByUser = (username) => {
-    return db.query(`select usr.username, usr.userimg, pst.item, pst.description, pst.descripimg
+    return db.query(`select usr.username, usr.userimg, pst.item, pst.description, pst.descripimg, usr.email
         FROM posts pst
         INNER JOIN users usr ON usr.id = pst.userid
         WHERE username = '` + username + `';`);
 }
 
 let onePostsByUser = (username, postid) => {
-    return db.one(`select usr.username, usr.userimg, pst.item, pst.description, pst.descripimg, pst.price, usr.city, usr.state
+    return db.one(`select usr.username, usr.userimg, pst.item, pst.description, pst.descripimg, pst.price, usr.city, usr.state, usr.email
         FROM posts pst
         INNER JOIN users usr ON usr.id = pst.userid
         WHERE username = '` + username + `'
@@ -37,7 +36,7 @@ let onePostsByUser = (username, postid) => {
 }
 
 let listPostsByCategory = (category) => {
-    return db.query(`select usr.username, usr.userimg, pst.item, usr.city, pst.price, usr.state, pst.description, pst.descripimg
+    return db.query(`select usr.username, usr.userimg, pst.item, usr.city, pst.price, usr.state, pst.description, pst.descripimg, usr.email
         FROM posts pst
         INNER JOIN users usr ON usr.id = pst.userid
         WHERE category = '` + category + `';`);

@@ -1,15 +1,6 @@
 let postArea = document.querySelector('.postSection');
 
-// let initMap = () => {
-//     let mapDiv = document.querySelector('.mapDiv')
-//     let map = new google.maps.Map(document.getElementById('map'), {
-//         center: {City: 'Atlanta', State: 'GA'},
-//         zoom: 10
-//     })
-// }
-
 let postSection = (post) => {
-
     let showMap = (event) => {
         let location = {city: post.city,
                         state: post.state}
@@ -31,14 +22,27 @@ let postSection = (post) => {
     let description = document.createElement('div');
     let descripImage = document.createElement('img');
     let descripText = document.createElement('p');
+    let emailLink = document.createElement('a');
+    let emailBTN = document.createElement('span');
+
 
     let showPost = (event) => {
-        if (event.target != mapBTN) {
+        if (event.target != mapBTN && event.target != emailLink && event.target != emailBTN) {
             description.classList.toggle('showDesc');
         }
     }
+    console.log(" LOGGED IN IS" + loggedin);
+    if (loggedin === true) {
+        emailLink.classList.remove('hide');
+    }
+   
+    if (loggedin === false) {
+        emailLink.classList.add('hide');
+    }
     
+   
     
+    emailLink.classList.add('emailLink');
     mainPost.classList.add('post');
     postHead.classList.add('postHead');
     userImage.classList.add('userIcon');
@@ -60,7 +64,13 @@ let postSection = (post) => {
     location.textContent = post.city + ', ' + post.state;
     price.textContent = '$' + post.price;
     descripText.textContent = post.description
-    descripImage.setAttribute('src', post.descripimg)
+    descripImage.setAttribute('src', post.descripimg);
+    emailBTN.textContent = "Contact";
+    emailLink.setAttribute('href', 'mailto:' + post.email + '?subject=Hey I want to plunder your ' + post.item);
+
+
+    emailLink.appendChild(emailBTN);
+    titleUsername.appendChild(emailLink);
 
     description.appendChild(descripText);
     description.appendChild(descripImage);
@@ -84,6 +94,7 @@ let postSection = (post) => {
     mapBTN.addEventListener('click', showMap);
 
 };
+
 
     
 
