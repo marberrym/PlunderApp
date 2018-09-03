@@ -14,7 +14,7 @@ let loginForm = document.querySelector('.loginForm')
 let postForm = document.querySelector('.postForm')
 let registerForm = document.querySelector('.registerForm')
 let modalMap = document.querySelector('.modalMap');
-let logoutFlash = document.querySelector('#logoutFlash');
+let flash = document.querySelector('#flashMSG');
 let loggedin;
 
 let loginSubmission = (event) => {
@@ -38,7 +38,7 @@ let loginSubmission = (event) => {
         }
         myStorage.setItem('webtoken', result);
         resetModal();
-        loginFlashMSG();
+        flashMSG("Successful logged in.")
         empty(postArea);
         loggedin = true;
         checkLogin();
@@ -80,16 +80,22 @@ let registerSubmission = (event) => {
         return result.json()
     })
     .then((data) => {
+        console.log(data);
+        if (data.response) {
+            flashMSG("Username Already Taken");
+        } else {
+            flashMSG("You can log in now.");
+        }
         fetch('http://localhost:3000/login', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {'Content-Type': 'application/JSON'}
-        })
+            })
             .then((result) => {
                 result.json().then((result) => {
+                })
             })
-        })
-        return data;
+            return data;
     })
     .then((user) => {
         registerFormData.append('id', user.id)
@@ -100,7 +106,6 @@ let registerSubmission = (event) => {
         })
     })
     resetModal();
-    registerFlashMSG();
     empty(postArea);
     getReq(url);
 }
@@ -138,7 +143,7 @@ let postSubmission = (event) => {
         })
     })
     resetModal();
-    postFlashMSG();
+    flashMSG("You have successfully posted.")
     empty(postArea);
     getReq(url);
 }
@@ -183,27 +188,18 @@ let resetModal = () => {
 
 }
 
-let logoutFlashMSG = () => {
-    logoutFlash.classList.add('flashAnimation');
+let flashMSG = (string) => {
+    flash.textContent = string;
+    flash.classList.add('flashAnimation');
+    setTimeout(function(){
+        flash.classList.remove('flashAnimation')
+    }, 2500)
 }
-
-let loginFlashMSG = () => {
-    loginFlash.classList.add('flashAnimation');
-}
-
-let registerFlashMSG = () => {
-    regFlash.classList.add('flashAnimation');
-}
-
-let postFlashMSG = () => {
-    postFlash.classList.add('flashAnimation');
-}
-
 
 let logout = () => {
     loggedin = false;
     myStorage.clear();
-    logoutFlashMSG();
+    flashMSG("You have been logged out.");
     empty(postArea);
     getReq(url);
     checkLogin();

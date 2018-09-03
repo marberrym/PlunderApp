@@ -31,17 +31,13 @@ let postSection = (post) => {
             description.classList.toggle('showDesc');
         }
     }
-    console.log(" LOGGED IN IS" + loggedin);
+    
     if (loggedin === true) {
         emailLink.classList.remove('hide');
-    }
-   
-    if (loggedin === false) {
+    } else {
         emailLink.classList.add('hide');
     }
-    
-   
-    
+     
     emailLink.classList.add('emailLink');
     mainPost.classList.add('post');
     postHead.classList.add('postHead');

@@ -42,8 +42,14 @@ let listPostsByCategory = (category) => {
         WHERE category = '` + category + `';`);
 }
 
+let checkUser = (username) => {
+    return db.query(`select username
+        FROM users
+        WHERE username = '` + username + `';`);
+}
+
 let listPostsByLocation = (city, state) => {
-    return db.query(`select usr.username, usr.userimg, pst.item, usr.city, pst.price, pst.state, pst.description, pst.descripimg, urs.email
+    return db.query(`select usr.username, usr.userimg, usr.state, usr.city, pst.item, pst.price, pst.description, pst.descripimg, usr.email
         FROM posts pst
         INNER JOIN users usr ON usr.id = pst.userid
         WHERE usr.state = '` + city + `', '` + state + `';`);
@@ -80,5 +86,6 @@ exports.listPostsByCategory = listPostsByCategory;
 exports.listPostsByLocation = listPostsByLocation;
 exports.createPost = createPost;
 exports.createUser = createUser;
+exports.checkUser = checkUser;
 
 
