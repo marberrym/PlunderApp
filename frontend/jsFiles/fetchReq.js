@@ -70,11 +70,11 @@ let initMap = (markers) => {
 }
 
 catBTNS.forEach(function(cat) {
-    let reqURL = 'http://localhost:3000/posts/cat/'+ cat.textContent;
+    let reqURL = '/cat/'+ cat.textContent;
     let catReq = () => {
         if (cat.textContent !== 'All'){
             empty(postArea);
-            getReq(reqURL);
+            getReq(url + reqURL);
         } else {
             empty(postArea);
             getReq(url);
