@@ -87,7 +87,27 @@ body {
     padding: 1em;
     border-radius: 1em;
 }
-
+.locationFilter {
+    display: block;
+    align-self: center;
+}
+.locationLabel {
+    color: aliceblue;
+    text-shadow: 1px 1px 0 #000;
+    font-family: 'Amatic SC', cursive;
+    font-size: 1.3em;
+    width: 10em;
+    text-align: right;
+    transform: translateX(-2.1em);
+    display: flex;
+    justify-content: flex-end;
+    margin-right: .3em;
+}
+.dropDown {
+    overflow: auto;
+    overflow-y: hidden;
+    margin-bottom: 10px;
+}
 .post {
     flex-basis: 10%;
     display: flex;

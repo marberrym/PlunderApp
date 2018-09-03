@@ -14,8 +14,6 @@ ex.use(jsonParser);
 let multer = require('multer');
 let upload = multer({dest: './images'});
 
-let upload = multer({dest: './images'})
- 
 ex.post("/postimageupload", upload.single('post-image'), (req, res)  =>  {
     let postid = req.body.id;
     console.log(postid)
@@ -71,7 +69,8 @@ let postsByCat = (req, res) => {
 //Get Posts by Location
 let postsByLocation = (req, res) => {
     let state = req.params.location;
-    dbq.listPostsByState(state)
+    let city = req.params.location;
+    dbq.listPostsByLocation(city, state)
         .then(results => res.send(results));
 }
 
@@ -93,56 +92,67 @@ let newPost = (req, res) => {
         });
 }
 
-//validation middlewhere takes in url query for ?token='webtoken'
-let validateToken = (req, res, next) => {
-    let token = req.query.token;
-    let isValid = false;
-    let payload;
-    console.log(token);
-    try {
-        payload = jwt.verify(token, 'secretsig');
-        isValid = true;
-    } catch (err) {
-        isValid = false;
-    }
-    req.user = payload;
-    //creates a new property for the request object, called user
-    if (isValid) {
-        next();
-    } else {
-        res.end('youshallnotpass')
-    }
-}
+// let registerToken = (req, res) =>{
+    
+// }
 
-let createToken = (req, res) => {
-        let credentials = req.body;
-        console.log(credentials)
-        let validUser = dbq.usernameLogin(credentials.username, credentials.password);
-        validUser.then(dbReply => {
-            // this function serves an object with keys "username" and "password" from our form
-            let loginID = JSON.stringify(dbReply.username);
-            let loginPass = JSON.stringify(dbReply.password)
-            let username = JSON.stringify(credentials.username);
-            let password = JSON.stringify(credentials.password);
-            if (loginID === username) {
-                if (loginPass === password) {
-                    let token = jwt.sign(
-                        {userID: username},
-                        'secretsig',
-                        {expiresIn: '7d'}
-                    );
-                    res.end(token)
-                    //this should be granted & held in localstorage for access later
-                } else {
-                    res.end('You entered an incorrect password, try again')
-                }
+// //validation middlewhere takes in url query for ?token='webtoken'
+// let validateToken = (req, res, next) => {
+//     let token = req.query.token;
+//     let isValid = false;
+//     let payload;
+//     console.log(token);
+//     try {
+//         payload = jwt.verify(token, 'secretsig');
+//         isValid = true;
+//     } catch (err) {
+//         isValid = false;
+//     }
+//     req.user = payload;
+//     //creates a new property for the request object, called user
+//     if (isValid) {
+//         next();
+//     } else {
+//         res.end('youshallnotpass')
+//     }
+// }
+// let createToken = (req, res) => {
+//     let credentials = req.body;
+//     console.log(credentials)
+//     let registeringUser = dbq.newUser(credentials.username, credentials.password, credentials.email, credentials.first, credentials.last, credentials.city, credentials.state);
+      
+    
 
-            } else {
-                res.end('You need to login, please enter username and password')
-            }
-        });
-    ;
-}
+
+// let createToken = (req, res) => {
+//         let credentials = req.body;
+//         console.log(credentials)
+//         let validUser = dbq.usernameLogin(credentials.username, credentials.password, credentials.email, credentials.first, credentials.last, credentials.city, credentials.state);
+//         validUser.then(dbReply => {
+//             // this function serves an object with keys "username" and "password" from our form
+//             let loginID = JSON.stringify(dbReply.username);
+//             let loginPass = JSON.stringify(dbReply.password)
+//             let username = JSON.stringify(credentials.username);
+//             let password = JSON.stringify(credentials.password);
+//             if (loginID === username) {
+//                 if (loginPass === password) {
+//                     let token = jwt.sign(
+//                         {userID: username},
+//                         'secretsig',
+//                         {expiresIn: '7d'}
+//                     );
+//                     res.end(token)
+//                     //this should be granted & held in localstorage for access later
+//                 } else {
+//                     res.end('You entered an incorrect password, try again')
+//                 }
+
+//             } else {
+//                 res.end('You need to login, please enter username and password')
+//             }
+//         });
+//     ;
+// }
 
 //geocoding
 let getGeocode = (req, res) => {
@@ -157,11 +167,9 @@ let getGeocode = (req, res) => {
 }
 
 
-ex.post('/login', createToken);
-// ex.get('/users', validateToken, getUsers);
+// ex.post('/login', createToken);
 ex.post('/register', newUser)
 ex.post('/post', newPost)
-ex.post('/newpost', newPost);
 ex.post('/map', jsonParser, getGeocode);
 ex.get('/users', getUsers);
 ex.get('/posts', getPosts);
