@@ -80,16 +80,22 @@ let registerSubmission = (event) => {
         return result.json()
     })
     .then((data) => {
+        console.log(data);
+        if (data.response) {
+            flashMSG("Username Already Taken");
+        } else {
+            flashMSG("You can log in now.");
+        }
         fetch('http://localhost:3000/login', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {'Content-Type': 'application/JSON'}
-        })
+            })
             .then((result) => {
                 result.json().then((result) => {
+                })
             })
-        })
-        return data;
+            return data;
     })
     .then((user) => {
         registerFormData.append('id', user.id)
@@ -100,7 +106,6 @@ let registerSubmission = (event) => {
         })
     })
     resetModal();
-    flashMSG("You can log in now.")
     empty(postArea);
     getReq(url);
 }
