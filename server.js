@@ -16,6 +16,8 @@ let multer = require('multer');
 let upload = multer({dest: './images'});
  
 ex.post("/postimageupload", upload.single('post-image'), (req, res)  =>  {
+    console.log("UP HERE");
+    console.log(req.body);
     let postid = req.body.id;
     dbq.postAddImage(postid, './images/' + req.file.filename)
     .then(row => {
@@ -24,6 +26,8 @@ ex.post("/postimageupload", upload.single('post-image'), (req, res)  =>  {
 })
 
 ex.post("/registerimageupload", upload.single('profile-image'), (req, res)  =>  {
+    console.log("DOWNHERE")
+    console.log(req.body);
     let userid = req.body.id;
     dbq.registerAddImage(userid, './images/' + req.file.filename)
     .then(row => {
@@ -76,11 +80,9 @@ let newUser = (req, res) => {
     let userNameTaken = {response: "Username Taken"};
     dbq.checkUser(userForm.username)
         .then(results => {
-            console.log(results);
             if(results === undefined || results.length == 0) {
                 dbq.createUser(userForm)
                     .then(results => {
-                        console.log(results)
                         res.send(results);
                     })
             } else {
@@ -91,7 +93,10 @@ let newUser = (req, res) => {
 
 //Create a new post
 let newPost = (req, res) => {
-    let postForm = req.body;               
+    let postForm = req.body;
+    let decoded = jwt.decode(postForm.webtoken)
+    let userid = decoded.userid;
+    postForm.userid = userid;        
     dbq.createPost(postForm)
         .then(results => {
             res.send(results)
@@ -107,13 +112,10 @@ let validateToken = (req, res) => {
     let payload;
     try {
         let decoded = jwt.verify(token, priv.signature, {"alg": "HS256", "typ": "JWT"});
-        console.log(decoded);
         isValid = true;
         req.user = decoded.payload;
         responseObject.payload = payload;
     } catch (err) {
-        console.log(err)
-        console.log("Token not valid.");
         isValid = false;
     }
     //creates a new property for the request object, called user
@@ -121,7 +123,7 @@ let validateToken = (req, res) => {
         responseObject.response = "Logged in";
         res.send(responseObject);
     } else {
-        responseObject.response = "invalid login";
+        responseObject.response = "Invalid login";
         res.send(responseObject);
     }
 }
@@ -148,7 +150,7 @@ let createToken = (req, res) => {
             } else {
                 res.end("Sorry, invalid login");
             }
-        }).catch(error=> res.send("invalid login"));
+        }).catch(error=> res.send({response: "bad login"}));
     };
 
 //geocoding
@@ -165,7 +167,6 @@ let getGeocode = (req, res) => {
 ex.post('/checktoken', validateToken);
 ex.post('/login', createToken);
 ex.post('/register', newUser);
-ex.post('/post', newPost);
 ex.post('/newpost', newPost);
 ex.post('/map', getGeocode);
 ex.get('/users', getUsers);

@@ -11,7 +11,7 @@ let modalPlunders = document.querySelector('.modalPlunders');
 let plunders = document.querySelectorAll('.post');
 let navBTN = document.querySelector('.navLogo');
 let loginForm = document.querySelector('.loginForm')
-let postForm = document.querySelector('.postForm')
+let postForm = document.querySelector('#newPostForm')
 let registerForm = document.querySelector('.registerForm')
 let modalMap = document.querySelector('.modalMap');
 let flash = document.querySelector('#flashMSG');
@@ -33,16 +33,18 @@ let loginSubmission = (event) => {
         return result.json()
     })
     .then((result)=>{
-        if (result === "invalid login") {
-
+        if (result.response === "bad login") {
+            resetModal();
+            flashMSG("Invalid Login.")
+        } else {
+            myStorage.setItem('webtoken', result);
+            resetModal();
+            flashMSG("Successful logged in.")
+            empty(postArea);
+            loggedin = true;
+            checkLogin();
+            getReq(url);
         }
-        myStorage.setItem('webtoken', result);
-        resetModal();
-        flashMSG("Successful logged in.")
-        empty(postArea);
-        loggedin = true;
-        checkLogin();
-        getReq(url);
     })
 }
 
@@ -67,8 +69,9 @@ let registerSubmission = (event) => {
 
     let userImage = document.querySelector('#userimg');
     let profileImg = userImage.files[0];
+    console.log(userImage);
     let registerFormData = new FormData()
-    registerFormData.append('profile-image', profileImg)
+    registerFormData.append('userimg', profileImg);
 
     //registerSubmissionObject['userimg'] = 
     fetch('http://localhost:3000/register', {
@@ -83,28 +86,26 @@ let registerSubmission = (event) => {
         console.log(data);
         if (data.response) {
             flashMSG("Username Already Taken");
+            registerFormData.append('id', data.id)
+            return fetch('http://localhost:3000/registerimageupload', {
+                method: 'POST',
+                body: registerFormData,
+                mode: 'cors',
+            })
         } else {
             flashMSG("You can log in now.");
         }
-        // fetch('http://localhost:3000/login', {
-        //     method: 'POST',
-        //     body: JSON.stringify(data),
-        //     headers: {'Content-Type': 'application/JSON'}
-        //     })
-        //     .then((result) => {
-        //         result.json().then((result) => {
-        //         })
-        //     })
-        //     return data;
     })
-    .then((user) => {
-        registerFormData.append('id', user.id)
-        return fetch('http://localhost:3000/registerimageupload', {
-            method: 'POST',
-            body: registerFormData,
-            mode: 'cors',
-        })
-    })
+    // .then((user) => {
+    //     console.log(user);
+    //     console.log(registerFormData);
+    //     registerFormData.append('id', user.id)
+    //     return fetch('http://localhost:3000/registerimageupload', {
+    //         method: 'POST',
+    //         body: registerFormData,
+    //         mode: 'cors',
+    //     })
+    // })
     resetModal();
     empty(postArea);
     getReq(url);
@@ -112,11 +113,12 @@ let registerSubmission = (event) => {
 
 let postSubmission = (event) => {
     event.preventDefault();
-    let postSubmissionObject = {item:'', category:'', description:'', price:''}; //re-add descripimg:''
+    let postSubmissionObject = {item:'', category:'', description:'', price:'', webtoken: '', userid: ''}; //re-add descripimg:''
     let itemNameSubmit = document.querySelector('#item');
     let categorySubmit = document.querySelector('#category');
     let descriptionSubmit = document.querySelector('#description');
     let priceSubmit = document.querySelector('#price');
+    postSubmissionObject.webtoken = myStorage.webtoken;
     postSubmissionObject['item'] = itemNameSubmit.value;
     postSubmissionObject['category'] = categorySubmit.value;
     postSubmissionObject['description'] = descriptionSubmit.value;
@@ -126,7 +128,7 @@ let postSubmission = (event) => {
     let postFormData = new FormData()
     postFormData.append('post-image', productImg)
     
-    fetch('http://localhost:3000/post', {
+    fetch('http://localhost:3000/newpost', {
         method: 'POST',
         body: JSON.stringify(postSubmissionObject),
         headers: {'Content-Type': 'application/json'}

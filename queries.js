@@ -56,9 +56,9 @@ let listPostsByState = (state) => {
 }
 
 let createPost = (postForm) => {
-    return db.one(`INSERT INTO posts (item, category, description, price) values 
-        ('` + postForm.item + `', '` + postForm.category + `', '` + postForm.description + `', '` + postForm.price + `')
-        RETURNING *;`) 
+    return db.one(`INSERT INTO posts (item, category, description, price, userid) values 
+        ('` + postForm.item + `', '` + postForm.category + `', '` + postForm.description + `', '` + postForm.price + `', '` + postForm.userid + `')
+        RETURNING *;`) // re-add '` + descripimg + `',
 }
 
 let createUser = (userForm) => {            
