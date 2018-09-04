@@ -70,7 +70,7 @@ let postsByCat = (req, res) => {
 
 //Get Posts by Location
 let postsByLocation = (req, res) => {
-    let state = req.params.location;
+    let state = req.params.state;
     dbq.listPostsByState(state)
         .then(results => res.send(results));
 }
@@ -170,7 +170,7 @@ ex.get('/posts', getPosts);
 ex.get('/:username/posts', postsByUser);
 ex.get('/:username/posts/:postid', postByUser);
 ex.get('/posts/cat/:category', postsByCat);
-ex.get('/posts/state/:location', postsByLocation);
+ex.get('/posts/state/:state', postsByLocation);
 
 ex.listen(3000);
 
