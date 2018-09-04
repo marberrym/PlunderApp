@@ -235,3 +235,21 @@ body {
     background: radial-gradient(circle, rgb(3, 189, 218) 18%, rgb(60, 2, 168) 93%); 
     border: 1px solid whitesmoke;  
 }
+
+.textInput {
+    text-align: right; 
+    margin-right: .5em;
+    height: 1.5em;
+    width: 15em;
+}
+
+.textInput:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.textInput:active {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
