@@ -111,6 +111,7 @@
 .inputFields {
     height: 2em;
     width: 10em;
+    border-radius: 0;
     border: 1px solid black;
 }
 

@@ -29,9 +29,13 @@ ex.post("/registerimageupload", upload.single('profile-image'), (req, res)  =>  
     console.log("DOWNHERE")
     console.log(req.body);
     let userid = req.body.id;
+    console.log(userid)
+    console.log(req.file.filename)
     dbq.registerAddImage(userid, './images/' + req.file.filename)
     .then(row => {
+        console.log(row)
         res.send(row)
+        
     })
 })
 //Request All Users
@@ -133,15 +137,19 @@ let createToken = (req, res) => {
     let password = credentials.password;
     let id = credentials.id;
     let username = credentials.username;
+    console.log(credentials);
 
     dbq.usernameLogin(username, password)
         .then(results => {
+            console.log(results);
             if (results.password === password && results.username === username) {
+                console.log("im here");
                 let token = jwt.sign(
                     {name: results.username,
                     userid: results.id},
                     priv.signature,
                     {expiresIn: '7d'})
+                    console.log(token);
                     res.end(JSON.stringify(token));
             } else {
                 res.end("Sorry, invalid login");

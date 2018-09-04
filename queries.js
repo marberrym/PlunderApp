@@ -64,22 +64,20 @@ let createPost = (postForm) => {
 let createUser = (userForm) => {            
     return db.one(`INSERT INTO users (username, password, email, first, last, city, state) values    
     ('` + userForm.username + `', '` + userForm.password + `', '` + userForm.email + `', '` + userForm.first + `', '` + userForm.last + `','` + userForm.city + `', '` + userForm.state + `')
-    RETURNING *;`);  //re-add userimg
+    RETURNING *;`);  
 } 
 
 let registerAddImage = (id, path) => {
-    return db.one(`UPDATE users SET userimg = $1 WHERE id = $2 RETURNING *;`, [path, id])
+    return db.query(`UPDATE users SET userimg = $1 WHERE id = $2 RETURNING *;`, [path, id])
 }
 
 let postAddImage = (id, path) => {
     return db.one(`UPDATE posts SET descripimg = $1 WHERE id = $2 RETURNING *;`, [path, id])
 }
 
-exports.registerAddImage = registerAddImage
+exports.registerAddImage = registerAddImage;
 exports.postAddImage = postAddImage;
 exports.usernameLogin = usernameLogin;
-exports.usernameLogin = usernameLogin;
-//let createUser = (username, password, email, first, last, city, state, )
 exports.listAllUsers = listAllUsers;
 exports.listAllPosts = listAllPosts;
 exports.allPostsByUser = allPostsByUser;

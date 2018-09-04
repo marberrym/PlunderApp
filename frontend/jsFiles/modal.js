@@ -71,7 +71,7 @@ let registerSubmission = (event) => {
     let profileImg = userImage.files[0];
     console.log(userImage);
     let registerFormData = new FormData()
-    registerFormData.append('userimg', profileImg);
+    registerFormData.append('profile-image', profileImg);
 
     //registerSubmissionObject['userimg'] = 
     fetch('http://localhost:3000/register', {
@@ -82,18 +82,18 @@ let registerSubmission = (event) => {
     .then((result) => {
         return result.json()
     })
-    .then((data) => {
-        console.log(data);
-        if (data.response) {
+    .then((user) => {
+        console.log(user);
+        if (user.response) {
             flashMSG("Username Already Taken");
-            registerFormData.append('id', data.id)
+        } else {
+            flashMSG("You can log in now.");
+            registerFormData.append('id', user.id)
             return fetch('http://localhost:3000/registerimageupload', {
                 method: 'POST',
                 body: registerFormData,
                 mode: 'cors',
             })
-        } else {
-            flashMSG("You can log in now.");
         }
     })
     // .then((user) => {
