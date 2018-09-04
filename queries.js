@@ -48,11 +48,11 @@ let checkUser = (username) => {
         WHERE username = '` + username + `';`);
 }
 
-let listPostsByLocation = (city, state) => {
+let listPostsByState = (state) => {
     return db.query(`select usr.username, usr.userimg, usr.state, usr.city, pst.item, pst.price, pst.description, pst.descripimg, usr.email
         FROM posts pst
         INNER JOIN users usr ON usr.id = pst.userid
-        WHERE usr.state = '` + city + `', '` + state + `';`);
+        WHERE usr.state = '` + state + `';`);
 }
 
 let createPost = (postForm) => {
@@ -83,7 +83,7 @@ exports.listAllPosts = listAllPosts;
 exports.allPostsByUser = allPostsByUser;
 exports.onePostsByUser = onePostsByUser;
 exports.listPostsByCategory = listPostsByCategory;
-exports.listPostsByLocation = listPostsByLocation;
+exports.listPostsByState = listPostsByState;
 exports.createPost = createPost;
 exports.createUser = createUser;
 exports.checkUser = checkUser;

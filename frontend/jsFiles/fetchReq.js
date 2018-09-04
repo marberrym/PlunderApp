@@ -2,7 +2,8 @@
 let url = 'http://localhost:3000/posts'
 let mapURL = 'http://localhost:3000/map'
 let catBTNS = document.querySelectorAll('.sideBar');
-let locationBTN = document.querySelector('.locationBTN')
+let locationBTN = document.querySelector('.locationFilter')
+let stateEntry = document.querySelector('#searchstate');
 
 let empty = (node) => {
     while (node.firstChild) {
@@ -83,18 +84,40 @@ catBTNS.forEach(function(cat) {
     cat.addEventListener('click', catReq)
 });
 
-let getLocation = (local) => {
-    let reqURL = 'http://localhost:3000/posts/local/' + local.textContent 
-    let localReq = () => {
-       if (local.textContent !== 'All' ){
-            empty(postArea);
-            getReq(reqURL);
-        } else {
-            empty(postArea);
-            getReq(url);
-        }   
-    }
-    local.addEventListener('submit', localReq)
+// let getLocation = (event) => {
+//     event.preventDefault();
+//     let getLocationObj = {state:''};
+//     let searchState = document.querySelector('#searchstate')
+//     getLocationObj['searchstate'] = searchState.value
+
+//     fetch('http://localhost:3000/posts/location/', {
+//         method: 'GET',
+//         body: JSON.stringify(getLocationObj),
+//         headers: {'Content-Type': 'application/json'}
+//     })
+//     .then((result) => {
+//         return result.json()
+// }
+
+let getLocation = () => {
+    console.log("hey state value is :" + stateEntry.value);
+    let reqURL = 'http://localhost:3000/posts/location/'+ stateEntry.value;
+    if (states.textContent !== 'All' ){
+        empty(postArea);
+        getReq(booty);
+    } else {
+        empty(postArea);
+        getReq(url);
+    }   
+    
 };
+
+locationBTN.addEventListener('submit', getLocation)
+
+
+
+
+
+    
 
 

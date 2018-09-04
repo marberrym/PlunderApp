@@ -86,16 +86,16 @@ let registerSubmission = (event) => {
         } else {
             flashMSG("You can log in now.");
         }
-        fetch('http://localhost:3000/login', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {'Content-Type': 'application/JSON'}
-            })
-            .then((result) => {
-                result.json().then((result) => {
-                })
-            })
-            return data;
+        // fetch('http://localhost:3000/login', {
+        //     method: 'POST',
+        //     body: JSON.stringify(data),
+        //     headers: {'Content-Type': 'application/JSON'}
+        //     })
+        //     .then((result) => {
+        //         result.json().then((result) => {
+        //         })
+        //     })
+        //     return data;
     })
     .then((user) => {
         registerFormData.append('id', user.id)

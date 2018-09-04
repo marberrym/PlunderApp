@@ -65,10 +65,9 @@ let postsByCat = (req, res) => {
 }
 
 //Get Posts by Location
-let postsByLocation = (req, res) => {
+let postsByState = (req, res) => {
     let state = req.params.state;
-    let city = req.params.city;
-    dbq.listPostsByLocation(city, state)
+    dbq.listPostsByLocation(state)
         .then(results => res.send(results));
 }
 
@@ -132,15 +131,19 @@ let createToken = (req, res) => {
     let password = credentials.password;
     let id = credentials.id;
     let username = credentials.username;
+    console.log(credentials);
 
     dbq.usernameLogin(username, password)
         .then(results => {
+            console.log(results);
             if (results.password === password && results.username === username) {
+                console.log("im here");
                 let token = jwt.sign(
                     {name: results.username,
                     userid: results.id},
                     priv.signature,
                     {expiresIn: '7d'})
+                    console.log(token);
                     res.end(JSON.stringify(token));
             } else {
                 res.end("Sorry, invalid login");
@@ -170,7 +173,7 @@ ex.get('/posts', getPosts);
 ex.get('/:username/posts', postsByUser);
 ex.get('/:username/posts/:postid', postByUser);
 ex.get('/posts/cat/:category', postsByCat);
-ex.get('/posts/local/:location', postsByLocation);
+ex.get('/posts/location/:state', postsByState);
 
 ex.listen(3000);
 
