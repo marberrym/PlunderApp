@@ -103,7 +103,7 @@ let filterByState = (event) => {
         flashMSG("Two letter format please");
     } else if (stateSelection === "") {
         getReq(url);
-    } else if (states.includes(stateSelection)) {
+    } else if (states.includes(stateSelection.toUpperCase())) {
         console.log("True");
         empty(postArea);
         getReq(url + '/state/' + stateSelection.toUpperCase());
