@@ -139,6 +139,19 @@
     transform: scale(1.2);
 }
 
+.submitBTN:active {
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+.submitBTN:focus {
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
 .sideBar {
     font-family: 'Acme', sans-serif;
     font-size: 1em;

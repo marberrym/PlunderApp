@@ -2,8 +2,9 @@
 let url = 'http://localhost:3000/posts'
 let mapURL = 'http://localhost:3000/map'
 let catBTNS = document.querySelectorAll('.sideBar');
-let locationBTN = document.querySelector('.locationFilter')
-let stateEntry = document.querySelector('#searchstate');
+let filterBTN = document.querySelector('#filter');
+let state = document.querySelector('#stateFilter');
+
 
 let empty = (node) => {
     while (node.firstChild) {
@@ -16,6 +17,7 @@ let getReq = (url) => fetch(url)
         if(response.status < 400) {
             response.json()
                 .then(results=> {
+                    console.log(results);
                     results.forEach(function (post) {
                         postSection(post)
                     })
@@ -84,40 +86,35 @@ catBTNS.forEach(function(cat) {
     cat.addEventListener('click', catReq)
 });
 
-// let getLocation = (event) => {
-//     event.preventDefault();
-//     let getLocationObj = {state:''};
-//     let searchState = document.querySelector('#searchstate')
-//     getLocationObj['searchstate'] = searchState.value
+let states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT",
+                "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA",
+                "KS", "KY", "LA", "ME", "MD", "MA", "MI",
+                "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+                "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA",
+                "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA",
+                "WA", "WV", "WI", "WY"];
 
-//     fetch('http://localhost:3000/posts/location/', {
-//         method: 'GET',
-//         body: JSON.stringify(getLocationObj),
-//         headers: {'Content-Type': 'application/json'}
-//     })
-//     .then((result) => {
-//         return result.json()
-// }
-
-let getLocation = () => {
-    console.log("hey state value is :" + stateEntry.value);
-    let reqURL = 'http://localhost:3000/posts/location/'+ stateEntry.value;
-    if (states.textContent !== 'All' ){
-        empty(postArea);
-        getReq(booty);
-    } else {
-        empty(postArea);
+let filterByState = (event) => {
+    event.preventDefault();
+    let stateSelection = state.value
+    
+    console.log(stateSelection);
+    if (stateSelection.length > 2) {
+        flashMSG("Two letter format please");
+    } else if (stateSelection === "") {
         getReq(url);
-    }   
-    
-};
+    } else if (states.includes(stateSelection.toUpperCase())) {
+        console.log("True");
+        empty(postArea);
+        getReq(url + '/state/' + stateSelection.toUpperCase());
+    } else {
+        flashMSG("Invalid Input");
+    }
+}
 
-locationBTN.addEventListener('submit', getLocation)
+filterBTN.addEventListener('click', filterByState);
 
 
 
-
-
-    
 
 
