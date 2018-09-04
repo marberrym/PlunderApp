@@ -68,7 +68,7 @@ let createUser = (userForm) => {
 } 
 
 let registerAddImage = (id, path) => {
-    return db.one(`UPDATE users SET userimg = $1 WHERE id = $2 RETURNING *;`, [path, id])
+    return db.query(`UPDATE users SET userimg = $1 WHERE id = $2 RETURNING *;`, [path, id])
 }
 
 let postAddImage = (id, path) => {

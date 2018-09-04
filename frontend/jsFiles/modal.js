@@ -82,18 +82,18 @@ let registerSubmission = (event) => {
     .then((result) => {
         return result.json()
     })
-    .then((post) => {
-        console.log(post);
-        if (post.response) {
+    .then((user) => {
+        console.log(user);
+        if (user.response) {
             flashMSG("Username Already Taken");
-            registerFormData.append('id', post.id)
+        } else {
+            flashMSG("You can log in now.");
+            registerFormData.append('id', user.id)
             return fetch('http://localhost:3000/registerimageupload', {
                 method: 'POST',
                 body: registerFormData,
                 mode: 'cors',
             })
-        } else {
-            flashMSG("You can log in now.");
         }
     })
     // .then((user) => {

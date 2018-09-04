@@ -52,7 +52,7 @@ let postSection = (post) => {
     descripImage.classList.add('descriptionIMG');
     descripText.classList.add('paraText');
     mapBTN.classList.add('mapBTN');
-
+    console.log(post)
     userImage.setAttribute('src', post.userimg);
     titleUsername.textContent = post.username;
     userProduct.textContent = post.item;

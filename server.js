@@ -29,9 +29,13 @@ ex.post("/registerimageupload", upload.single('profile-image'), (req, res)  =>  
     console.log("DOWNHERE")
     console.log(req.body);
     let userid = req.body.id;
+    console.log(userid)
+    console.log(req.file.filename)
     dbq.registerAddImage(userid, './images/' + req.file.filename)
     .then(row => {
+        console.log(row)
         res.send(row)
+        
     })
 })
 //Request All Users
