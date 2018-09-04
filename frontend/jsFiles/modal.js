@@ -144,11 +144,14 @@ let postSubmission = (event) => {
             mode: 'cors',
         })
     })
-    resetModal();
-    flashMSG("You have successfully posted.")
-    empty(postArea);
-    getReq(url);
+    .then((results => {
+        resetModal();
+        flashMSG("You have successfully posted.")
+        empty(postArea);
+        getReq(url);
+    }))
 }
+
 let showLogin = (event) => {
     modalWindow.classList.add('show');
     modalLogin.classList.add('show');
