@@ -75,7 +75,7 @@ let postAddImage = (id, path) => {
     return db.one(`UPDATE posts SET descripimg = $1 WHERE id = $2 RETURNING *;`, [path, id])
 }
 
-exports.registerAddImage = registerAddImage
+exports.registerAddImage = registerAddImage;
 exports.postAddImage = postAddImage;
 exports.usernameLogin = usernameLogin;
 exports.listAllUsers = listAllUsers;

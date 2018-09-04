@@ -71,7 +71,7 @@ let registerSubmission = (event) => {
     let profileImg = userImage.files[0];
     console.log(userImage);
     let registerFormData = new FormData()
-    registerFormData.append('userimg', profileImg);
+    registerFormData.append('profile-image', profileImg);
 
     //registerSubmissionObject['userimg'] = 
     fetch('http://localhost:3000/register', {
@@ -82,11 +82,11 @@ let registerSubmission = (event) => {
     .then((result) => {
         return result.json()
     })
-    .then((data) => {
-        console.log(data);
-        if (data.response) {
+    .then((post) => {
+        console.log(post);
+        if (post.response) {
             flashMSG("Username Already Taken");
-            registerFormData.append('id', data.id)
+            registerFormData.append('id', post.id)
             return fetch('http://localhost:3000/registerimageupload', {
                 method: 'POST',
                 body: registerFormData,
