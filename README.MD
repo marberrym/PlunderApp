@@ -12,18 +12,18 @@ This was a group project developed by:
 * Marshall Simpson
 
 In this project I had a wide array of responsibilities including but not limited to:
-*#### Concept Development
-*#### Design Oversight:
-    * Logo Development
-    * Design of front-end interface
-*#### Google Maps API integration
+#### Concept Development
+#### Design Oversight:
+* Logo Development
+* Design of front-end interface
+#### Google Maps API integration
     * Creating geocodes
     * Querying a list of results based on location
     * Front-end placement of the map
-*#### JSON Webtokens
+#### JSON Webtokens
     * Encryption and storing of user data
     * Back-end verification of webtokens
-*#### Backend Server Router Patterns
+#### Backend Server Router Patterns
     * Developing RESTful requests used to receive data from out server
 
 Throughout this project both Marshall and I ran into several challenges and hurdles, but we were able to work together to overcome these issues.  I'm going to speak about some of my personal struggles in regards to developing the Plunder App.
