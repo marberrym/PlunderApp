@@ -17,14 +17,13 @@ When developing the concept behind plunder, I thought about the endless possibil
 
 <div align="center">
 <img src="/markdownimages/PlunderLogin.png" height="300px">
-<img src="/markdownimages/PlunderRegister.png" height="300px">
 </div>
 
 #### Post expansion where users can see more about the post, if they are interested they can open a map of suggested plunder spots based on the location of the post.
 
 <div align="center">
-<img src="/markdownimages/PlunderPost.png" height="300px">
-<img src="/markdownimages/PlunderMap.png" height="300px">
+<img src="/markdownimages/PlunderPost.png" height="200px">
+<img src="/markdownimages/PlunderMap.png" height="200px">
 </div>
 
 #### Users can filter posts based on the state and category of posts.
@@ -36,8 +35,8 @@ When developing the concept behind plunder, I thought about the endless possibil
 #### Users can register and if they are logged in they can submit posts with images as well as contact any other plunder posters via email.
 
 <div align="center">
-<img src="/markdownimages/PlunderEmail.png" height="300px">
-<img src="/markdownimages/PlunderSubmit.png" height="300px">
+<img src="/markdownimages/PlunderEmail.png" height="200px">
+<img src="/markdownimages/PlunderSubmit.png" height="200px">
 </div>
 
 
