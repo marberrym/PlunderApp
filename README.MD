@@ -1,8 +1,10 @@
 #  Plunder 
 #### An app creating an on-line marketplace for users that places a high value on the safety of users while they conduct their e-commerce transactions.
 
-<a href="#core-features">**Core Features**</a>
-<a href="#core-features">**Personal Responsibilities**</a>
+**Table of Contents:**
+* <a href="#core-features">**Core Features**</a>
+* <a href="#personal-responsibilities">**Personal Responsibilities**</a>
+* <a href="#challenges">**Challenges**</a>
 
 <div align="center">
 <img src="markdownimages/PlunderMain.png" height="500px">
