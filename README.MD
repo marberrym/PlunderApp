@@ -67,4 +67,49 @@ My two main struggles in developing this project were in regards to:
 
 ## Google Maps Integration:
 
+The most difficult aspect of the Google Maps Integration was getting the front and back end to work together properly.  This required Google Maps API access on both the front end the server side.  The front end dealt with rendering the map and the locations based on the information that was retrieved server side.  The server side would be taking in the city and state of the selected post, converting that to geocode and then populating a list of destinations near that geocode and handing it back to the front end.  Here is some sample code:
+
+This is my code that would handle the RESTful post request to the /map URL.
+```javascript
+let getGeocode = (req, res) => {
+    maps.geocode(req.body.city, req.body.state)
+        .then(results => {
+            maps.mapQuery(results)
+            .then(results => {
+                res.send(results.json.results);
+            })
+        })
+}
+
+ex.post('/map', getGeocode);
+```
+
+This is where my back end server talks to the Google Maps API and returns me a geocode which is used to get a list of locations (in this example firehouses) that are within a given radius of the post location.
+
+```javascript
+let priv = require('./private');
+
+var googleMapsClient = require('@google/maps').createClient({
+    key: priv.apiKey,
+    Promise: Promise
+});
+
+let geocode = (city, state) => {
+    return googleMapsClient.geocode({
+        address: city + ', ' + state
+        }).asPromise()
+}
+
+let mapQuery = (object) => {
+    let longlat = object.json.results[0].geometry.location
+    return googleMapsClient.placesNearby({location: longlat,
+                                radius: 12000.3,
+                                keyword: 'Fire Department'
+                                }).asPromise();
+}
+exports.mapQuery = mapQuery;
+exports.geocode = geocode;
+```
+
+While this code may not look super complicated - it did take quite a bit of trial and error to get right.  I then passed this information back to the front end where the map was populated.
 
