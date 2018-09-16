@@ -1,6 +1,9 @@
 #  Plunder 
 #### An app creating an on-line marketplace for users that places a high value on the safety of users while they conduct their e-commerce transactions.
 
+<a href="#core-features">**Core Features**</a>
+<a href="#core-features">**Personal Responsibilities**</a>
+
 <div align="center">
 <img src="markdownimages/PlunderMain.png" height="500px">
 </div>
@@ -58,6 +61,9 @@ In this project I had a wide array of responsibilities including but not limited
 * Back-end verification of webtokens
 #### Backend Server Router Patterns
 * Developing RESTful requests used to receive data from out server
+
+
+# Challenges:
 
 Throughout this project both Marshall and I ran into several challenges and hurdles, but we were able to work together to overcome these issues.  I'm going to speak about some of my personal struggles in regards to developing the Plunder App.
 
